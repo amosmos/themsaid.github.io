@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid - [iOS] Implementing a 3D rotation reveal effect for a side menu</title>
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">[iOS] Implementing a 3D rotation reveal effect for a side menu</h1>
+
+        <p><img src="https://github.com/themsaid/swift-sidemenu-3d/raw/master/Project2.gif" alt="The final product" /></p>
+<h2>The Source code</h2>
+<p>You can find the <a href="https://github.com/themsaid/swift-sidemenu-3d">complete source code on github</a></p>
+<blockquote>
+<p>Design work used in this demo is captured from <a href="https://www.behance.net/gallery/24185205/Dream-Yoga-App">a project on behance</a></p>
+</blockquote>
+<h3>Animating the whole view</h3>
+<p>The main screen of the app may contain many subviews, in order for us to animate the whole view we will use a very interesting trick, we will capture the view, hide it, and use the captured image instead.</p>
+<p>So the first step in our effect would be capturing the View Controller's main view:</p>
+<pre><code class="language-swift">func captureScreen() -&gt; UIImage {
+   UIGraphicsBeginImageContextWithOptions(view.frame.size, view.opaque, 0.0)
+   view.layer.renderInContext(UIGraphicsGetCurrentContext())
+   let image = UIGraphicsGetImageFromCurrentImageContext()
+   UIGraphicsEndImageContext()
+
+   return image;
+}</code></pre>
+<p>Now we may add the new image view as a sub view <code>view.addSubview(screenImageView)</code> and then hide all other sub-views of the main view.</p>
+<pre><code class="language-swift">for subView in view.subviews as [UIView]{
+  if subView.tag &lt; 2000{
+      subView.hidden = true
+  }
+}</code></pre>
+<p><em>Notice</em> We hide all the views except those with tag less than 2000, I made the tags for the screenImageView and the sideMenu view with tags greater than 2000 so that they keep appearing.</p>
+<h3>Building the Side Menu</h3>
+<p>I used a nib to create the menu and added it as a sub view:</p>
+<pre><code class="language-swift">sideMenu = NSBundle.mainBundle().loadNibNamed("SideMenu", owner: self, options: nil)[0] as UIView
+sideMenu.tag = 2002
+sideMenu.alpha = 0 // because we don't want to show it yet, also to make a nice reveal animation
+sideMenu.frame.origin.y = -10 // to add a nice animation
+view.addSubview(sideMenu)</code></pre>
+<h3>Adding a background for the whole view</h3>
+<p>Using the following piece of code I set the background of the main view:</p>
+<pre><code class="language-swift">UIGraphicsBeginImageContext(self.view.frame.size);
+UIImage(named: "splashBG")!.drawInRect(self.view.bounds)
+var backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+UIGraphicsEndImageContext();
+view.backgroundColor = UIColor(patternImage: backgroundImage!)</code></pre>
+<h3>3D Rotation</h3>
+<p>The effect of revealing the menu is described in this code:</p>
+<pre><code class="language-swift">var id = CATransform3DIdentity
+id.m34 =  -1.0 / 1000
+
+// Rotate the view on the Y axis in a anti-clockwise direction
+let rotationTransform = CATransform3DRotate(id, 0.5 * CGFloat(-M_PI_2), 0, 1.0, 0)
+
+// Transform the view to the right of the screen
+let translationTransform = CATransform3DMakeTranslation(screenImageView.frame.width * 0.2, 0, 0)
+
+// Combine these two transformations
+let transform = CATransform3DConcat(rotationTransform, translationTransform)
+
+UIView.animateKeyframesWithDuration(1, delay: 0, options: nil, animations: {
+
+  UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/3, animations: {
+      self.screenImageView.layer.transform = transform
+      self.screenImageView.frame.size.height -= 200
+      self.screenImageView.center.y += 100
+  })
+
+  UIView.addKeyframeWithRelativeStartTime(1/3, relativeDuration: 2/3, animations: {
+      self.sideMenu.alpha = 1
+      self.sideMenu.frame.origin.y = 0
+  })
+
+  },
+  completion: {_ in}
+)</code></pre>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s7.postimg.org/weovsp0qz/themsaid.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer [PHP, Laravel, Vue.js] & iOS beginner.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+</body>
+</html>
