@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid - What's coming up in laravel 5.2.3</title>
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">What's coming up in laravel 5.2.3</h1>
+
+    
+By the time of writing this post laravel has 911 contributors on GitHub, some of them are actively adding awesome stuff to the framework on daily basis. This is a wrap up for the new stuff in laravel 5.2.23.
+
+<h2>in_array validation rule</h2>
+<p>Array validation in laravel is just awesome, I myself replaced a lot of code in some of the current projects with just a few lines for validation. In 5.3.2 a new rule is added to help with validating that a value of a key exists in another related key:</p>
+<pre><code class="language-php">Validator::make(
+    [
+        'devices' =&gt; [['user_id' =&gt; 1], ['user_id' =&gt; 2]],
+        'users' =&gt; [['id' =&gt; 1, ['id' =&gt; 2]]]
+    ],
+    ['devices.*.user_id' =&gt; 'in_array:users.*.id']
+);</code></pre>
+<p>This rule will make sure all <code>user_id</code> values exists in the users array.</p>
+<h2>Arr::first() &amp; Arr::last() now have the callback optional</h2>
+<p>Previously the callback was required as a second argument for these methods, now they are optional.</p>
+<pre><code class="language-php">$array = [100, 200, 300];
+
+// (NEW) This will return 100
+Arr::first($array);
+
+// Same as
+array_first($array);
+
+// (NEW) This will return 300
+Arr::last($array);
+
+// Same as
+array_last($array);
+
+// (You still can) do this and return 200
+Arr::first($array, function ($key, $value) {
+    return $value &gt;= 150;
+});</code></pre>
+<h2>Specifying more than one middleware at a time</h2>
+<p>When adding controller middlewares, you're now to register multiple middlewares in the same statement.</p>
+<pre><code class="language-php">$this-&gt;middleware(['auth', 'subscribed'], ['only' =&gt; ['getCandy']]);</code></pre>
+<h2>New Blade directives @.php, @.endphp, and @.unset</h2>
+<div class="alert alert-warning">Ignore the dot in directive names, it's added to prevent Blade from compiling them since till now there's no
+way to ignore directives compilation in blade, hopefully this will be taken care of soon.</div>
+<p>The <code>@.php</code> directives will allow you to write PHP statements with style:</p>
+<pre><code class="language-html">@.php($count = 1)
+
+@.php(++ $count)</code></pre>
+<pre><code class="language-html">@.php
+    $now = new DateTime();
+
+    $environment = isset($env) ? $env : "testing";
+@enphp</code></pre>
+<p>The <code>@.unset</code> is just a wrapper for <code>unset()</code>.</p>
+<pre><code class="language-html">@.unset($count)</code></pre>
+<h2>Overwrite core blade directives</h2>
+<p>Prior to 5.2.23 it was not possible to extend Blade and overwrite a core directive, now your extension will overwrite any core blade directive.</p>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s7.postimg.org/weovsp0qz/themsaid.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer [PHP, Laravel, Vue.js] & iOS beginner.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+</body>
+</html>
