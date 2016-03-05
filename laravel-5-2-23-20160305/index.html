@@ -58,7 +58,7 @@ Arr::first($array, function ($key, $value) {
     return $value &gt;= 150;
 });</code></pre>
 <h2>Specifying more than one middleware at a time</h2>
-<p>When adding controller middlewares, you're now to register multiple middlewares in the same statement.</p>
+<p>When adding controller middlewares, you're now able to register multiple middlewares in the same statement.</p>
 <pre><code class="language-php">$this-&gt;middleware(['auth', 'subscribed'], ['only' =&gt; ['getCandy']]);</code></pre>
 <h2>New Blade directives @.php, @.endphp, and @.unset</h2>
 <div class="alert alert-warning">Ignore the dot in directive names, it's added to prevent Blade from compiling them since till now there's no
