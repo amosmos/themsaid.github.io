@@ -1,6 +1,6 @@
 @extends('_includes.blog_post_base')
 
-@section('post::title', 'What\'s coming up in laravel 5.2.3')
+@section('post::title', 'Coming up in laravel 5.2.3')
 @section('post::brief')
 By the time of writing this post laravel has 911 contributors on GitHub, some of them are actively adding awesome stuff to the framework on daily basis. This is a wrap up for the new stuff in laravel 5.2.23.
 @stop
@@ -89,7 +89,6 @@ The `@.unset` is just a wrapper for `unset()`.
 
 ## Overwrite core blade directives
 Prior to 5.2.23 it was not possible to extend Blade and overwrite a core directive, now your extension will overwrite any core blade directive.
-
 
 
 @endmarkdown
