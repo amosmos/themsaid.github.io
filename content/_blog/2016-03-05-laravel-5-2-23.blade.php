@@ -1,6 +1,6 @@
 @extends('_includes.blog_post_base')
 
-@section('post::title', 'Coming up in laravel 5.2.3')
+@section('post::title', 'Coming up in laravel 5.2.23')
 @section('post::brief')
 By the time of writing this post laravel has 911 contributors on GitHub, some of them are actively adding awesome stuff to the framework on daily basis. This is a wrap up for the new stuff in laravel 5.2.23.
 @stop
@@ -14,7 +14,7 @@ By the time of writing this post laravel has 911 contributors on GitHub, some of
 
 ## in_array validation rule
 
-Array validation in laravel is just awesome, I myself replaced a lot of code in some of the current projects with just a few lines for validation. In 5.3.2 a new rule is added to help with validating that a value of a key exists in another related key:
+Array validation in laravel is just awesome, I myself replaced a lot of code in some of the current projects with just a few lines for validation. In 5.2.23 a new rule is added to help with validating that a value of a key exists in another related key:
 
 ```php
 Validator::make(
