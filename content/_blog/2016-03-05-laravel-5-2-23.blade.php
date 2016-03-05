@@ -91,9 +91,9 @@ The `@.unset` is just a wrapper for `unset()`.
 Prior to 5.2.23 it was not possible to extend Blade and overwrite a core directive, now your extension will overwrite any core blade directive.
 
 
-# A hidden gem
+## + hidden gem
 
-Did you know you can do this?
+Did you know you can already do this?
 
 ```php
 User::whereNameAndEmail('jon', 'jon@theWall.com')->first();
