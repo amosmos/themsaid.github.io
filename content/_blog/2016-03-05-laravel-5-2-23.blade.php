@@ -54,7 +54,7 @@ Arr::first($array, function ($key, $value) {
 
 ## Specifying more than one middleware at a time
 
-When adding controller middlewares, you're now to register multiple middlewares in the same statement.
+When adding controller middlewares, you're now able to register multiple middlewares in the same statement.
 
 ```php
 $this->middleware(['auth', 'subscribed'], ['only' => ['getCandy']]);
