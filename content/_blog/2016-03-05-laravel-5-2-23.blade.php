@@ -29,7 +29,7 @@ Validator::make(
 This rule will make sure all `user_id` values exists in the users array.
 
 ## Arr::first() & Arr::last() now have the callback optional
-Previously the callback was required as a second argument for these methods, now they are optional.
+Previously the callback was required as a second argument for these methods, now it is optional:
 
 ```php
 $array = [100, 200, 300];
