@@ -107,6 +107,14 @@ blockquote {
     font-size: inherit;
 }
 
+.post-footer{
+    display: block;
+    letter-spacing: -1px;
+    text-align: center;
+    margin: 50px 0 20px;
+    color: #85A8BB;
+}
+
 .alert{
     border-radius: 0;
     border: none;
