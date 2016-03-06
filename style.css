@@ -4,10 +4,16 @@ html, body, .main-container {
 
 body {
     font-family: 'Source Sans Pro', sans-serif;
-    line-height: 22px;
-    font-size: 1.4rem;
-    color: #263238;
+    line-height: 23px;
+    font-size: 1.5rem;
+    color: #3A4B54;
     padding-top: 30px;
+}
+
+@media (min-width: 1170px) {
+    .container {
+        width: 1100px
+    }
 }
 
 .avatar {
@@ -75,13 +81,13 @@ p.footer {
 .main-content h1 {
     font-size: 30px;
     font-weight: 400;
-    margin-top: 55px;
+    margin-top: 65px;
 }
 
 .main-content h2 {
     font-size: 24px;
     font-weight: 400;
-    margin-top: 45px;
+    margin-top: 55px;
 }
 
 h1.blog-post-title {
@@ -91,12 +97,37 @@ h1.blog-post-title {
     margin-bottom: 30px;
 }
 
-code:not([class]){
+code:not([class]) {
     background: rgba(0, 0, 0, 0.06);
     padding: 0 2px;
 }
 
-blockquote{
+blockquote {
     margin: 30px 0;
     font-size: inherit;
+}
+
+.alert{
+    border-radius: 0;
+    border: none;
+}
+
+.alert-danger{
+    background-color: #fddddd;
+    color: #933432;
+}
+
+.alert-warning {
+    background-color: #fef6dd;
+    color: #957d32;
+}
+
+.alert-success {
+    background-color: #cff5f2;
+    color: #0a7c71;
+}
+
+.alert-info {
+    background-color: #daeffd;
+    color: #2b6a94;
 }
