@@ -62,7 +62,7 @@ $this->middleware(['auth', 'subscribed'], ['only' => ['getCandy']]);
 
 ## New Blade directives @@php, @@endphp, and @@unset
 
-The `@@php` directives will allow you to write PHP statements with style:
+The `@@php` directive will allow you to write PHP statements with style:
 
 ```html
 @@php($count = 1)
@@ -78,7 +78,7 @@ The `@@php` directives will allow you to write PHP statements with style:
 @enphp
 ```
 
-The `@@unset` is just a wrapper for `unset()`.
+`@@unset` is just a wrapper for `unset()`.
 
 ```html
 @@unset($count)

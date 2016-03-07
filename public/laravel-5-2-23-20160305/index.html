@@ -61,7 +61,7 @@ Arr::first($array, function ($key, $value) {
 <p>When adding controller middlewares, you're now able to register multiple middlewares in the same statement.</p>
 <pre><code class="language-php">$this-&gt;middleware(['auth', 'subscribed'], ['only' =&gt; ['getCandy']]);</code></pre>
 <h2>New Blade directives @php, @endphp, and @unset</h2>
-<p>The <code>@php</code> directives will allow you to write PHP statements with style:</p>
+<p>The <code>@php</code> directive will allow you to write PHP statements with style:</p>
 <pre><code class="language-html">@php($count = 1)
 
 @php(++ $count)</code></pre>
@@ -70,7 +70,7 @@ Arr::first($array, function ($key, $value) {
 
     $environment = isset($env) ? $env : "testing";
 @enphp</code></pre>
-<p>The <code>@unset</code> is just a wrapper for <code>unset()</code>.</p>
+<p><code>@unset</code> is just a wrapper for <code>unset()</code>.</p>
 <pre><code class="language-html">@unset($count)</code></pre>
 <h2>Ability to override core blade directives</h2>
 <p>Prior to 5.2.23 it was not possible to extend Blade and overwrite a core directive, now your extension will overwrite any core blade directive.</p>
