@@ -60,35 +60,49 @@ When adding controller middlewares, you're now able to register multiple middlew
 $this->middleware(['auth', 'subscribed'], ['only' => ['getCandy']]);
 ```
 
-## New Blade directives @.php, @.endphp, and @.unset
+## New Blade directives @@php, @@endphp, and @@unset
 
-<div class="alert alert-warning">Ignore the dot in directive names, it's added to prevent Blade from compiling them since till now there's no
-way to ignore directives compilation in blade, hopefully this will be taken care of soon.</div>
-
-The `@.php` directives will allow you to write PHP statements with style:
+The `@@php` directives will allow you to write PHP statements with style:
 
 ```html
-@.php($count = 1)
+@@php($count = 1)
 
-@.php(++ $count)
+@@php(++ $count)
 ```
 
 ```html
-@.php
+@@php
 	$now = new DateTime();
 
 	$environment = isset($env) ? $env : "testing";
 @enphp
 ```
 
-The `@.unset` is just a wrapper for `unset()`.
+The `@@unset` is just a wrapper for `unset()`.
 
 ```html
-@.unset($count)
+@@unset($count)
 ```
 
-## Overwrite core blade directives
+## Ability to override core blade directives
 Prior to 5.2.23 it was not possible to extend Blade and overwrite a core directive, now your extension will overwrite any core blade directive.
+
+## Ability to escape blade directives
+Now you can escape compilation for a blade directive by prepending a `@`, just like what we used to do to escape compiling echos:
+
+
+```html
+// output: <?php continue; ?>
+@@continue
+
+// output: @@continue
+@@@continue
+```
+
+## New mail driver for SparkPost
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The next release of Laravel 5.2 will contain a mail driver for <a href="https://twitter.com/SparkPost">@SparkPost</a> thanks to a community contribution! 📫</p>&mdash; Taylor Otwell (@taylorotwell) <a href="https://twitter.com/taylorotwell/status/706660698605006849">March 7, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 ## + hidden gem
