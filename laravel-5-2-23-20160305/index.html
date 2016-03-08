@@ -84,6 +84,10 @@ Arr::first($array, function ($key, $value) {
 <h2>New mail driver for SparkPost</h2>
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The next release of Laravel 5.2 will contain a mail driver for <a href="https://twitter.com/SparkPost">@SparkPost</a> thanks to a community contribution! 📫</p>&mdash; Taylor Otwell (@taylorotwell) <a href="https://twitter.com/taylorotwell/status/706660698605006849">March 7, 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<h2>New <code>monthlyOn()</code> method for scheduling commands</h2>
+<pre><code class="language-php">$schedule-&gt;call(function () {
+    DB::table('shopping_list')-&gt;delete();
+})-&gt;monthlyOn(4, '12:00');</code></pre>
 <h2>+ hidden gem #1</h2>
 <p>Did you know you can already do this?</p>
 <pre><code class="language-php">User::whereNameAndEmail('jon', 'jon@theWall.com')-&gt;first();
