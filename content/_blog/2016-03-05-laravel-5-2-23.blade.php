@@ -35,16 +35,11 @@ Previously the callback was required as a second argument for these methods, now
 $array = [100, 200, 300];
 
 // (NEW) This will return 100
-Arr::first($array);
+Arr::first($array); /** same for **/ array_first($array);
 
-// Same as
-array_first($array);
 
 // (NEW) This will return 300
-Arr::last($array);
-
-// Same as
-array_last($array);
+Arr::last($array); /** same for **/ array_last($array);
 
 // (You still can) do this and return 200
 Arr::first($array, function ($key, $value) {
