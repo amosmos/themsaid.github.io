@@ -105,7 +105,7 @@ Now you can escape compilation for a blade directive by prepending a `@`, just l
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
-## + hidden gem
+## + hidden gem #1
 
 Did you know you can already do this?
 
@@ -115,6 +115,21 @@ User::whereNameAndEmail('jon', 'jon@theWall.com')->first();
 User::whereNameAndEmailOrPhone('jon', 'jon@theWall.com', '123321')->first();
 
 DB::table('users')->whereEmailOrUsername('mail@mail.com', 'themsaid')->first();
+```
+
+## + hidden gem #2
+
+```php
+// Instead of this:
+if(!$item){
+	abort(404);
+}
+
+// You can do that:
+abort_unless($item);
+
+// You may also have something like this:
+abort_if($item->is_hidden);
 ```
 
 @endmarkdown
