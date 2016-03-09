@@ -78,6 +78,10 @@ p.footer {
     margin-bottom: 20px;
 }
 
+h1, h2, h3, h4 {
+    line-height: 30px;
+}
+
 .main-content h1 {
     font-size: 30px;
     font-weight: 400;
@@ -88,6 +92,12 @@ p.footer {
     font-size: 24px;
     font-weight: 400;
     margin-top: 55px;
+}
+
+.main-content h3 {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 40px;
 }
 
 h1.blog-post-title {
@@ -102,7 +112,7 @@ code:not([class]) {
     padding: 0 2px;
 }
 
-code{
+code {
     font-size: 1.2rem;
 }
 
@@ -111,7 +121,7 @@ blockquote {
     font-size: inherit;
 }
 
-.post-footer{
+.post-footer {
     display: block;
     letter-spacing: -1px;
     text-align: center;
@@ -119,12 +129,12 @@ blockquote {
     color: #85A8BB;
 }
 
-.alert{
+.alert {
     border-radius: 0;
     border: none;
 }
 
-.alert-danger{
+.alert-danger {
     background-color: #fddddd;
     color: #933432;
 }
