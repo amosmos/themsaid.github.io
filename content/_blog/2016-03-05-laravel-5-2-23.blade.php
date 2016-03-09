@@ -141,7 +141,7 @@ User::where('contacts->phone->home', 1234);
 <a name="see-and-dont-see"></a>
 ## seeElement() and dontSeeElement() test helpers
 
-While you have this elements:
+While you have this element:
 
 ```html
 <image width="100" height="50">
