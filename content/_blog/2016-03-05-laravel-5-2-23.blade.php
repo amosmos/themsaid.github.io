@@ -123,7 +123,7 @@ if (app()->isLocale('en'))
 
 With MySQL 5.7, a new column type `JSON` was introduced , in laravel 5.2.23 you're able to query values from a json field as fluent as usual:
 
-Let's say you  have a users table with a JSON `name` column, the column has the following value:
+Let's say you have a users table with a `name` column of type JSON, the column has the following value:
 
 ```json
 {"en":"name","ar":"nom"}
