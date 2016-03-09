@@ -121,7 +121,7 @@ if (app()->isLocale('en'))
 <a name="mysql-json-fields"></a>
 ## Querying MySQL 5.7 json fields fluently with the query builder
 
-With MySQL 5.7, a new column type `JSON` was introduced , in laravel 5.2.23 you're able to query values from a json field as fluent as usual:
+With the release of MySQL 5.7, a new column type `JSON` was introduced , in laravel 5.2.23 you're able to query values from a json field as fluent as usual:
 
 Let's say you have a users table with a `name` column of type JSON, the column has the following value:
 
