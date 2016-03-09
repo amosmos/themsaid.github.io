@@ -134,7 +134,7 @@ You can query the json values using the following syntax:
 ```php
 User::where('name->en', 'name')->get();
 
-// You may dive deep in the JSON string string using the `->` character.
+// You may dive deep in the JSON string using the `->` character.
 User::where('contacts->phone->home', 1234);
 ```
 
