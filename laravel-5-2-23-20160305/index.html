@@ -25,7 +25,8 @@
     <h1 class="blog-post-title">Coming up in laravel 5.2.23</h1>
 
     
-By the time of writing this post laravel has 911 contributors on GitHub, some of them are actively adding awesome stuff to the framework on daily basis. This is a wrap up for the new stuff in laravel 5.2.23.
+By the time of writing this post, laravel has 911 contributors on GitHub, some of them are actively adding awesome
+stuff to the framework on a daily basis. This is a wrap up for the new stuff in laravel 5.2.23.
 
 <h2>in_array validation rule</h2>
 <p>Array validation in laravel is just awesome, I myself replaced a lot of code in some of the current projects with just a few lines for validation. In 5.2.23 a new rule is added to help with validating that a value of a key exists in another related key:</p>
@@ -67,7 +68,7 @@ Arr::first($array, function ($key, $value) {
 <p><code>@unset</code> is just a wrapper for <code>unset()</code>.</p>
 <pre><code class="language-html">@unset($count)</code></pre>
 <h2>Ability to override core blade directives</h2>
-<p>Prior to 5.2.23 it was not possible to extend Blade and overwrite a core directive, now your extension will overwrite any core blade directive.</p>
+<p>Prior to 5.2.23 it was not possible to extend Blade and override a core directive, now your extension will overwrite any core blade directive.</p>
 <h2>Ability to escape blade directives</h2>
 <p>Now you can escape compilation for a blade directive by prepending a <code>@</code>, just like what we used to do to escape compiling echos:</p>
 <pre><code class="language-html">// output: &lt;?php continue; ?&gt;
