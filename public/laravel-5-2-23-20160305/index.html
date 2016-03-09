@@ -83,6 +83,30 @@ Arr::first($array, function ($key, $value) {
 <pre><code class="language-php">$schedule-&gt;call(function () {
     DB::table('shopping_list')-&gt;delete();
 })-&gt;monthlyOn(4, '12:00');</code></pre>
+<h2>New <code>app()-&gt;isLocale()</code> method</h2>
+<pre><code class="language-php">// Instead of this
+if (app()-&gt;getLocale() == 'en')
+
+// You can do that
+if (app()-&gt;isLocale('en'))</code></pre>
+<p><a name="mysql-json-fields"></a></p>
+<h2>Querying MySQL 5.7 json fields fluently with the query builder</h2>
+<p>With MySQL 5.7 a new column type was introduced <code>JSON</code>, in laravel 5.2.23 you're able to query values from a json field like this:</p>
+<p>Let's say you a users table with a JSON <code>name</code> column, the column has the following value:</p>
+<pre><code class="language-json">{"en":"name","ar":"nom"}</code></pre>
+<p>You can query the json values using the following syntax:</p>
+<pre><code class="language-php">User::where('name-&gt;en', 'name')-&gt;get();
+
+// You may dive deep in the JSON string string using the `-&gt;` character.
+User::where('contacts-&gt;phone-&gt;home', 1234);</code></pre>
+<p><a name="see-and-dont-see"></a></p>
+<h2>seeElement() and dontSeeElement() test helpers</h2>
+<p>While you have this elements:</p>
+<pre><code class="language-html">&lt;image width="100" height="50"&gt;</code></pre>
+<p>You may run the following tests and get a success:</p>
+<pre><code class="language-php">$this-&gt;seeElement('image', ['width' =&gt; 100, 'height' =&gt; 50]);
+
+$this-&gt;dontSeeElement('image', ['class' =&gt; 'video']);</code></pre>
 <h2>+ hidden gem #1</h2>
 <p>Did you know you can already do this?</p>
 <pre><code class="language-php">User::whereNameAndEmail('jon', 'jon@theWall.com')-&gt;first();

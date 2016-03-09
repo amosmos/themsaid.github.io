@@ -108,6 +108,53 @@ $schedule->call(function () {
 })->monthlyOn(4, '12:00');
 ```
 
+## New `app()->isLocale()` method
+
+```php
+// Instead of this
+if (app()->getLocale() == 'en')
+
+// You can do that
+if (app()->isLocale('en'))
+```
+
+<a name="mysql-json-fields"></a>
+## Querying MySQL 5.7 json fields fluently with the query builder
+
+With MySQL 5.7 a new column type was introduced `JSON`, in laravel 5.2.23 you're able to query values from a json field like this:
+
+Let's say you a users table with a JSON `name` column, the column has the following value:
+
+```json
+{"en":"name","ar":"nom"}
+```
+
+You can query the json values using the following syntax:
+
+```php
+User::where('name->en', 'name')->get();
+
+// You may dive deep in the JSON string string using the `->` character.
+User::where('contacts->phone->home', 1234);
+```
+
+<a name="see-and-dont-see"></a>
+## seeElement() and dontSeeElement() test helpers
+
+While you have this elements:
+
+```html
+<image width="100" height="50">
+```
+
+You may run the following tests and get a success:
+
+```php
+$this->seeElement('image', ['width' => 100, 'height' => 50]);
+
+$this->dontSeeElement('image', ['class' => 'video']);
+```
+
 
 ## + hidden gem #1
 
@@ -115,7 +162,7 @@ Did you know you can already do this?
 
 ```php
 User::whereNameAndEmail('jon', 'jon@theWall.com')->first();
-        
+
 User::whereNameAndEmailOrPhone('jon', 'jon@theWall.com', '123321')->first();
 
 DB::table('users')->whereEmailOrUsername('mail@mail.com', 'themsaid')->first();
