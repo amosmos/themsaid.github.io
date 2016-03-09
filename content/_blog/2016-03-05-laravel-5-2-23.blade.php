@@ -2,7 +2,8 @@
 
 @section('post::title', 'Coming up in laravel 5.2.23')
 @section('post::brief')
-By the time of writing this post laravel has 911 contributors on GitHub, some of them are actively adding awesome stuff to the framework on daily basis. This is a wrap up for the new stuff in laravel 5.2.23.
+By the time of writing this post, laravel has 911 contributors on GitHub, some of them are actively adding awesome
+stuff to the framework on a daily basis. This is a wrap up for the new stuff in laravel 5.2.23.
 @stop
 @section('pageTitle')- @yield('post::title')@stop
 
@@ -80,7 +81,7 @@ The `@@php` directive will allow you to write PHP statements with style:
 ```
 
 ## Ability to override core blade directives
-Prior to 5.2.23 it was not possible to extend Blade and overwrite a core directive, now your extension will overwrite any core blade directive.
+Prior to 5.2.23 it was not possible to extend Blade and override a core directive, now your extension will overwrite any core blade directive.
 
 ## Ability to escape blade directives
 Now you can escape compilation for a blade directive by prepending a `@`, just like what we used to do to escape compiling echos:
