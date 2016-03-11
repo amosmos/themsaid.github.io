@@ -13,6 +13,8 @@ going to use Laravel's fluent query builder.
 
 @markdown
 
+First let's create a simple table:
+
 ```sql
 CREATE TABLE `products` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
