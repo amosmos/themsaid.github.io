@@ -138,6 +138,8 @@ User::where('name->en', 'name')->get();
 User::where('contacts->phone->home', 1234);
 ```
 
+The output of these queries will be a JSON string (`"name"` and not `name`), so you'll need to use `json_decode()` before display.
+
 <div class="alert alert-warning">To use this syntax make sure your JSON keys are valid <a href="http://www.ecma-international.org/ecma-262/5.1/#sec-7.6">ECMAScript identifier names</a>.</div>
 
 <a name="see-and-dont-see"></a>

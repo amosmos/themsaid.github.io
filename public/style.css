@@ -104,6 +104,10 @@ h1, h2, h3, h4 {
     margin-top: 40px;
 }
 
+table{
+    margin: 30px 0;
+}
+
 h1.blog-post-title {
     font-weight: 200;
     font-size: 40px;
@@ -116,6 +120,7 @@ code:not([class]) {
     background: rgba(0, 0, 0, 0.06);
     padding: 0 2px;
     font-size: inherit;
+
 }
 
 code {
@@ -158,4 +163,13 @@ blockquote {
 .alert-info {
     background-color: #daeffd;
     color: #2b6a94;
+}
+
+.table-condensed > thead > tr > th,
+.table-condensed > tbody > tr > th,
+.table-condensed > tfoot > tr > th,
+.table-condensed > thead > tr > td,
+.table-condensed > tbody > tr > td,
+.table-condensed > tfoot > tr > td {
+    padding: 2px;
 }
