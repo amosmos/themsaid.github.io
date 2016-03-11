@@ -115,6 +115,7 @@ h1.blog-post-title {
 code:not([class]) {
     background: rgba(0, 0, 0, 0.06);
     padding: 0 2px;
+    font-size: inherit;
 }
 
 code {

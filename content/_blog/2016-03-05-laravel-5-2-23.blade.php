@@ -100,7 +100,7 @@ Now you can escape compilation for a blade directive by prepending a `@`, just l
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The next release of Laravel 5.2 will contain a mail driver for <a href="https://twitter.com/SparkPost">@SparkPost</a> thanks to a community contribution! 📫</p>&mdash; Taylor Otwell (@taylorotwell) <a href="https://twitter.com/taylorotwell/status/706660698605006849">March 7, 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-## New `monthlyOn()` method for scheduling commands
+## New monthlyOn() method for scheduling commands
 
 ```php
 $schedule->call(function () {
@@ -108,7 +108,7 @@ $schedule->call(function () {
 })->monthlyOn(4, '12:00');
 ```
 
-## New `app()->isLocale()` method
+## New isLocale() method
 
 ```php
 // Instead of this
