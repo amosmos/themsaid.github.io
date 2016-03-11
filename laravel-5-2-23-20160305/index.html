@@ -99,6 +99,7 @@ if (app()-&gt;isLocale('en'))</code></pre>
 
 // You may dive deep in the JSON string using the `-&gt;` operator.
 User::where('contacts-&gt;phone-&gt;home', 1234);</code></pre>
+<div class="alert alert-warning">To use this syntax make sure your JSON keys are valid <a href="http://www.ecma-international.org/ecma-262/5.1/#sec-7.6">ECMAScript identifier names</a>.</div>
 <p><a name="see-and-dont-see"></a></p>
 <h2>seeElement() and dontSeeElement() test helpers</h2>
 <p>While you have this element:</p>
