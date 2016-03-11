@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid - MySQL JSON data type decoded</title>
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">MySQL JSON data type decoded</h1>
+
+    
+In this post we're going to explore the new MySQL 5.7 JSON Data Type. While diving into the topic we're
+going to use Laravel's fluent query builder.
+
+<pre><code class="language-sql">CREATE TABLE `products` (
+`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`name` JSON,
+`specs` JSON,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;</code></pre>
+<p>And now we insert some values:</p>
+<pre><code class="language-sql">INSERT INTO products VALUES(
+    null,
+    '{"en": "phone", "it": "telefono"}',
+    '{"colors": ["black", "white", "gold"], "size": {"weight": 1, "height": 1}}'
+);
+
+INSERT INTO products VALUES(
+    null,
+    '{"en": "screen", "it": "schermo"}',
+    '{"colors": ["black", "silver"], "size": {"weight": 2, "height": 3}}'
+);
+
+INSERT INTO products VALUES(
+    null,
+    '{"en": "car", "it": "auto"}',
+    '{"colors": ["red", "blue"], "size": {"weight": 40, "height": 34}}'
+);</code></pre>
+<h1>Reading JSON values</h1>
+<p>Using a simple syntax, here's how we can read JSON values:</p>
+<pre><code class="language-sql">select
+name-&gt;"$.en" as name,
+specs-&gt;"$.size.weight" as weight,
+specs-&gt;"$.colors" as colors
+from products;</code></pre>
+<p>The result of this query is:</p>
+<table class="table table-bordered table-condensed">
+    <tr>
+        <td><strong>name</strong></td>
+        <td><strong>weight</strong></td>
+        <td><strong>colors</strong></td>
+    </tr>
+    <tr>
+        <td>"phone"</td>
+        <td>1</td>
+        <td>["black", "white", "gold"]</td>
+    </tr>
+    <tr>
+        <td>"screen"</td>
+        <td>2</td>
+        <td>["black", "silver"]</td>
+    </tr>
+    <tr>
+        <td>"car"</td>
+        <td>40</td>
+        <td>["red", "blue"]</td>
+    </tr>
+</table>
+<p>As you may have noticed the results are produced as JSON strings, that means you'll need to decode them
+before display.</p>
+<pre><code class="language-php">json_decode( Products::selectRaw('name-&gt;"$.en" as name')-&gt;first()-&gt;name )</code></pre>
+<h3>About the syntax</h3>
+<p>Querying JSON fields is done via the <code>-&gt;</code> operator, at the left hand side of the operator we add the column name,
+the right hand side we place the path syntax.</p>
+<p>The Path syntax uses a leading <code>$</code> to represent the JSON document followed by selectors that indicate more specific parts
+of the document. Here are the different paths to extract data:</p>
+<ul>
+<li><code>specs-&gt;"$.colors"</code> returns the array of colors.</li>
+<li><code>specs-&gt;"$.colors[0]"</code> returns a JSON string <code>"black"</code>.</li>
+<li><code>specs-&gt;"$.non_existing"</code> returns NULL.</li>
+<li><code>specs-&gt;"$.\"key name with space\""</code> if the key contains spaces.</li>
+</ul>
+<p>If the key is not a valid <a href="http://www.ecma-international.org/ecma-262/5.1/#sec-7.6">ECMAScript identifier</a> then
+it must be quoted inside the path.</p>
+<h3>Using Wildcards</h3>
+<p>You may also use wild cards to query JSON values, imagine we have the following data:</p>
+<pre><code class="language-json">{"name": "phone", "price": 400, "sizes": [3, 4, 5]}</code></pre>
+<table class="table table-bordered table-condensed">
+    <tr>
+        <td style="min-width:200px"><strong>Syntax</strong></td>
+        <td style="min-width:200px"><strong>Output</strong></td>
+        <td><strong>Notes</strong></td>
+    </tr>
+    <tr>
+        <td>specs->"$.*"</td>
+        <td>["phone", [3, 4, 5], [{"name": "black"}, {"name": "gold"}]]</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>specs->"$.sizes[*]"</td>
+        <td>[3, 4, 5]</td>
+        <td>Same as $.sizes</td>
+    </tr>
+    <tr>
+        <td>specs->"$.colors**.name"</td>
+        <td>["black", "gold"]</td>
+        <td>The "prefix**suffix" syntax will query for all paths that begin with the prefix and ends with the suffix.</td>
+    </tr>
+</table>
+<h1>Querying JSON values</h1>
+<p>It works the same as in regular MySQL columns, now that we know how to write a valid path we'll be able to query
+and/or sort JSON values, here are various examples:</p>
+<pre><code class="language-sql">select name-&gt;"$.en" from products where name-&gt;"$.en" = "phone";
+
+select name-&gt;"$.en" from products where name-&gt;"$.en" IN ("phone");
+
+select specs-&gt;"$.size.weight" from products where specs-&gt;"$.size.weight" BETWEEN 1 AND 10;
+
+select * from products ORDER BY name-&gt;"$.en";</code></pre>
+<h1>MySQL JSON Data Type and laravel</h1>
+<p>If you're using laravel 5.2.23 or above you'll be able to use the fluent query builder to query JSON data types:</p>
+<pre><code class="language-php">Product::where('name-&gt;en', 'car')-&gt;first();
+
+Product::whereIn('specs-&gt;size-&gt;weight', [1, 2, 3])-&gt;get();
+
+Product::select('name-&gt;en')-&gt;orderBy('specs-&gt;size-&gt;height', 'DESC')-&gt;get();</code></pre>
+<p>If not then you can use raw statements:</p>
+<pre><code class="language-php">Product::whereRaw('name-&gt;"$.en"', 'car')-&gt;first();</code></pre>
+<h1>Conclusion</h1>
+<p>In many cases developers prefer a NoSQL database for specific features, flexibility, or performance, however SQL databases
+are preferred by many developers and a lot of large companies rely on it building high performance web applications, so it
+happens a lot that one needs to use MySQL + (Mongo|Redis|etc...) but this adds complexity to the stack. With the
+introduction of a JSON data type in MySQL, it became sort of a SQL-NoSQL hybrid database.</p>
+    <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
+
+    <div class="text-center">
+        <a href="https://twitter.com/share"
+           class="twitter-share-button"
+           data-text="MySQL JSON data type decoded"
+           data-via="themsaid">Tweet</a>
+        &nbsp&nbsp&nbsp
+        <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
+           class="twitter-mention-button"
+           data-related="themsaid">Tweet to @themsaid</a>
+    </div>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s7.postimg.org/weovsp0qz/themsaid.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer [PHP, Laravel, Vue.js] & iOS beginner.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs');</script>
+<script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-61501903-1', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
