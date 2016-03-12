@@ -95,6 +95,14 @@ Now you can escape compilation for a blade directive by prepending a `@`, just l
 @@@continue
 ```
 
+You may also use the new `@@verbatim` to prevent Blade from compiling multiple lines:
+
+```html
+@@verbatim
+	@@if @{{ $var }} @@endif
+@@endverbatim
+```
+
 ## New mail driver for SparkPost
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The next release of Laravel 5.2 will contain a mail driver for <a href="https://twitter.com/SparkPost">@SparkPost</a> thanks to a community contribution! 📫</p>&mdash; Taylor Otwell (@taylorotwell) <a href="https://twitter.com/taylorotwell/status/706660698605006849">March 7, 2016</a></blockquote>
@@ -119,7 +127,7 @@ if (app()->isLocale('en'))
 ```
 
 <a name="mysql-json-fields"></a>
-## Querying MySQL 5.7 json fields fluently with the query builder
+## Querying MySQL 5.7 & Postegres json fields fluently with the query builder
 
 With the release of MySQL 5.7, a new column type `JSON` was introduced , in laravel 5.2.23 you're able to query values from a json field as fluent as usual:
 
@@ -137,6 +145,8 @@ User::where('name->en', 'name')->get();
 // You may dive deep in the JSON string using the `->` operator.
 User::where('contacts->phone->home', 1234);
 ```
+
+### Notes for MySQL
 
 The output of these queries will be a JSON string (`"name"` and not `name`), so you'll need to use `json_decode()` before display.
 
