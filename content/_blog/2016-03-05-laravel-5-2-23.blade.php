@@ -126,7 +126,7 @@ if (app()->getLocale() == 'en')
 if (app()->isLocale('en'))
 ```
 
-<a name="mysql-json-fields"></a>
+<a name="query-json-fields"></a>
 ## Querying MySQL 5.7 & Postegres json fields fluently with the query builder
 
 With the release of MySQL 5.7, a new column type `JSON` was introduced , in laravel 5.2.23 you're able to query values from a json field as fluent as usual:
@@ -145,6 +145,9 @@ User::where('name->en', 'name')->get();
 // You may dive deep in the JSON string using the `->` operator.
 User::where('contacts->phone->home', 1234);
 ```
+
+The same syntax works with Postgres as well, the `column->key->key->...` format will be converted to a valid JSON path
+before sending to the database driver.
 
 ### Notes for MySQL
 
