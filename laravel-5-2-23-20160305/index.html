@@ -76,6 +76,10 @@ Arr::first($array, function ($key, $value) {
 
 // output: @continue
 @@continue</code></pre>
+<p>You may also use the new <code>@verbatim</code> to prevent Blade from compiling multiple lines:</p>
+<pre><code class="language-html">@verbatim
+    @if {{ $var }} @endif
+@endverbatim</code></pre>
 <h2>New mail driver for SparkPost</h2>
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The next release of Laravel 5.2 will contain a mail driver for <a href="https://twitter.com/SparkPost">@SparkPost</a> thanks to a community contribution! 📫</p>&mdash; Taylor Otwell (@taylorotwell) <a href="https://twitter.com/taylorotwell/status/706660698605006849">March 7, 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -90,7 +94,7 @@ if (app()-&gt;getLocale() == 'en')
 // You can do that
 if (app()-&gt;isLocale('en'))</code></pre>
 <p><a name="mysql-json-fields"></a></p>
-<h2>Querying MySQL 5.7 json fields fluently with the query builder</h2>
+<h2>Querying MySQL 5.7 &amp; Postegres json fields fluently with the query builder</h2>
 <p>With the release of MySQL 5.7, a new column type <code>JSON</code> was introduced , in laravel 5.2.23 you're able to query values from a json field as fluent as usual:</p>
 <p>Let's say you have a users table with a <code>name</code> column of type JSON, the column has the following value:</p>
 <pre><code class="language-json">{"en":"name","ar":"nom"}</code></pre>
@@ -99,6 +103,7 @@ if (app()-&gt;isLocale('en'))</code></pre>
 
 // You may dive deep in the JSON string using the `-&gt;` operator.
 User::where('contacts-&gt;phone-&gt;home', 1234);</code></pre>
+<h3>Notes for MySQL</h3>
 <p>The output of these queries will be a JSON string (<code>"name"</code> and not <code>name</code>), so you'll need to use <code>json_decode()</code> before display.</p>
 <div class="alert alert-warning">To use this syntax make sure your JSON keys are valid <a href="http://www.ecma-international.org/ecma-262/5.1/#sec-7.6">ECMAScript identifier names</a>.</div>
 <p><a name="see-and-dont-see"></a></p>
