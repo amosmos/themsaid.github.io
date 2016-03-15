@@ -95,7 +95,7 @@ Now you can escape compilation for a blade directive by prepending a `@`, just l
 @@@continue
 ```
 
-You may also use the new `@@verbatim` to prevent Blade from compiling multiple lines:
+You may also use the new `@@verbatim` directive to prevent Blade from compiling multiple statements:
 
 ```html
 @@verbatim
