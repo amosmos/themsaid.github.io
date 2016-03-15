@@ -1,6 +1,6 @@
 @extends('_includes.blog_post_base')
 
-@section('post::title', 'Coming up in laravel 5.2.23')
+@section('post::title', 'What\'s new in laravel 5.2.23')
 @section('post::brief')
 By the time of writing this post, laravel has 911 contributors on GitHub, some of them are actively adding awesome
 stuff to the framework on a daily basis. This is a wrap up for the new stuff in laravel 5.2.23.
