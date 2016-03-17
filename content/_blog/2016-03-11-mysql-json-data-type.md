@@ -1,17 +1,11 @@
-@extends('_includes.blog_post_base')
-
-@section('post::title', 'MySQL JSON data type decoded')
-@section('post::brief')
-In this post we're going to explore the new MySQL 5.7 JSON Data Type. While diving into the topic we're
-going to use Laravel's fluent query builder.
-@stop
-@section('pageTitle')- @yield('post::title')@stop
-
-@section('post_body')
-
+---
+view::extends: _includes.blog_post_base
+view::yields: post_body
+post::title: MySQL JSON data type decoded
+post::brief: In this post we are going to explore the new MySQL 5.7 JSON Data Type. While diving into the topic we are going to use Laravel\'s fluent query builder.
+pageTitle: MySQL JSON data type decoded
+---
 @yield('post::brief')
-
-@markdown
 
 First let's create a simple table:
 
@@ -176,6 +170,3 @@ In many cases developers prefer a NoSQL database for specific features, flexibil
 are preferred by many developers and a lot of large companies rely on it building high performance web applications, so it
 happens a lot that one needs to use MySQL + (Mongo|Redis|etc...) but this adds complexity to the stack. With the
 introduction of a JSON data type in MySQL, it became sort of a SQL-NoSQL hybrid database.
-
-@endmarkdown
-@stop

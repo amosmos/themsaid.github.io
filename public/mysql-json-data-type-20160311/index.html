@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
 
-    <title>themsaid - MySQL JSON data type decoded</title>
+    <title>themsaid MySQL JSON data type decoded</title>
 
     <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
@@ -24,10 +24,7 @@
 
     <h1 class="blog-post-title">MySQL JSON data type decoded</h1>
 
-    
-In this post we're going to explore the new MySQL 5.7 JSON Data Type. While diving into the topic we're
-going to use Laravel's fluent query builder.
-
+                <p>In this post we are going to explore the new MySQL 5.7 JSON Data Type. While diving into the topic we are going to use Laravel's fluent query builder.</p>
 <p>First let's create a simple table:</p>
 <pre><code class="language-sql">CREATE TABLE `products` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -148,6 +145,7 @@ Product::select('name-&gt;en')-&gt;orderBy('specs-&gt;size-&gt;height', 'DESC')-
 are preferred by many developers and a lot of large companies rely on it building high performance web applications, so it
 happens a lot that one needs to use MySQL + (Mongo|Redis|etc...) but this adds complexity to the stack. With the
 introduction of a JSON data type in MySQL, it became sort of a SQL-NoSQL hybrid database.</p>
+            
     <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
 
     <div class="text-center">
