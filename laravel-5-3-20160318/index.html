@@ -45,17 +45,14 @@
 <li>The <code>lists()</code> method is also removed from ELoquent Builder, Query Builder, and Collections. You may use the <code>pluck()</code> method directly.</li>
 <li><code>array_build()</code> helper is also removed from the framework as it's no longer used anywhere in the core.</li>
 <li>Model's <code>withHidden()</code> method is removed in favour of <code>makeVisible()</code>, same goes for Eloquent Collection's <code>withHidden()</code>. So in order for you to make certain fields visible after defining them as hidden using the Model's <code>hidden</code> property, you'll need to use <code>makeVisible()</code>.</li>
-<li>The <code>Collection::whereLoose()</code> method was removed since <code>Collection::where()</code> now supports operators. <a href="#collection-where-operators">See here</a>.</li>
+<li>The <code>Collection::whereLoose()</code> method was removed since <code>Collection::where()</code> now supports operators. <a href="collection-where-operators">See here</a>.</li>
 </ul>
 <h1>New validate() method in Validator</h1>
 <p>The new method will through a <code>ValidationException</code> if the Validations fails, here are the different ways you can use this method:</p>
 <p>Using the Validation factory:</p>
 <pre><code class="language-php">$validator = Validator::make($data, $rules);
-// Do anything you need with the validator
 
-$validator-&gt;validate();
-
-// validation passed</code></pre>
+$validator-&gt;validate();</code></pre>
 <p>Or on the Validator directly:</p>
 <pre><code class="language-php">Validator::validate($data, $rules);</code></pre>
 <p>Or using the helper method:</p>
