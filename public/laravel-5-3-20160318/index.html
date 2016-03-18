@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid Coming up in laravel 5.3</title>
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">Coming up in laravel 5.3</h1>
+
+                <p>laravel 5.3 is scheduled in June 2016 based on the Proposed Release Schedule, this post is a list of all the things you can expect in this release.</p>
+<h1>Implicit controller routes have been removed</h1>
+<p>Using <code>Route::controller</code> is no longer available in 5.3, the reasons for that change are stated in <a href="https://github.com/laravel/framework/pull/10777">Pull Request #10777</a>, here's part of it:</p>
+<blockquote>
+<p>This method has quite a lot of issues and also makes routes definitions confusing as they are not directly referenced in routes file. This sometimes may lead to unexpected route definitions (e. g. if method like getFilesystem is added to parent or trait - developer mistake, but may be unnoticed).</p>
+</blockquote>
+<p>It's more likely that this method will be available as a package, so it's up to you to decide if you're going to keep using it or switch to using explicit route definitions, however if you decided to switch it's better to start now.</p>
+<h1>The Query Builder returns a collection</h1>
+<p>As of 5.3, the query builder <code>get()</code> method will return an <code>Illuminate\Support\Collection</code> instead of an array. The Pros of such change, as listed by the PR creator, are:</p>
+<ol>
+<li>Makes it consistent with Eloquent. You'll find countless questions on StackOverflow asking why some collection method can't be called on a query builder result.</li>
+<li>It's just much cleaner than this: collect(DB::table('posts')-&gt;get()). Laravel prides itself on making all these tiny interactions more enjoyable. This should not be any different.</li>
+<li>Native PHP arrays are just useless.</li>
+</ol>
+<p>So if you're expecting an array out of <code>DB::get()</code> anywhere in your application or tests you'll need to update your calls to be <code>DB::get()-&gt;all()</code> instead.</p>
+<h1>Removed functions</h1>
+<ul>
+<li><code>Str::randomBytes</code> and <code>Str::equals</code> are removed in favour of the native PHP methods <code>random_bytes()</code> and <code>hash_equals()</code>.</li>
+<li>The <code>lists()</code> method is also removed from ELoquent Builder, Query Builder, and Collections. You may use the <code>pluck()</code> method directly.</li>
+<li><code>array_build()</code> helper is also removed from the framework as it's no longer used anywhere in the core.</li>
+<li>Model's <code>withHidden()</code> method is removed in favour of <code>makeVisible()</code>, same goes for Eloquent Collection's <code>withHidden()</code>. So in order for you to make certain fields visible after defining them as hidden using the Model's <code>hidden</code> property, you'll need to use <code>makeVisible()</code>.</li>
+</ul>
+<h1>New validate() method in Validator</h1>
+<p>The new method will through a <code>ValidationException</code> if the Validations fails, here are the different ways you can use this method:</p>
+<p>Using the Validation factory:</p>
+<pre><code class="language-php">$validator = Validator::make($data, $rules);
+// Do anything you need with the validator
+
+$validator-&gt;validate();
+
+// validation passed</code></pre>
+<p>Or on the Validator directly:</p>
+<pre><code class="language-php">Validator::validate($data, $rules);</code></pre>
+<p>Or using the helper method:</p>
+<pre><code class="language-php">validator($data, $rules)-&gt;validate();</code></pre>
+<h1>Collection::where() accepts operators</h1>
+<p>In laravel 5.3 you're able to filter a collection using <code>where()</code> via operators, and also a major change is that the method performs a loose comparison when not given any operators:</p>
+<pre><code class="language-php">$collection = collect([['score' =&gt; '3'], ['score' =&gt; 3]]);
+
+// Loose comparison by default
+$collection-&gt;where('score', 3);
+// returns [['score' =&gt; '3'], ['score' =&gt; 3]]
+
+$collection-&gt;where('score', '=', 3);
+$collection-&gt;where('score', '==', 3);
+// returns [['score' =&gt; '3'], ['score' =&gt; 3]]
+
+$collection-&gt;where('score', '===', 3);
+// returns [['score' =&gt; 3]]</code></pre>
+<p>Here's a list of all the operators you can use:</p>
+<p><code>=</code> <code>==</code> <code>===</code> <code>&lt;=</code> <code>&gt;=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;&gt;</code> <code>!=</code> <code>!==</code></p>
+<p>With these operators available, the <code>whereLoose()</code> method was removed from the collection class as it's not needed anymore.</p>
+<h1>Minimum PHP version</h1>
+<p>In 5.3 the framework only supports php 5.6, php 7.0, and hhvm.</p>
+            
+    <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
+
+    <div class="text-center">
+        <a href="https://twitter.com/share"
+           class="twitter-share-button"
+           data-text="Coming up in laravel 5.3"
+           data-via="themsaid">Tweet</a>
+        &nbsp&nbsp&nbsp
+        <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
+           class="twitter-mention-button"
+           data-related="themsaid">Tweet to @themsaid</a>
+    </div>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s7.postimg.org/weovsp0qz/themsaid.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer [PHP, Laravel, Vue.js] & iOS beginner.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs');</script>
+<script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-61501903-1', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
