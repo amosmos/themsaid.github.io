@@ -24,7 +24,7 @@
 
     <h1 class="blog-post-title">Coming up in laravel 5.3</h1>
 
-                <p>laravel 5.3 is scheduled in June 2016 based on the Proposed Release Schedule, this post is a list of all the things you can expect in this release.</p>
+                <p>laravel 5.3 is scheduled to be released in June 2016 based on a proposed release schedule, this post is a list of all the things you can expect in this release.</p>
 <h1>Implicit controller routes have been removed</h1>
 <p>Using <code>Route::controller</code> is no longer available in 5.3, the reasons for that change are stated in <a href="https://github.com/laravel/framework/pull/10777">Pull Request #10777</a>, here's part of it:</p>
 <blockquote>
@@ -45,6 +45,7 @@
 <li>The <code>lists()</code> method is also removed from ELoquent Builder, Query Builder, and Collections. You may use the <code>pluck()</code> method directly.</li>
 <li><code>array_build()</code> helper is also removed from the framework as it's no longer used anywhere in the core.</li>
 <li>Model's <code>withHidden()</code> method is removed in favour of <code>makeVisible()</code>, same goes for Eloquent Collection's <code>withHidden()</code>. So in order for you to make certain fields visible after defining them as hidden using the Model's <code>hidden</code> property, you'll need to use <code>makeVisible()</code>.</li>
+<li>The <code>Collection::whereLoose()</code> method was removed since <code>Collection::where()</code> now supports operators. <a href="#collection-where-operators">See here</a>.</li>
 </ul>
 <h1>New validate() method in Validator</h1>
 <p>The new method will through a <code>ValidationException</code> if the Validations fails, here are the different ways you can use this method:</p>
@@ -59,6 +60,7 @@ $validator-&gt;validate();
 <pre><code class="language-php">Validator::validate($data, $rules);</code></pre>
 <p>Or using the helper method:</p>
 <pre><code class="language-php">validator($data, $rules)-&gt;validate();</code></pre>
+<p><a name="collection-where-operators"></a></p>
 <h1>Collection::where() accepts operators</h1>
 <p>In laravel 5.3 you're able to filter a collection using <code>where()</code> via operators, and also a major change is that the method performs a loose comparison when not given any operators:</p>
 <pre><code class="language-php">$collection = collect([['score' =&gt; '3'], ['score' =&gt; 3]]);
@@ -75,7 +77,7 @@ $collection-&gt;where('score', '===', 3);
 // returns [['score' =&gt; 3]]</code></pre>
 <p>Here's a list of all the operators you can use:</p>
 <p><code>=</code> <code>==</code> <code>===</code> <code>&lt;=</code> <code>&gt;=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;&gt;</code> <code>!=</code> <code>!==</code></p>
-<p>With these operators available, the <code>whereLoose()</code> method was removed from the collection class as it's not needed anymore.</p>
+<p>With these operators available, the <code>whereLoose()</code> method was <strong>removed</strong> from the collection class as it's not needed anymore.</p>
 <h1>Minimum PHP version</h1>
 <p>In 5.3 the framework only supports php 5.6, php 7.0, and hhvm.</p>
             
