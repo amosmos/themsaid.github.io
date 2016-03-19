@@ -3,7 +3,7 @@ view::extends: _includes.blog_post_base
 view::yields: post_body
 post::title: MySQL JSON data type decoded
 post::brief: In this post we are going to explore the new MySQL 5.7 JSON Data Type. While diving into the topic we are going to use Laravel\'s fluent query builder.
-pageTitle: MySQL JSON data type decoded
+pageTitle: - MySQL JSON data type decoded
 ---
 @yield('post::brief')
 

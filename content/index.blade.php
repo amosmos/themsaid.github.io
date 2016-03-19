@@ -1,5 +1,7 @@
 @extends('_includes.base')
 
+@section('pageTitle', '- Mohamed Said')
+
 @section('body')
 
     @foreach($paginatedBlogPosts as $post)
