@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
 
-    <title>themsaid - Coming up in laravel 5.3</title>
+    <title>themsaid - MySQL JSON data type decoded</title>
 
     <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
@@ -22,68 +22,136 @@
             
     <a href="/">Back to home</a>
 
-    <h1 class="blog-post-title">Coming up in laravel 5.3</h1>
+    <h1 class="blog-post-title">MySQL JSON data type decoded</h1>
 
-                <p>laravel 5.3 is scheduled to be released in June 2016 based on a proposed release schedule, this post is a list of all the things you can expect in this release.</p>
-<h1>Implicit controller routes have been removed</h1>
-<p>Using <code>Route::controller</code> is no longer available in 5.3, the reasons for that change are stated in <a href="https://github.com/laravel/framework/pull/10777">Pull Request #10777</a>, here's part of it:</p>
-<blockquote>
-<p>This method has quite a lot of issues and also makes routes definitions confusing as they are not directly referenced in routes file. This sometimes may lead to unexpected route definitions (e. g. if method like getFilesystem is added to parent or trait - developer mistake, but may be unnoticed).</p>
-</blockquote>
-<p>It's more likely that this method will be available as a package, so it's up to you to decide if you're going to keep using it or switch to using explicit route definitions, however if you decided to switch it's better to start now.</p>
-<h1>The Query Builder returns a collection</h1>
-<p>As of 5.3, the query builder <code>get()</code> method will return an <code>Illuminate\Support\Collection</code> instead of an array. The Pros of such change, as listed by the PR creator, are:</p>
-<ol>
-<li>Makes it consistent with Eloquent. You'll find countless questions on StackOverflow asking why some collection method can't be called on a query builder result.</li>
-<li>It's just much cleaner than this: collect(DB::table('posts')-&gt;get()). Laravel prides itself on making all these tiny interactions more enjoyable. This should not be any different.</li>
-<li>Native PHP arrays are just useless.</li>
-</ol>
-<p>So if you're expecting an array out of <code>DB::get()</code> anywhere in your application or tests you'll need to update your calls to be <code>DB::get()-&gt;all()</code> instead.</p>
-<h1>Removed functions</h1>
+                <p>In this post we are going to explore the new MySQL 5.7 JSON Data Type. While diving into the topic we are going to use Laravel\'s fluent query builder.</p>
+<p>First let's create a simple table:</p>
+<pre><code class="language-sql">CREATE TABLE `products` (
+`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`name` JSON,
+`specs` JSON,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;</code></pre>
+<p>And now we insert some values:</p>
+<pre><code class="language-sql">INSERT INTO products VALUES(
+    null,
+    '{"en": "phone", "it": "telefono"}',
+    '{"colors": ["black", "white", "gold"], "size": {"weight": 1, "height": 1}}'
+);
+
+INSERT INTO products VALUES(
+    null,
+    '{"en": "screen", "it": "schermo"}',
+    '{"colors": ["black", "silver"], "size": {"weight": 2, "height": 3}}'
+);
+
+INSERT INTO products VALUES(
+    null,
+    '{"en": "car", "it": "auto"}',
+    '{"colors": ["red", "blue"], "size": {"weight": 40, "height": 34}}'
+);</code></pre>
+<h1>Reading JSON values</h1>
+<p>Using a simple syntax, here's how we can read JSON values:</p>
+<pre><code class="language-sql">select
+name-&gt;"$.en" as name,
+specs-&gt;"$.size.weight" as weight,
+specs-&gt;"$.colors" as colors
+from products;</code></pre>
+<p>The result of this query is:</p>
+<table class="table table-bordered table-condensed">
+    <tr>
+        <td><strong>name</strong></td>
+        <td><strong>weight</strong></td>
+        <td><strong>colors</strong></td>
+    </tr>
+    <tr>
+        <td>"phone"</td>
+        <td>1</td>
+        <td>["black", "white", "gold"]</td>
+    </tr>
+    <tr>
+        <td>"screen"</td>
+        <td>2</td>
+        <td>["black", "silver"]</td>
+    </tr>
+    <tr>
+        <td>"car"</td>
+        <td>40</td>
+        <td>["red", "blue"]</td>
+    </tr>
+</table>
+<p>As you may have noticed the results are produced as JSON strings, that means you'll need to decode them
+before display.</p>
+<pre><code class="language-php">json_decode( Products::selectRaw('name-&gt;"$.en" as name')-&gt;first()-&gt;name )</code></pre>
+<h3>About the syntax</h3>
+<p>Querying JSON fields is done via the <code>-&gt;</code> operator, at the left hand side of the operator we add the column name,
+the right hand side we place the path syntax.</p>
+<p>The Path syntax uses a leading <code>$</code> to represent the JSON document followed by selectors that indicate more specific parts
+of the document. Here are the different paths to extract data:</p>
 <ul>
-<li><code>Str::randomBytes</code> and <code>Str::equals</code> are removed in favour of the native PHP methods <code>random_bytes()</code> and <code>hash_equals()</code>.</li>
-<li>The <code>lists()</code> method is also removed from ELoquent Builder, Query Builder, and Collections. You may use the <code>pluck()</code> method directly.</li>
-<li><code>array_build()</code> helper is also removed from the framework as it's no longer used anywhere in the core.</li>
-<li>Model's <code>withHidden()</code> method is removed in favour of <code>makeVisible()</code>, same goes for Eloquent Collection's <code>withHidden()</code>. So in order for you to make certain fields visible after defining them as hidden using the Model's <code>hidden</code> property, you'll need to use <code>makeVisible()</code>.</li>
-<li>The <code>Collection::whereLoose()</code> method was removed since <code>Collection::where()</code> now supports operators. <a href="collection-where-operators">See here</a>.</li>
+<li><code>specs-&gt;"$.colors"</code> returns the array of colors.</li>
+<li><code>specs-&gt;"$.colors[0]"</code> returns a JSON string <code>"black"</code>.</li>
+<li><code>specs-&gt;"$.non_existing"</code> returns NULL.</li>
+<li><code>specs-&gt;"$.\"key name with space\""</code> if the key contains spaces.</li>
 </ul>
-<h1>New validate() method in Validator</h1>
-<p>The new method will throw a <code>ValidationException</code> if the Validations fails, here are the different ways you can use this method:</p>
-<p>Using the Validation factory:</p>
-<pre><code class="language-php">$validator = Validator::make($data, $rules);
+<p>If the key is not a valid <a href="http://www.ecma-international.org/ecma-262/5.1/#sec-7.6">ECMAScript identifier</a> then
+it must be quoted inside the path.</p>
+<h3>Using Wildcards</h3>
+<p>You may also use wild cards to query JSON values, imagine we have the following data:</p>
+<pre><code class="language-json">{"name": "phone", "price": 400, "sizes": [3, 4, 5]}</code></pre>
+<table class="table table-bordered table-condensed">
+    <tr>
+        <td style="min-width:200px"><strong>Syntax</strong></td>
+        <td style="min-width:200px"><strong>Output</strong></td>
+        <td><strong>Notes</strong></td>
+    </tr>
+    <tr>
+        <td>specs->"$.*"</td>
+        <td>["phone", [3, 4, 5], [{"name": "black"}, {"name": "gold"}]]</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>specs->"$.sizes[*]"</td>
+        <td>[3, 4, 5]</td>
+        <td>Same as $.sizes</td>
+    </tr>
+    <tr>
+        <td>specs->"$.colors**.name"</td>
+        <td>["black", "gold"]</td>
+        <td>The "prefix**suffix" syntax will query for all paths that begin with the prefix and ends with the suffix.</td>
+    </tr>
+</table>
+<h1>Querying JSON values</h1>
+<p>It works the same as in regular MySQL columns, now that we know how to write a valid path we'll be able to query
+and/or sort JSON values, here are various examples:</p>
+<pre><code class="language-sql">select name-&gt;"$.en" from products where name-&gt;"$.en" = "phone";
 
-$validator-&gt;validate();</code></pre>
-<p>Or on the Validator directly:</p>
-<pre><code class="language-php">Validator::validate($data, $rules);</code></pre>
-<p>Or using the helper method:</p>
-<pre><code class="language-php">validator($data, $rules)-&gt;validate();</code></pre>
-<p><a name="collection-where-operators"></a></p>
-<h1>Collection::where() accepts operators</h1>
-<p>In laravel 5.3 you're able to filter a collection using <code>where()</code> via operators, and also a major change is that the method performs a loose comparison when not given any operators:</p>
-<pre><code class="language-php">$collection = collect([['score' =&gt; '3'], ['score' =&gt; 3]]);
+select name-&gt;"$.en" from products where name-&gt;"$.en" IN ("phone");
 
-// Loose comparison by default
-$collection-&gt;where('score', 3);
-// returns [['score' =&gt; '3'], ['score' =&gt; 3]]
+select specs-&gt;"$.size.weight" from products where specs-&gt;"$.size.weight" BETWEEN 1 AND 10;
 
-$collection-&gt;where('score', '=', 3);
-$collection-&gt;where('score', '==', 3);
-// returns [['score' =&gt; '3'], ['score' =&gt; 3]]
+select * from products ORDER BY name-&gt;"$.en";</code></pre>
+<h1>MySQL JSON Data Type and laravel</h1>
+<p>If you're using laravel 5.2.23 or above you'll be able to use the fluent query builder to query JSON data types:</p>
+<pre><code class="language-php">Product::where('name-&gt;en', 'car')-&gt;first();
 
-$collection-&gt;where('score', '===', 3);
-// returns [['score' =&gt; 3]]</code></pre>
-<p>Here's a list of all the operators you can use:</p>
-<p><code>=</code> <code>==</code> <code>===</code> <code>&lt;=</code> <code>&gt;=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;&gt;</code> <code>!=</code> <code>!==</code></p>
-<p>With these operators available, the <code>whereLoose()</code> method was <strong>removed</strong> from the collection class as it's not needed anymore.</p>
-<h1>Minimum PHP version</h1>
-<p>In 5.3 the framework only supports php 5.6, php 7.0, and hhvm.</p>
+Product::whereIn('specs-&gt;size-&gt;weight', [1, 2, 3])-&gt;get();
+
+Product::select('name-&gt;en')-&gt;orderBy('specs-&gt;size-&gt;height', 'DESC')-&gt;get();</code></pre>
+<p>If not then you can use raw statements:</p>
+<pre><code class="language-php">Product::whereRaw('name-&gt;"$.en"', 'car')-&gt;first();</code></pre>
+<h1>Conclusion</h1>
+<p>In many cases developers prefer a NoSQL database for specific features, flexibility, or performance, however SQL databases
+are preferred by many developers and a lot of large companies rely on it building high performance web applications, so it
+happens a lot that one needs to use MySQL + (Mongo|Redis|etc...) but this adds complexity to the stack. With the
+introduction of a JSON data type in MySQL, it became sort of a SQL-NoSQL hybrid database.</p>
             
     <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
 
     <div class="text-center">
         <a href="https://twitter.com/share"
            class="twitter-share-button"
-           data-text="Coming up in laravel 5.3"
+           data-text="MySQL JSON data type decoded"
            data-via="themsaid">Tweet</a>
         &nbsp&nbsp&nbsp
         <a href="https://twitter.com/intent/tweet?screen_name=themsaid"

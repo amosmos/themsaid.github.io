@@ -76,10 +76,10 @@ Arr::first($array, function ($key, $value) {
 
 // output: @continue
 @@continue</code></pre>
-<p>You may also use the new `` directive to prevent Blade from compiling multiple statements:</p>
-<pre><code class="language-html">@@verbatim
-    @@if @{{ $var }} @@endif
-@</code></pre>
+<p>You may also use the new <code>@verbatim</code> directive to prevent Blade from compiling multiple statements:</p>
+<pre><code class="language-html">@verbatim
+    @if {{ $var }} @endif
+@endverbatim</code></pre>
 <h2>New mail driver for SparkPost</h2>
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The next release of Laravel 5.2 will contain a mail driver for <a href="https://twitter.com/SparkPost">@SparkPost</a> thanks to a community contribution! 📫</p>&mdash; Taylor Otwell (@taylorotwell) <a href="https://twitter.com/taylorotwell/status/706660698605006849">March 7, 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
