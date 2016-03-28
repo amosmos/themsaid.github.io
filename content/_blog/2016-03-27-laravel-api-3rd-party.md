@@ -2,7 +2,7 @@
 view::extends: _includes.blog_post_base
 view::yields: post_body
 post::title: Building an API for 3rd party applications
-post::brief: APIs are cool, & laravel can handle all the coolness you may desire. Here we talk about building an API for third party applications and allow them to communicate with your application on behalf of users.
+post::brief: APIs are cool, & laravel can handle all the coolness you may desire. Here we talk about building an API for third party applications and allowing them to communicate with your application on behalf of users.
 pageTitle: - Building an API for 3rd party applications - laravel
 ---
 @yield('post::brief')
