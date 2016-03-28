@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid - Building an API for 3rd party applications - laravel</title>
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">Building an API for 3rd party applications</h1>
+
+                <p>APIs are cool, & laravel can handle all the coolness you may desire. Here we talk about building an API for third party applications and allow them to communicate with your application on behalf of users.</p>
+<h2>Planning ahead</h2>
+<p>Our application gives third-party applications the ability to read/write data, we only need the applications we know about to be able to connect, we also need to be able to deactivate an application at any point of time, here's a list of all the specs:</p>
+<ol>
+<li>Issue an application authentication token.</li>
+<li>Deactivate an application so that it may not make requests.</li>
+<li>Allow our users to log in from a 3rd party app.</li>
+<li>Allow our users to log out from an app.</li>
+</ol>
+<h2>New  Laravel installation</h2>
+<p>For the purpose of this post we're going to install a fresh copy of laravel to run our project &quot;Valhalla&quot;:</p>
+<pre><code class="language-shell">composer create-project laravel/laravel valhalla</code></pre>
+<h2>Preparing files</h2>
+<p>Update <code>app/Http/routes.php</code>:</p>
+<pre><code class="language-php">$router-&gt;group(['prefix' =&gt; 'api/v1'], function ($router) {
+    // Applications Authentication...
+    $router-&gt;post('/auth/app', 'Api\AuthController@authenticateApp');
+
+    // Users Authentication...
+    $router-&gt;post('/auth/user', 'Api\AuthController@authenticateUser')-&gt;middleware('auth.api.app');
+    $router-&gt;post('/auth/user/logout', 'Api\AuthController@logoutUser')-&gt;middleware('auth.api.user');
+
+    // Testing routes...
+    $router-&gt;get('/application-data', 'Api\HomeController@appData');
+    $router-&gt;get('/user-data', 'Api\HomeController@userData');
+});
+
+// authorize an application for user data...
+$router-&gt;get('/authorize', 'HomeController@showAuthorizationForm')-&gt;middleware('web');
+$router-&gt;post('/authorize', 'HomeController@authorizeApp')-&gt;middleware('web');</code></pre>
+<hr />
+<p>Create <code>app/Http/Controllers/Api/AuthController.php</code></p>
+<pre><code class="language-php">class AuthController extends Controller
+{
+    public function authenticateApp(Request $request){}
+
+    public function authenticateUser(Request $request){}
+
+    public function logoutUser(Request $request){}
+}</code></pre>
+<hr />
+<p>Create <code>app/Http/Controllers/Api/HomeController.php</code></p>
+<pre><code class="language-php">class HomeController extends Controller
+{
+    public function appData(Request $request){}
+
+    public function userData(Request $request){}
+}</code></pre>
+<hr />
+<p>Create <code>app/Http/Controllers/HomeController.php</code></p>
+<pre><code class="language-php">class HomeController extends Controller
+{
+    public function authorizeApp(Request $request){}
+}</code></pre>
+<hr />
+<p>We'll also need to create an <code>Application</code> Model:</p>
+<pre><code class="language-shell">php artisan make:model Application</code></pre>
+<h2>Preparing the database</h2>
+<p>For this application we need a <code>users</code> table and a <code>applications</code> table, the users table migration is available out of the box with each laravel installation, so we're only going to create an <code>applications</code> table:</p>
+<pre><code class="language-shell">php artisan make:migration create_applications_table --create=applications</code></pre>
+<p>Here's the structure of our new table:</p>
+<pre><code class="language-php">Schema::create('applications', function (Blueprint $table) {
+    $table-&gt;increments('id');
+    $table-&gt;string('name');
+    $table-&gt;string('key')-&gt;unique();
+    $table-&gt;string('secret');
+    $table-&gt;tinyInteger('is_active')-&gt;unsigned()-&gt;default(1);
+    $table-&gt;timestamps();
+});</code></pre>
+<p>We'll also need to build a pivot table to manage users authorized apps:</p>
+<pre><code class="language-shell">php artisan make:migration create_application_user_table --create=application_user</code></pre>
+<pre><code class="language-php">Schema::create('application_user', function (Blueprint $table) {
+    $table-&gt;integer('application_id')-&gt;unsigned();
+    $table-&gt;integer('user_id')-&gt;unsigned();
+    $table-&gt;string('Authorization_code')-&gt;nullable();
+
+    $table-&gt;primary(['application_id', 'user_id']);
+
+    $table-&gt;foreign('application_id')-&gt;references('id')-&gt;on('applications')-&gt;onDelete('cascade');
+    $table-&gt;foreign('user_id')-&gt;references('id')-&gt;on('users')-&gt;onDelete('cascade');
+});</code></pre>
+<p>Now let's add some data, we're going to register an application &quot;Asgard Connect&quot; with proper key and secret:</p>
+<pre><code class="language-sql">insert into `applications` (name, key, secret) values ('Asgard Connect', '111222333', 'aaabbbccc');</code></pre>
+<p>We're going to add a new user as well:</p>
+<pre><code class="language-sql">insert into `users` (name, email, password) values ('Loki', 'loki@asgard.com', '$2y$10$QfBGX14wKpXT/zA1gR.FZ.A12nrXzbtfki8wfqfwG.irvAWAYE9dC');</code></pre>
+<h1>Application Authentication</h1>
+<p>In order for us to identify and authenticate apps trying to communicate with our API, we assigned a <code>key</code> &amp; <code>secret</code> for each one, apps use a hashed version of this pair to generate an authentication token.</p>
+<p>We're going to use <a href="https://jwt.io/">JSON Web tokens</a> in this application, I believe it's a perfect approach that combines between security and simplicity. For this we're going to pull this JWT PHP library:</p>
+<pre><code class="language-shell">composer require firebase/php-jwt</code></pre>
+<h2>Requesting a token</h2>
+<p>In order for an app to acquire a token, it must base64 encode the app key &amp; secret pair separated by a colon, for example using PHP and our demo app credentials:</p>
+<pre><code class="language-php">base64_encode('111222333:aaabbbccc');
+
+// Results: MTExMjIyMzMzOmFhYWJiYmNjYw==</code></pre>
+<p>The app then sends a <code>POST</code> request to <code>/auth/app</code> with the following authorization header:</p>
+<pre><code class="language-bash">Authorization: Basic MTExMjIyMzMzOmFhYWJiYmNjYw==</code></pre>
+<p>In our <code>AuthController@authenticateApp</code> method, here's how we handle the request:</p>
+<pre><code class="language-php">public function authenticateApp(Request $request)
+{
+    $credentials = base64_decode(
+        Str::substr($request-&gt;header('Authorization'), 6)
+    );
+
+    try {
+        list($appKey, $appSecret) = explode(':', $credentials);
+
+        $app = Application::whereKeyAndSecret($appKey, $appSecret)-&gt;firstOrFail();
+    } catch (\Throwable $e) {
+        return response('invalid_credentials', 400);
+    }
+
+    if (! $app-&gt;is_active) {
+        return response('app_inactive', 403);
+    }
+
+    return response([
+        'token_type' =&gt; 'Bearer',
+        'access_token' =&gt; $app-&gt;generateAuthToken(),
+    ]);
+}</code></pre>
+<p>The auth token is generated in <code>Application@generateAuthToken</code>:</p>
+<pre><code class="language-php">public function generateAuthToken()
+{
+    $jwt = \Firebase\JWT::encode([
+        'iss' =&gt; 'valhalla',
+        'sub' =&gt; $this-&gt;key,
+        'iat' =&gt; time(),
+        'exp' =&gt; time() + (5 * 60 * 60),
+    ], 'w5yuCV2mQDVTGmn3');
+
+    return $jwt;
+}</code></pre>
+<p>Using the Firebase\JWT library we created a token and signed it with a secret, this secret may be saved as an environment value, however we just added it there for simplification.</p>
+<p>A JWT contains the following claims:</p>
+<ul>
+<li><code>iss</code> The issuer of the token, in this case it's our application &quot;valhalla&quot;.</li>
+<li><code>sub</code> The subject of the token, which is the app trying to authenticate.</li>
+<li><code>iat</code> The time the token was issued.</li>
+<li><code>exp</code> Token expiration time. Here the token will expire after 5 hours.</li>
+</ul>
+<p>The response of the authentication request will be the following:</p>
+<pre><code class="language-json">{
+    "token_type": "Bearer",
+    "access_token": "eyJ0eXAiO~~~.eyJpc3MiO~~~.MSzBigimzWrc9DlZZduh~~~"
+}</code></pre>
+<p>The app shall store this token in order for it to send it back with every request later on.</p>
+<h2>Making requests</h2>
+<p>To create a request that requires an application to be authenticated, you have to send the authentication token via the <code>Authorization</code> header:</p>
+<pre><code class="language-shell">Authorization: Bearer eyJ0eXAiO~~~.eyJpc3MiO~~~.MSzBigimzWrc9DlZZduh~~~</code></pre>
+<p>But first, let's create a middleware to check for a valid token:</p>
+<pre><code class="language-shell">php artisan make:middleware ApiAppAuth</code></pre>
+<p>Then we handle the incoming request:</p>
+<pre><code class="language-php">public function handle($request, Closure $next)
+{
+    $authToken = $request-&gt;bearerToken();
+
+    try {
+        // Check the validation implementation in the next method
+        $this-&gt;payloadIsValid(
+              // JWT::decode accepts the token string as the first argument, the 
+              // key used to sign the token, and finally a list of supported 
+              // verification algorithms.
+            $payload = (array) JWT::decode($authToken, 'w5yuCV2mQDVTGmn3', ['HS256'])
+        );
+
+        $app = Application::whereKey($payload['sub'])-&gt;firstOrFail();
+    } catch (\Firebase\JWT\ExpiredException $e) {
+        return response('token_expired', 401);
+    } catch (\Throwable $e) {
+        return response('token_invalid', 401);
+    }
+
+    if (! $app-&gt;is_active) {
+        return response('app_inactive', 403);
+    }
+
+     // Once we get an instance of the authenticated application, we pass
+     // it to the Request object as an input. This will allow us to use
+     // the application data in all routes actions.
+     $request-&gt;merge(['__authenticatedApp' =&gt; $app]);
+
+    return $next($request);
+}
+
+private function payloadIsValid($payload)
+{
+    $validator = Validator::make($payload, [
+        'iss' =&gt; 'required|in:valhalla',
+        'sub' =&gt; 'required',
+    ]);
+
+    if (! $validator-&gt;passes()) {
+        throw new \InvalidArgumentException;
+    }
+}</code></pre>
+<p>Now we need to register the middleware in <code>Http/Kernel.php</code>:</p>
+<pre><code class="language-php">protected $routeMiddleware = [
+    'auth.api.app' =&gt; \App\Http\Middleware\ApiAppAuth::class,
+    // ... list of other middlewares.
+];</code></pre>
+<p>And finally register the middleware on the <code>/application-data</code> route:</p>
+<pre><code class="language-php">$router-&gt;get('/application-data', 'Api\HomeController@appData')-&gt;middleware('auth.api.app');</code></pre>
+<p>Now when you visit <code>/api/v1/application-data</code> and provide the right authorization header you receive a 200 response, the response body can be setup in <code>HomeController@appData</code>, here we only send the JSON representation of the authenticated application:</p>
+<pre><code class="language-php">public function appData(Request $request)
+{
+    return $request-&gt;__authenticatedApp;
+}</code></pre>
+<p>In case the token was invalid a 401 response will be received, or if the application was inactive a 403 response will be received.</p>
+<h3>Dealing with expired tokens</h3>
+<p>In case the given token was expired, the response will be <code>token_expired</code> with a 401 response code, the device trying to authenticate needs to detect for such response and re-issue a new token in order to be able to make requests.</p>
+<h3>Deactivating an Application</h3>
+<p>If, at any point of time, you'd like a specific application to be deactivated so that I may not communicate with your API, you simply change the <code>is_active</code> key of this application to 0, the rest is taken care of by the <code>auth.api.app</code> middleware.</p>
+<p>Once an app is not active, response to all its requests will be <code>app_inactive</code> with a response code <code>403</code>.</p>
+<h1>User Authentication</h1>
+<p>In Valhalla we allow applications to make user-less requests where they may request general information that are not user specific, but we also would like these applications to allow users to log into their Valhalla account and give the app a permission to make specific requests on behalf of them.</p>
+<p>However we don't want our users to share their account credentials with these apps, if a user wants to use Valhalla from a 3rd party app he has to come to Valhalla, identify himself, and give Valhalla a permission to share data with that app. Here's how we're going to implement that:</p>
+<ol>
+<li>User opens the 3rd party app.</li>
+<li>Clicks on &quot;Log In&quot;.</li>
+<li>Gets redirected to a URL on Valhalla's website.</li>
+<li>User logs in using correct credentials.</li>
+<li>User gets redirected to an app-specific URI with a code.</li>
+<li>App uses this code to request a user authentication token.</li>
+<li>App uses this token in future requests.</li>
+</ol>
+<h2>Authorization</h2>
+<p>In <code>app/Http/Controllers/HomeController@showAuthorizationForm</code> we'll check for valid Authorization parameters &amp; display a log-in form:</p>
+<pre><code class="language-php">public function authorizeApp(Request $request)
+{
+    $validator = Validator::make($request-&gt;all(), [
+        'app_key' =&gt; 'required|exists:applications,key,is_active,1',
+        'redirect_uri' =&gt; 'required:active_url',
+    ]);
+
+    if (! $validator-&gt;passes()) {
+        return view('authorize-app')-&gt;withInvalid('true');
+    }
+
+    $app = Application::whereKey($request-&gt;app_key)-&gt;first();
+
+    return view('authorize-app', compact('app'));
+}</code></pre>
+<p>If the request is not valid we'll display the view and pass a <code>$invalid</code> variable, if valid we'll display the view and pass an instance of the app trying to issue the token.</p>
+<p>The view (<code>resources/views/authorize-app.blade.php</code>) has a simple form:</p>
+<pre><code class="language-html">@if(isset($invalid))
+    Invalid Authorization request.
+@else
+    &lt;div class="error"&gt; authorize "{{$app-&gt;name}}" to use your data. &lt;/div&gt;
+
+    @if(session('message'))
+        &lt;div class="error"&gt; {{session('message')}} &lt;/div&gt;
+    @endif
+
+    &lt;form method="POST" action="{{ url('/authorize') }}"&gt;
+        {!! csrf_field() !!}
+        &lt;input type="hidden" name="app_key" value="{{ request('app_key') }}"&gt;
+        &lt;input type="hidden" name="redirect_uri" value="{{ request('redirect_uri') }}"&gt;
+
+        &lt;input type="email" name="email"&gt;
+        &lt;input type="password" name="password"&gt;
+
+        &lt;button type="submit"&gt;authorize&lt;/button&gt;
+    &lt;/form&gt;
+@endif</code></pre>
+<p>Now the user has to fill in his email &amp; password and click on &quot;authorize&quot; to send a post request to Valhalla indicating that the user is willing to share his data with the 3rd party application.</p>
+<h3>Handling user Authorization permission</h3>
+<p>Once the user submits the form, the <code>HomeController@authorizeApp</code> action will be executed:</p>
+<pre><code class="language-php">public function authorizeApp(Request $request)
+{
+     // Validate Authorization parameters...
+    $validator = Validator::make($request-&gt;all(), [
+        'app_key' =&gt; 'required|exists:applications,key,is_active,1',
+        'redirect_uri' =&gt; 'required:active_url',
+    ]);
+
+    if (! $validator-&gt;passes()) {
+        return redirect()-&gt;back()-&gt;withMessage('Invalid Authorization parameters.');
+    }
+
+     // Check user credentials...
+    if (! Auth::validate($request-&gt;only(['email', 'password']))) {
+        return redirect()-&gt;back()-&gt;withMessage('Wrong credentials.');
+    }
+
+    $app = Application::whereKey($request-&gt;app_key)-&gt;first();
+
+    $user = User::whereEmail($request-&gt;email)-&gt;first();
+
+     // Generate an Authorization code for the application...
+    $pivotData = ['Authorization_code' =&gt; $code = sha1($app-&gt;id.':'.$user-&gt;id.str_random())];
+
+     // Update the database record...
+    if ($app-&gt;users-&gt;contains($user)) {
+        $app-&gt;users()-&gt;updateExistingPivot($user-&gt;id, $pivotData);
+    } else {
+        $app-&gt;users()-&gt;attach($user-&gt;id, $pivotData);
+    }
+
+     // Redirect to the defined redirect_uri with the code...
+    return redirect()-&gt;away($request-&gt;redirect_uri.'?code='.$code);
+}</code></pre>
+<p>Now if the user provided the right credentials a redirect response will be returned pointing the browser to <code>redirect_uri?code=6bc02273a757569a0237</code>, the application then has to catch the code in the uri in order to issue an Authorization token to get the user data.</p>
+<h3>Issuing an authentication token</h3>
+<p>Back to <code>app\Http\Controllers\Api\AuthController.php</code>, we're going to implement the action to issue an authentication token for the user.</p>
+<pre><code class="language-php">public function authenticateUser(Request $request)
+{
+    $code = $request-&gt;json('code');
+
+    $app = $request-&gt;__authenticatedApp;
+
+    if (! $code || ! $user = $app-&gt;users()-&gt;wherePivot('Authorization_code', $code)-&gt;first()) {
+        return response('invalid_code', 400);
+    }
+
+    $app-&gt;users()-&gt;updateExistingPivot($user-&gt;id, ['Authorization_code' =&gt; null]);
+
+    return response([
+        'token_type' =&gt; 'Bearer',
+        'access_token' =&gt; $user-&gt;generateAuthToken($app),
+    ]);
+}</code></pre>
+<p>Here's how we generate a token for the user in <code>app\User.php</code>:</p>
+<pre><code class="language-php">public function generateAuthToken(Application $app)
+{
+    $jwt = JWT::encode([
+        'iss' =&gt; $app-&gt;key,
+        'sub' =&gt; $this-&gt;email,
+        'iat' =&gt; time(),
+        'jti' =&gt; sha1($app-&gt;key.$this-&gt;email.time()),
+    ], 'w5yuCV2mQDVTGmn3');
+
+    return $jwt;
+}</code></pre>
+<p>The <code>jti</code> is a unique identifier for the token, we'll use it later to log the user out and forbid the use of this token.</p>
+<p><strong>Notice</strong> that this time the issuer is an application, so we pass the application key for further reference. Also as you can see the user token will never expire, later on we will implement a log-out mechanism.</p>
+<p>To generate a token, an application has to send the code to <code>/auth/user</code> in a json body and receive the token in return.</p>
+<h2>Making requests</h2>
+<p>To make a request that requires a user to be authenticated, you have to send the <strong>user</strong> authentication token via the <code>Authorization</code> header:</p>
+<pre><code class="language-shell">Authorization: Bearer eyJ0eXAiO~~~.eyJpc3MiO~~~.MSzBigimzWrc9DlZZduh~~~</code></pre>
+<p>But first, let's create a middleware to check for a valid token:</p>
+<pre><code class="language-shell">php artisan make:middleware ApiUserAuth</code></pre>
+<p>Then we handle the incoming request:</p>
+<pre><code class="language-php">public function handle($request, Closure $next)
+{
+    $authToken = $request-&gt;bearerToken();
+
+    try {
+        $this-&gt;payloadIsValid(
+            $payload = (array) JWT::decode($authToken, 'w5yuCV2mQDVTGmn3', ['HS256'])
+        );
+
+        $app = Application::whereKey($payload['iss'])-&gt;firstOrFail();
+
+        $user = User::whereEmail($payload['sub'])-&gt;firstOrFail();
+    } catch (\Throwable $e) {
+        return response('token_invalid', 401);
+    }
+
+    if (! $app-&gt;is_active) {
+        return response('app_inactive', 403);
+    }
+
+    $request-&gt;merge(['__authenticatedApp' =&gt; $app]);
+
+    $request-&gt;merge(['__authenticatedUser' =&gt; $user]);
+
+    return $next($request);
+}
+
+private function payloadIsValid($payload)
+{
+    $validator = Validator::make($payload, [
+        'iss' =&gt; 'required',
+        'sub' =&gt; 'required',
+        'jti' =&gt; 'required',
+    ]);
+
+    if (! $validator-&gt;passes()) {
+        throw new \InvalidArgumentException;
+    }
+}</code></pre>
+<p>Now we need to register the middleware in <code>Http/Kernel.php</code>:</p>
+<pre><code class="language-php">protected $routeMiddleware = [
+    'auth.api.user' =&gt; \App\Http\Middleware\ApiUserAuth::class,
+    // ... list of other middlewares.
+];</code></pre>
+<p>And finally register the middleware on the <code>/user-data</code> route:</p>
+<pre><code class="language-php">$router-&gt;get('/user-data', 'Api\HomeController@appData')-&gt;middleware('auth.api.user');</code></pre>
+<p>Now when you visit <code>/api/v1/user-data</code> and provide the right authorization header you receive a 200 response, the response body can be setup in <code>HomeController@userData</code>:</p>
+<pre><code class="language-php">public function userData(Request $request)
+{
+    return [
+        'app' =&gt; $request-&gt;__authenticatedApp,
+        'user' =&gt; $request-&gt;__authenticatedUser,
+    ];
+}</code></pre>
+<h2>Logging a user out of an application</h2>
+<p>The user now is able to use the application to manage his own data, however we need a way to allow him to log out, for this we'll create a <code>tokens_cemetery</code> table that'll hold user tokens that are dead and may not be used anymore:</p>
+<pre><code class="language-shell">php artisan make:migration create_tokens_cemetery_table --create=tokens_cemetery</code></pre>
+<p>And here's the schema:</p>
+<pre><code class="language-php">Schema::create('tokens_cemetery', function (Blueprint $table) {
+    $table-&gt;string('token_id');
+});</code></pre>
+<p>Then we modify the <code>Api\AuthController@logoutUser</code> action:</p>
+<pre><code class="language-php">public function logoutUser(Request $request)
+{
+    $token = $request-&gt;bearerToken();
+
+    DB::table('tokens_cemetery')-&gt;insert(['token_id' =&gt; $token]);
+
+    return response('token_deceased');
+}</code></pre>
+<p>And finally we update the <code>ApiUserAuth</code> middleware to check for a deceased token and send the proper response:</p>
+<pre><code class="language-php">// Add After:
+// if (! $app-&gt;is_active) {
+//    return response('app_inactive', 403);
+// }
+
+if (DB::table('tokens_cemetery')-&gt;whereTokenId($payload['jti'])-&gt;first()) {
+    return response('token_deceased', 403);
+}
+
+$request-&gt;merge(['__authTokenId' =&gt; $payload['jti']]);</code></pre>
+<p>Now if the user logged out, any further communication using the token will result a 403 token_deceased response, the app shall ask the user to re-authorize in order to make further requests on his behalf.</p>
+<h1>Closing Thoughts</h1>
+<p>You may have noticed that during the process we've issued two different types of tokens, one for user authentication and another for application authentication, while writing our documentation for the API we need to give the developers a hint about what endpoints require app-only tokens and others that require user tokens.</p>
+<p>Done! You may now invite application developers to visit Valhalla and create applications for the platform, and you have the control to deactivate any of the applications at any point of time.</p>
+<p>You've also secured your users data but at the same time gave them the ability to access any of the cool third party applications built for your platform.</p>
+<hr />
+<p>Note: If you found any loophole or security risk in this approach please contact me on twitter :)</p>
+            
+    <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
+
+    <div class="text-center">
+        <a href="https://twitter.com/share"
+           class="twitter-share-button"
+           data-text="Building an API for 3rd party applications"
+           data-via="themsaid">Tweet</a>
+        &nbsp&nbsp&nbsp
+        <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
+           class="twitter-mention-button"
+           data-related="themsaid">Tweet to @themsaid</a>
+    </div>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s7.postimg.org/weovsp0qz/themsaid.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer [PHP, Laravel, Vue.js] & iOS beginner.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs');</script>
+<script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-61501903-1', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
