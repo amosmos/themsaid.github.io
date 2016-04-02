@@ -71,7 +71,7 @@ The `@@php` directive will allow you to write PHP statements with style:
 	$now = new DateTime();
 
 	$environment = isset($env) ? $env : "testing";
-@enphp
+@endphp
 ```
 
 `@@unset` is just a wrapper for `unset()`.
