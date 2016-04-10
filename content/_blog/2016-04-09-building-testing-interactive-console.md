@@ -6,6 +6,8 @@ post::brief: In this post we're going to discuss building and testing console co
 pageTitle: - Building and testing Artisan Commands
 ---
 
+<img src="http://s30.postimg.org/buel0wn5t/post.gif">
+<br>
 While building the [Laravel Langman](https://github.com/themsaid/laravel-langman) package I was facing some difficulties trying to figure out how to test a console command that interacts with the user via questions, most of the tutorials and blog posts I found online were just calling the command and passing arguments/options using the `artisan()` method that comes with laravel's default test suite, however I didn't stumble upon a tutorial that covers user interaction with the console after calling the command.
 
 In this post I'm going to share how I tested such type of commands, but let's first see how powerful artisan commands can be.
