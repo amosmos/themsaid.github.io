@@ -17,7 +17,7 @@ In this post I'm going to share how I tested such type of commands, but let's fi
 First we'll need to create a new command by calling:
 
 ```shell
-php artisan make:console ConfigManager --command=config:make
+php artisan make:console ConfigManager --command=config:manage
 ```
 
 This will create a new class in `app/Console/Commands` with the following content:

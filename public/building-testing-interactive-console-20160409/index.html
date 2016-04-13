@@ -30,7 +30,7 @@ While building the <a href="https://github.com/themsaid/laravel-langman">Laravel
 <p>In this post I'm going to share how I tested such type of commands, but let's first see how powerful artisan commands can be.</p>
 <h2>Building a console command</h2>
 <p>First we'll need to create a new command by calling:</p>
-<pre><code class="language-shell">php artisan make:console ConfigManager --command=config:make</code></pre>
+<pre><code class="language-shell">php artisan make:console ConfigManager --command=config:manage</code></pre>
 <p>This will create a new class in <code>app/Console/Commands</code> with the following content:</p>
 <pre><code class="language-php">class ConfigManager extends Command
 {
