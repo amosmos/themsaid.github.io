@@ -1,7 +1,7 @@
 ---
 view::extends: _includes.blog_post_base
 view::yields: post_body
-post::title: Better readability using enumerators
+post::title: Better readability using Enumerators
 post::brief: This post is about using an Enumerated-type-like in your PHP code for better readability.
 ---
 
