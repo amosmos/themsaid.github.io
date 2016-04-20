@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid </title>
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">Better readability using enumerators</h1>
+
+                <p>Let's assume we're building a system for monitoring a restaurant orders, an order can be &quot;Dine In&quot; or &quot;Takeaway&quot;, and each order should have a status of &quot;New&quot;, &quot;Served&quot;, or &quot;Cancelled&quot;.</p>
+<p>We create two columns in the <code>orders</code> database table for the <code>type</code> and <code>status</code> as <code>TINYINT</code> and map the possible values as follows:</p>
+<ul>
+<li>1 = Dine In</li>
+<li>
+<p>2 = Takeaway</p>
+</li>
+<li>1 = New</li>
+<li>2 = Served</li>
+<li>3 = Cancelled</li>
+</ul>
+<p>Later on you might need to do something like this:</p>
+<pre><code class="language-php">if($order-&gt;type == 1){
+    $order-&gt;validateTableNumber();
+}</code></pre>
+<p>You probably find it easy to relate that <code>1</code> means the order is of type &quot;Dine In&quot;, but give it sometime and you'll need to look at the docs to understand what's going on.</p>
+<p>You might do:</p>
+<pre><code class="language-php">if($order-&gt;isDineIn()){
+    $order-&gt;validateTableNumber();
+}</code></pre>
+<p>But you'll have to create a method for each type and status, and you'll still need to pass the integer value sometimes:</p>
+<pre><code class="language-php">DB::table('orders')-&gt;whereType(1)-&gt;get();</code></pre>
+<h2>Enter Enums</h2>
+<p>Enums is a data type consisting of a set of named values, an example in C:</p>
+<pre><code class="language-c">enum Days
+{ 
+  Monday, 
+  Tuesday, 
+  Wednesday 
+};</code></pre>
+<p>Unfortunately there's no native enum support in PHP, if that wasn't the case we would have used something like:</p>
+<pre><code class="language-php">enum OrderTypes{
+    DineIn,
+    TakeAway;
+}</code></pre>
+<p>And use it like this:</p>
+<pre><code class="language-php">if($order-&gt;type == OrderTypes::DineIn){
+    $order-&gt;validateTableNumber();
+}
+
+DB::table('orders')-&gt;whereType(OrderTypes::DineIn)-&gt;get();</code></pre>
+<p>See? much better readability, and with an IDE support you'll be able to easily write your code without having to memorise these values.</p>
+<p>Let's see how we can achieve something similar in PHP:</p>
+<pre><code class="language-php">Order{
+    const TYPE_DINE_IN = 1;
+    const TYPE_TAKEAWAY = 2;
+
+    const STATUS_NEW = 1;
+    const STATUS_SERVED = 2;
+    const STATUS_CANCELLED = 3;
+}</code></pre>
+<p>Using this approach you'll be able to do something like:</p>
+<pre><code class="language-php">if($order-&gt;type == Order::TYPE_DINE_IN){
+    $order-&gt;validateTableNumber();
+}</code></pre>
+<p>And moreover, an IDE will give you hints about possible constants you may use.</p>
+<h2>Bonus treat/trait</h2>
+<p>I wrote a trait that'll allow me to do something like:</p>
+<pre><code class="language-php">Order::enums('TYPE');
+// returns: ["TYPE_DINE_IN" =&gt; 1, "TYPE_TAKEAWAY" =&gt; 2]
+
+Order::enums('TYPE');
+// returns all class constants
+
+Order::isValidEnumValue(32, 'TYPE');
+// Check if the given value `32` exists in the `TYPE` group.
+
+Order::isValidEnumKey('TYPE_PICKUP');
+// Check if the given key `TYPE_PICKUP` exists.</code></pre>
+<p>Here's the full trait code:</p>
+<pre><code class="language-php">trait HasEnums
+{
+    /**
+     * The array of enumerators of a given group.
+     *
+     * @param  null|string $group
+     * @return  array
+     */
+    static function enums($group = null)
+    {
+        $constants = (new ReflectionClass(get_called_class()))-&gt;getConstants();
+
+        if ($group) {
+            return array_filter($constants, function ($key) use ($group) {
+                return strpos($key, $group.'_') === 0;
+            }, ARRAY_FILTER_USE_KEY);
+        }
+
+        return $constants;
+    }
+
+    /**
+     * Check if the given value is valid within the given group.
+     *
+     * @param  mixed $value
+     * @param  null|string $group
+     * @return  bool
+     */
+    static function isValidEnumValue($value, $group = null)
+    {
+        $constants = static::enums($group);
+
+        return in_array($value, $constants);
+    }
+
+    /**
+     * Check if the given key exists.
+     *
+     * @param  mixed $key
+     * @return  bool
+     */
+    static function isValidEnumKey($key)
+    {
+        return array_key_exists($key, static::enums());
+    }
+}</code></pre>
+<hr />
+<p>If you find this useful and decided to enhance the trait, please write your comments on this gist: <a href="https://gist.github.com/themsaid/593a1972adbe35150e730c0ad3632cad">https://gist.github.com/themsaid/593a1972adbe35150e730c0ad3632cad</a></p>
+            
+    <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
+
+    <div class="text-center">
+        <a href="https://twitter.com/share"
+           class="twitter-share-button"
+           data-text="Better readability using enumerators"
+           data-via="themsaid">Tweet</a>
+        &nbsp&nbsp&nbsp
+        <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
+           class="twitter-mention-button"
+           data-related="themsaid">Tweet to @themsaid</a>
+    </div>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s7.postimg.org/weovsp0qz/themsaid.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer [PHP, Laravel, Vue.js] & iOS beginner.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs');</script>
+<script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-61501903-1', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
