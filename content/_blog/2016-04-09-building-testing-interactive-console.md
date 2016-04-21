@@ -199,6 +199,10 @@ class CommandTest extends TestCase
 
 To be able to properly test the command we'll need to create a temporary directory acting as the `config` directory. We'll also need to resolve our own instance of `Illuminate\Contracts\Console\Kernel` to be able to add a new method, we will talk about the new method shortly when we discuss our flow of testing the command, for now we'll just add these methods:
 
+<div class="alert alert-info">
+<strong>Update 2016-04-21</strong><br>
+Starting Laravel `5.2.30` you don't need to register a custom Kernel instance as the registerCommand() method is now included in the core by default, you may skip that step.</div>
+
 ```php
 protected function setUp()
 {
@@ -286,7 +290,7 @@ public function testItAsksForFileIfNotProvidedAsArgument()
 
     // We expect the choice method to be called asking us to select one
     // of the two files existing in the config path.
-    $command->shouldReceive('choice')->once()->with('Please select a file', ['one', 'two']);
+    $command->shouldReceive('choice')->once()->with('Please select a file', ['one', 'two'])->andReturn('two');
 
     $this->app['Illuminate\Contracts\Console\Kernel']->registerCommand($command);
     

@@ -430,9 +430,13 @@ private function payloadIsValid($payload)
 <p>Then we modify the <code>Api\AuthController@logoutUser</code> action:</p>
 <pre><code class="language-php">public function logoutUser(Request $request)
 {
-    $token = $request-&gt;bearerToken();
+    try {
+        $payload = (array) JWT::decode($authToken, 'w5yuCV2mQDVTGmn3', ['HS256'])
 
-    DB::table('tokens_cemetery')-&gt;insert(['token_id' =&gt; $token]);
+        DB::table('tokens_cemetery')-&gt;insert(['token_id' =&gt; $payload['jti']]);
+    } catch (\Throwable $e) {
+        return response('token_invalid', 401);
+    }
 
     return response('token_deceased');
 }</code></pre>

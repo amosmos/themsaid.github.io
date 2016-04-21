@@ -165,6 +165,9 @@ $username = $this-&gt;secret('Provide a password');</code></pre>
     }
 }</code></pre>
 <p>To be able to properly test the command we'll need to create a temporary directory acting as the <code>config</code> directory. We'll also need to resolve our own instance of <code>Illuminate\Contracts\Console\Kernel</code> to be able to add a new method, we will talk about the new method shortly when we discuss our flow of testing the command, for now we'll just add these methods:</p>
+<div class="alert alert-info">
+<strong>Update 2016-04-21</strong><br>
+Starting Laravel `5.2.30` you don't need to register a custom Kernel instance as the registerCommand() method is now included in the core by default, you may skip that step.</div>
 <pre><code class="language-php">protected function setUp()
 {
     parent::setUp();
@@ -233,7 +236,7 @@ public function tearDown()
 
     // We expect the choice method to be called asking us to select one
     // of the two files existing in the config path.
-    $command-&gt;shouldReceive('choice')-&gt;once()-&gt;with('Please select a file', ['one', 'two']);
+    $command-&gt;shouldReceive('choice')-&gt;once()-&gt;with('Please select a file', ['one', 'two'])-&gt;andReturn('two');
 
     $this-&gt;app['Illuminate\Contracts\Console\Kernel']-&gt;registerCommand($command);
 

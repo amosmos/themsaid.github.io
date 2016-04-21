@@ -593,9 +593,13 @@ Then we modify the `Api\AuthController@logoutUser` action:
 ```php
 public function logoutUser(Request $request)
 {
-    $token = $request->bearerToken();
+    try {
+        $payload = (array) JWT::decode($authToken, 'w5yuCV2mQDVTGmn3', ['HS256'])
 
-    DB::table('tokens_cemetery')->insert(['token_id' => $token]);
+        DB::table('tokens_cemetery')->insert(['token_id' => $payload['jti']]);
+    } catch (\Throwable $e) {
+        return response('token_invalid', 401);
+    }
 
     return response('token_deceased');
 }
