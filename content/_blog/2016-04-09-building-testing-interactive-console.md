@@ -290,7 +290,10 @@ public function testItAsksForFileIfNotProvidedAsArgument()
 
     // We expect the choice method to be called asking us to select one
     // of the two files existing in the config path.
-    $command->shouldReceive('choice')->once()->with('Please select a file', ['one', 'two'])->andReturn('two');
+    $command->shouldReceive('choice')
+    		  ->once()
+    		  ->with('Please select a file', ['one', 'two'])
+    		  ->andReturn('two');
 
     $this->app['Illuminate\Contracts\Console\Kernel']->registerCommand($command);
     

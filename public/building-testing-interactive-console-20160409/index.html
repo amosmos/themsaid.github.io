@@ -236,7 +236,10 @@ public function tearDown()
 
     // We expect the choice method to be called asking us to select one
     // of the two files existing in the config path.
-    $command-&gt;shouldReceive('choice')-&gt;once()-&gt;with('Please select a file', ['one', 'two'])-&gt;andReturn('two');
+    $command-&gt;shouldReceive('choice')
+              -&gt;once()
+              -&gt;with('Please select a file', ['one', 'two'])
+              -&gt;andReturn('two');
 
     $this-&gt;app['Illuminate\Contracts\Console\Kernel']-&gt;registerCommand($command);
 
