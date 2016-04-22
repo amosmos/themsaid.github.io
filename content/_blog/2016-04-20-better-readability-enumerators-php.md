@@ -100,13 +100,13 @@ And moreover, an IDE will give you hints about possible constants you may use.
 
 ## Bonus treat/trait
 
-I wrote a trait that'll allow me to do something like:
+I wrote a trait that'll allow me to do stuff like:
 
 ```php
 Order::enums('TYPE');
 // returns: ["TYPE_DINE_IN" => 1, "TYPE_TAKEAWAY" => 2]
 
-Order::enums('TYPE');
+Order::enums();
 // returns all class constants
 
 Order::isValidEnumValue(32, 'TYPE');

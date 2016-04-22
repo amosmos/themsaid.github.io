@@ -81,11 +81,11 @@ DB::table('orders')-&gt;whereType(OrderTypes::DineIn)-&gt;get();</code></pre>
 }</code></pre>
 <p>And moreover, an IDE will give you hints about possible constants you may use.</p>
 <h2>Bonus treat/trait</h2>
-<p>I wrote a trait that'll allow me to do something like:</p>
+<p>I wrote a trait that'll allow me to do stuff like:</p>
 <pre><code class="language-php">Order::enums('TYPE');
 // returns: ["TYPE_DINE_IN" =&gt; 1, "TYPE_TAKEAWAY" =&gt; 2]
 
-Order::enums('TYPE');
+Order::enums();
 // returns all class constants
 
 Order::isValidEnumValue(32, 'TYPE');
