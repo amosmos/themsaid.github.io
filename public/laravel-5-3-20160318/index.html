@@ -75,6 +75,16 @@ $collection-&gt;where('score', '===', 3);
 <p>Here's a list of all the operators you can use:</p>
 <p><code>=</code> <code>==</code> <code>===</code> <code>&lt;=</code> <code>&gt;=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;&gt;</code> <code>!=</code> <code>!==</code></p>
 <p>With these operators available, the <code>whereLoose()</code> method was <strong>removed</strong> from the collection class as it's not needed anymore.</p>
+<h1>Model::firstOrCreate() accepts additional values</h1>
+<p>With this change you'll be able to do something like:</p>
+<pre><code class="language-php">$user = User::firstOrCreate(
+    ['github_id', $githubUser-&gt;id], 
+    ['avatar' =&gt; $githubUser-&gt;avatar]
+);</code></pre>
+<p>In case a user with the given <code>github_id</code> was found it'll be returned, if not a new user will be created with the given <code>github_id</code> and <code>avatar</code>.</p>
+<h1>PDO Integer Parameters are now bound as PARAM_INT</h1>
+<p>Before this change all query bindings were passed as strings, that was ok for most of the cases, however with the introduction of the JSON type in MySQL the need for handling integer values properly became important.</p>
+<p>Now all integers and doubles will be bound using <code>PDO::PARAM_INT</code>, the rest of types will be bound as <code>PDO::PARAM_STR</code> as before.</p>
 <h1>Minimum PHP version</h1>
 <p>In 5.3 the framework only supports php 5.6, php 7.0, and hhvm.</p>
             
