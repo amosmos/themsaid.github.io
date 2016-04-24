@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>themsaid</title>
+        <description>Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.</description>
+        <link>http:/themsaid.app/</link>
+        <atom:link href="http:/themsaid.app/feed.xml" rel="self" type="application/rss+xml" />
+                <item>
+            <title>Better readability using Enumerators</title>
+            <description>This post is about using an Enumerated-type-like in your PHP code for better readability.</description>
+            <link>http:/themsaid.app/better-readability-enumerators-php-20160420/</link>
+        </item>
+                <item>
+            <title>Building and testing Artisan Commands</title>
+            <description>In this post we&#039;re going to discuss building and testing console commands that involve interaction from the user side.</description>
+            <link>http:/themsaid.app/building-testing-interactive-console-20160409/</link>
+        </item>
+                <item>
+            <title>Building an API for 3rd party applications</title>
+            <description>APIs are cool, &amp; laravel can handle all the coolness you may desire. Here we talk about building an API for third party applications and allowing them to communicate with your application on behalf of users.</description>
+            <link>http:/themsaid.app/laravel-api-3rd-party-20160327/</link>
+        </item>
+                <item>
+            <title>Coming up in laravel 5.3</title>
+            <description>laravel 5.3 is scheduled to be released in June 2016 based on a proposed release schedule, this post is a list of all the things you can expect in this release.</description>
+            <link>http:/themsaid.app/laravel-5-3-20160318/</link>
+        </item>
+                <item>
+            <title>MySQL JSON data type decoded</title>
+            <description>In this post we are going to explore the new MySQL 5.7 JSON Data Type. While diving into the topic we are going to use Laravel\&#039;s fluent query builder.</description>
+            <link>http:/themsaid.app/mysql-json-data-type-20160311/</link>
+        </item>
+                <item>
+            <title>What&#039;s new in laravel 5.2.23</title>
+            <description>By the time of writing this post, laravel has 911 contributors on GitHub, some of them are actively adding awesome
+stuff to the framework on a daily basis. This is a wrap up for the new stuff in laravel 5.2.23.
+</description>
+            <link>http:/themsaid.app/laravel-5-2-23-20160305/</link>
+        </item>
+                <item>
+            <title>My thoughts on 2015 and dreams for 2016</title>
+            <description>lessons learnt from 2015 and my goals and plans for 2016.</description>
+            <link>http:/themsaid.app/thoughts-on-2015-and-dreams-for-2016-20151231/</link>
+        </item>
+                <item>
+            <title>[iOS] Implementing a 3D rotation reveal effect for a side menu</title>
+            <description></description>
+            <link>http:/themsaid.app/ios-sidemenu-3d-rotation-reveal-effect-20150402/</link>
+        </item>
+                <item>
+            <title>Building an interactive iOS App interface using Swift</title>
+            <description>This is my third trial to build an interactive interface for an iOS app using swift, I was searching online on bechance for a design that involves some ideas I can try to implement and I found this lovely design of an app called yohago.</description>
+            <link>http:/themsaid.app/building-interactive-ios-interface-with-swift-20150401/</link>
+        </item>
+                <item>
+            <title>Deployment via git and Bitbucket</title>
+            <description>On how to automate deployment for your project via git and Bitbucket.</description>
+            <link>http:/themsaid.app/deployment-via-git-and-bitbucket-20150318/</link>
+        </item>
+                <item>
+            <title>Building my first iOS app: Part 5</title>
+            <description>Wrapping up my first trial to build an iOS app.</description>
+            <link>http:/themsaid.app/building-my-first-ios-app-part-5-20150201/</link>
+        </item>
+                <item>
+            <title>My First iOS application: Part 4</title>
+            <description>In the first 3 parts of the series we created a screen that lists the sections of &quot;Clozet&quot;, with the ability to add new or edit/delete sections.</description>
+            <link>http:/themsaid.app/Building-my-first-iOS-App-Part-4-20150131/</link>
+        </item>
+                <item>
+            <title>My First iOS application: Part 3</title>
+            <description>In Part 1 and 2 of this series, we built an interface that lists the sections of &quot;Clozet&quot;, also a bar button that leads to another modal screen that allows us to add a new section. No let us see how to allow the user to edit and delete sections</description>
+            <link>http:/themsaid.app/Building-my-first-iOS-App-Part-3-20150131/</link>
+        </item>
+                <item>
+            <title>My First iOS application: Part 2</title>
+            <description>At the end of the last post we were able to create the sections screen for &quot;Clozet&quot;, a table view that has 3 dummy rows. Now we will start adding some real data and see how to build a screen a user can use to add more sections and edit existing ones.</description>
+            <link>http:/themsaid.app/ios-development-building-the-first-application-20150130/</link>
+        </item>
+                <item>
+            <title>My First iOS application: Part 1</title>
+            <description> What I am going to build is a very basic app called &quot;Clozet&quot;, it is a closet organiser, you create sections and add items to each section so that you can come back and check what items you do have in your closet.</description>
+            <link>http:/themsaid.app/iOS-development-first-trial-20150129/</link>
+        </item>
+                <item>
+            <title>File and Directory permissions</title>
+            <description>Here I&#8217;m going to explain the whole permissions issue, and I recommend you read about it if you are going to deal with servers.</description>
+            <link>http:/themsaid.app/file-and-directory-permissions-20131225/</link>
+        </item>
+                <item>
+            <title>Faster git commits using bash functions</title>
+            <description>A shortcut for git add --all, commit -m, and push</description>
+            <link>http:/themsaid.app/faster-commits-using-bash-functions-20130930/</link>
+        </item>
+            </channel>
+</rss>
