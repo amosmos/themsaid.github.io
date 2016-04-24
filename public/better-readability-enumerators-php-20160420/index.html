@@ -67,7 +67,7 @@
 DB::table('orders')-&gt;whereType(OrderTypes::DineIn)-&gt;get();</code></pre>
 <p>See? much better readability, and with an IDE support you'll be able to easily write your code without having to memorise these values.</p>
 <p>Let's see how we can achieve something similar in PHP:</p>
-<pre><code class="language-php">Order{
+<pre><code class="language-php">class Order{
     const TYPE_DINE_IN = 1;
     const TYPE_TAKEAWAY = 2;
 

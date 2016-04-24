@@ -77,7 +77,7 @@ See? much better readability, and with an IDE support you'll be able to easily w
 Let's see how we can achieve something similar in PHP:
 
 ```php
-Order{
+class Order{
 	const TYPE_DINE_IN = 1;
 	const TYPE_TAKEAWAY = 2;
 	
