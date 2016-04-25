@@ -6,7 +6,7 @@
         <link>http:/themsaid.github.io/</link>
         <atom:link href="http:/themsaid.github.io/feed.xml" rel="self" type="application/rss+xml" />
                 <item>
-            <title>Conditionally add instructions to laravel&#039;s query builder</title>
+            <title>Conditionally adding instructions to laravel&#039;s query builder</title>
             <description>While using the query builder, sometimes you need to add more instructions based on specific conditions, in this post I&#039;m going to share with you how to accomplish this without breaking method chaining.</description>
             <link>http:/themsaid.github.io/laravel-query-conditions-20160425/</link>
         </item>
