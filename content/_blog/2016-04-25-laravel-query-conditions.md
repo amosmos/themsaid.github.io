@@ -1,8 +1,8 @@
 ---
 view::extends: _includes.blog_post_base
 view::yields: post_body
-post::title: Using laravel's query builder with conditions
-post::brief: While using the query builder, sometimes you need to add more instructions based on specific conditions, in this post I'm going to share how to accomplish that without breaking the method chaining.
+post::title: Conditionally add instructions to laravel's query builder
+post::brief: While using the query builder, sometimes you need to add more instructions based on specific conditions, in this post I'm going to share with you how to accomplish this without breaking method chaining.
 ---
 
 ```php

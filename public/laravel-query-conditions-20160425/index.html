@@ -22,7 +22,7 @@
             
     <a href="/">Back to home</a>
 
-    <h1 class="blog-post-title">Using laravel's query builder with conditions</h1>
+    <h1 class="blog-post-title">Conditionally add instructions to laravel's query builder</h1>
 
                 <pre><code class="language-php">$results = DB::table('orders')
     -&gt;where('branch_id', Auth::user()-&gt;branch_id)
@@ -69,7 +69,7 @@ Builder::macro('if', function ($condition, $column, $operator, $value) {
     <div class="text-center">
         <a href="https://twitter.com/share"
            class="twitter-share-button"
-           data-text="Using laravel&#039;s query builder with conditions"
+           data-text="Conditionally add instructions to laravel&#039;s query builder"
            data-via="themsaid">Tweet</a>
         &nbsp&nbsp&nbsp
         <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
