@@ -56,11 +56,9 @@ The `if()` method is not part of the core, so we may register it using a Macro:
 ```php
 use Illuminate\Database\Query\Builder;
 
-Builder::macro('if', function ($condition, $column, $operator = null, $value = null) {
+Builder::macro('if', function ($condition, $column, $operator, $value) {
     if ($condition) {
-        return is_callable($column)
-               ? call_user_func($column, $this)
-               : $this->where($column, $operator, $value);
+        return $this->where($column, $operator, $value);
     }
 
     return $this;
