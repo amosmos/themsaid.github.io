@@ -24,8 +24,8 @@
 
     <h1 class="blog-post-title">Better readability using Enumerators</h1>
 
-                <p>Let's assume we're building a system for monitoring a restaurant orders, an order can be &quot;Dine In&quot; or &quot;Takeaway&quot;, and each order should have a status of &quot;New&quot;, &quot;Served&quot;, or &quot;Cancelled&quot;.</p>
-<p>We create two columns in the <code>orders</code> database table for the <code>type</code> and <code>status</code> as <code>TINYINT</code> and map the possible values as follows:</p>
+                <p>Let's assume we're building a system for monitoring restaurant orders, an order can be &quot;Dine In&quot; or &quot;Takeaway&quot;, and each order should have a status of &quot;New&quot;, &quot;Served&quot;, or &quot;Cancelled&quot;.</p>
+<p>We'll create two columns in the <code>orders</code> database table for the <code>type</code> and <code>status</code> as <code>TINYINT</code> and map the possible values as follows:</p>
 <ul>
 <li>1 = Dine In</li>
 <li>
@@ -35,7 +35,7 @@
 <li>2 = Served</li>
 <li>3 = Cancelled</li>
 </ul>
-<p>Later on you might need to do something like this:</p>
+<p>Later on, you might need to do something like this:</p>
 <pre><code class="language-php">if($order-&gt;type == 1){
     $order-&gt;validateTableNumber();
 }</code></pre>
