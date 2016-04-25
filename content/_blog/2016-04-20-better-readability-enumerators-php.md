@@ -5,9 +5,9 @@ post::title: Better readability using Enumerators
 post::brief: This post is about using an Enumerated-type-like in your PHP code for better readability.
 ---
 
-Let's assume we're building a system for monitoring a restaurant orders, an order can be "Dine In" or "Takeaway", and each order should have a status of "New", "Served", or "Cancelled".
+Let's assume we're building a system for monitoring restaurant orders, an order can be "Dine In" or "Takeaway", and each order should have a status of "New", "Served", or "Cancelled".
 
-We create two columns in the `orders` database table for the `type` and `status` as `TINYINT` and map the possible values as follows:
+We'll create two columns in the `orders` database table for the `type` and `status` as `TINYINT` and map the possible values as follows:
 
 - 1 = Dine In
 - 2 = Takeaway
@@ -16,7 +16,7 @@ We create two columns in the `orders` database table for the `type` and `status`
 - 2 = Served
 - 3 = Cancelled
 
-Later on you might need to do something like this:
+Later on, you might need to do something like this:
 
 ```php
 if($order->type == 1){
