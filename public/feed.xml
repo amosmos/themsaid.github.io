@@ -6,6 +6,11 @@
         <link>http:/themsaid.github.io/</link>
         <atom:link href="http:/themsaid.github.io/feed.xml" rel="self" type="application/rss+xml" />
                 <item>
+            <title>Using laravel&#039;s query builder with conditions</title>
+            <description>While using the query builder, sometimes you need to add more instructions based on specific conditions, in this post I&#039;m going to share how to accomplish that without breaking the method chaining.</description>
+            <link>http:/themsaid.github.io/laravel-query-conditions-20160425/</link>
+        </item>
+                <item>
             <title>Better readability using Enumerators</title>
             <description>This post is about using an Enumerated-type-like in your PHP code for better readability.</description>
             <link>http:/themsaid.github.io/better-readability-enumerators-php-20160420/</link>
