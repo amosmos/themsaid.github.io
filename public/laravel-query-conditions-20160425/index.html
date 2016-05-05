@@ -38,7 +38,7 @@ if($request-&gt;customer_id){
 
 $results = $results-&gt;get();</code></pre>
 <p>You get what you want, but is that the most eloquent approach to accomplish the task? Of course it's not, breaking the chain affects readability so bad, specially when you have a lot of conditions.</p>
-<p>Fortunately starting laravel v5.2.27 we can to do the following:</p>
+<p>Fortunately starting laravel v5.2.27 we can do the following:</p>
 <pre><code class="language-php">$results = DB::table('orders')
     -&gt;where('branch_id', Auth::user()-&gt;branch_id)
     -&gt;when($request-&gt;customer_id, function($query) use ($request){

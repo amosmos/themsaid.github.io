@@ -27,7 +27,7 @@ $results = $results->get();
 
 You get what you want, but is that the most eloquent approach to accomplish the task? Of course it's not, breaking the chain affects readability so bad, specially when you have a lot of conditions.
 
-Fortunately starting laravel v5.2.27 we can to do the following:
+Fortunately starting laravel v5.2.27 we can do the following:
 
 ```php
 $results = DB::table('orders')
