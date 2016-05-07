@@ -210,7 +210,7 @@ public function mutateUri($uri)
 }
 ```
 
-Now a request like `blog.dev/assets/the-red-woman.gif` will serve `sites/blog/public_html/the-red-woman.gif`.
+Now a request like `blog.dev/assets/the-red-woman.gif` will serve `sites/blog/public_html/assets/the-red-woman.gif`.
 
 ### Serving static files
 Valet is currently able to find files that should be served, the next step is determining if that file is static or not, every driver should have a `isStaticFile()` method, WordPressDriver's method looks like this:
