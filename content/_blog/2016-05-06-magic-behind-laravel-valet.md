@@ -166,7 +166,7 @@ When we set up PHP's built in server to run on boot, we also passed Valet's serv
 }
 ```
 
-Here Valet will look for a `myAwesomeApp` directory in `/Users/mac/company-sites` and `/Users/mac/personal-projects`, and in case no directory with found a 404 response will be given.
+Here Valet will look for a `myAwesomeApp` directory in `/Users/mac/company-sites` and `/Users/mac/personal-projects`, and in case no directory was found a 404 response will be given.
 
 **Third**, the `ValetDriver` class will be used to determine which driver should handle the incoming request, more on drivers later.
 
@@ -178,18 +178,18 @@ Long story short, the `server.php` file decides which driver should respond to t
 
 # Understanding drivers
 
-A driver is responsible for generating a proper response to the incoming requests, at the beginning of the request Valet loops over every driver asking if it can handle the request, the first driver to answer "yes" is the winning one.
+A driver is responsible for generating a proper response to incoming requests, at the beginning of the request Valet loops over every driver asking if it can handle the request, the first driver to answer "yes" is the winning one.
 
 Valet looks for drivers in two locations:
 
 - Drivers in `~/.valet/Drivers`
 - Drivers downloaded by default with Valet
 
-> `~/.valet/Drivers` is where you can configure any custom driver you want.
+> `~/.valet/Drivers` is where you can configure any custom drivers you want.
 
-When Valet checks for a driver's ability to the serve the request it runs the `serves()` method and check if the return value is true.
+When Valet checks for a driver's ability to serve the request it runs the `serves()` method and checks if the return value is true.
 
-So for ever driver a `serves()` method should exist, here's the one for Laravel's driver:
+So, for every driver a `serves()` method should exist, here's the one for Laravel's driver:
 
 ```php
 public function serves($sitePath, $siteName, $uri)
@@ -201,7 +201,7 @@ public function serves($sitePath, $siteName, $uri)
 
 This simply checks for the existence of a `/public/index.php` and a `/artisan` file, if found then Valet assumes that this is a laravel website and so the LaravelDriver shall be used.
 
-After finding the driver, Valet will run the `mutateUri()` of the driver, this method gives you the ability to alter the incoming URI so that you may run all your future driver logic with respect to custom settings. You may think of it as rewrite rule, here's an example for dealing with requests coming to `blog.dev` while the actual site files live in `sites/blog/public_html`.
+After finding the driver, Valet will run the `mutateUri()` method of the driver, this method gives you the ability to alter the incoming URI so that you may run all your future driver logic with respect to custom settings. You may think of it as rewrite rule, here's an example for dealing with requests coming to `blog.dev` while the actual site files live in `sites/blog/public_html`.
 
 ```php
 public function mutateUri($uri)
@@ -228,7 +228,7 @@ public function isStaticFile($sitePath, $siteName, $uri)
 }
 ```
 
-Here all found paths that aren't directories or with a `.php` application is identified as static files, the method returns the full path to the file in case it should be considered static, otherwise it returns false.
+Here, all found paths that aren't directories or with a `.php` application is identified as static files, the method returns the full path to the file in case it should be considered static, otherwise it returns false.
 
 Once a file is found to be static, Valet serves it as a response using the following method:
 
