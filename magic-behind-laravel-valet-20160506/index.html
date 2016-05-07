@@ -148,7 +148,7 @@
 {
     return rtrim('/public_html'.$uri, '/');
 }</code></pre>
-<p>Now a request like <code>blog.dev/assets/the-red-woman.gif</code> will serve <code>sites/blog/public_html/the-red-woman.gif</code>.</p>
+<p>Now a request like <code>blog.dev/assets/the-red-woman.gif</code> will serve <code>sites/blog/public_html/assets/the-red-woman.gif</code>.</p>
 <h3>Serving static files</h3>
 <p>Valet is currently able to find files that should be served, the next step is determining if that file is static or not, every driver should have a <code>isStaticFile()</code> method, WordPressDriver's method looks like this:</p>
 <pre><code class="language-php">public function isStaticFile($sitePath, $siteName, $uri)
