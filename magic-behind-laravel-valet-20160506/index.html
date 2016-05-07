@@ -120,30 +120,30 @@
         "\/Users\/mac\/personal-projects"
     ]
 }</code></pre>
-<p>Here Valet will look for a <code>myAwesomeApp</code> directory in <code>/Users/mac/company-sites</code> and <code>/Users/mac/personal-projects</code>, and in case no directory with found a 404 response will be given.</p>
+<p>Here Valet will look for a <code>myAwesomeApp</code> directory in <code>/Users/mac/company-sites</code> and <code>/Users/mac/personal-projects</code>, and in case no directory was found a 404 response will be given.</p>
 <p><strong>Third</strong>, the <code>ValetDriver</code> class will be used to determine which driver should handle the incoming request, more on drivers later.</p>
 <p>If no driver found, a 404 response will be given.</p>
 <p><strong>Finally</strong>, it responds to the request by serving a static file or presenting a path to the index file based on the selected driver's configurations.</p>
 <p>Long story short, the <code>server.php</code> file decides which driver should respond to the request and presents the results to the server.</p>
 <h1>Understanding drivers</h1>
-<p>A driver is responsible for generating a proper response to the incoming requests, at the beginning of the request Valet loops over every driver asking if it can handle the request, the first driver to answer &quot;yes&quot; is the winning one.</p>
+<p>A driver is responsible for generating a proper response to incoming requests, at the beginning of the request Valet loops over every driver asking if it can handle the request, the first driver to answer &quot;yes&quot; is the winning one.</p>
 <p>Valet looks for drivers in two locations:</p>
 <ul>
 <li>Drivers in <code>~/.valet/Drivers</code></li>
 <li>Drivers downloaded by default with Valet</li>
 </ul>
 <blockquote>
-<p><code>~/.valet/Drivers</code> is where you can configure any custom driver you want.</p>
+<p><code>~/.valet/Drivers</code> is where you can configure any custom drivers you want.</p>
 </blockquote>
-<p>When Valet checks for a driver's ability to the serve the request it runs the <code>serves()</code> method and check if the return value is true.</p>
-<p>So for ever driver a <code>serves()</code> method should exist, here's the one for Laravel's driver:</p>
+<p>When Valet checks for a driver's ability to serve the request it runs the <code>serves()</code> method and checks if the return value is true.</p>
+<p>So, for every driver a <code>serves()</code> method should exist, here's the one for Laravel's driver:</p>
 <pre><code class="language-php">public function serves($sitePath, $siteName, $uri)
 {
     return file_exists($sitePath.'/public/index.php') &amp;&amp;
            file_exists($sitePath.'/artisan');
 }</code></pre>
 <p>This simply checks for the existence of a <code>/public/index.php</code> and a <code>/artisan</code> file, if found then Valet assumes that this is a laravel website and so the LaravelDriver shall be used.</p>
-<p>After finding the driver, Valet will run the <code>mutateUri()</code> of the driver, this method gives you the ability to alter the incoming URI so that you may run all your future driver logic with respect to custom settings. You may think of it as rewrite rule, here's an example for dealing with requests coming to <code>blog.dev</code> while the actual site files live in <code>sites/blog/public_html</code>.</p>
+<p>After finding the driver, Valet will run the <code>mutateUri()</code> method of the driver, this method gives you the ability to alter the incoming URI so that you may run all your future driver logic with respect to custom settings. You may think of it as rewrite rule, here's an example for dealing with requests coming to <code>blog.dev</code> while the actual site files live in <code>sites/blog/public_html</code>.</p>
 <pre><code class="language-php">public function mutateUri($uri)
 {
     return rtrim('/public_html'.$uri, '/');
@@ -161,7 +161,7 @@
 
     return false;
 }</code></pre>
-<p>Here all found paths that aren't directories or with a <code>.php</code> application is identified as static files, the method returns the full path to the file in case it should be considered static, otherwise it returns false.</p>
+<p>Here, all found paths that aren't directories or with a <code>.php</code> application is identified as static files, the method returns the full path to the file in case it should be considered static, otherwise it returns false.</p>
 <p>Once a file is found to be static, Valet serves it as a response using the following method:</p>
 <pre><code class="language-php">public function serveStaticFile($staticFilePath, $sitePath, $siteName, $uri)
 {
