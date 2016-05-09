@@ -7,7 +7,7 @@
 
     <title>themsaid - Building Laravel Valet</title>
 
-    <link href="http:/themsaid.app/feed.rss" rel="alternate" type="application/rss+xml" title="Mohamed Said - themsaid"/>
+    <link href="http:/themsaid.github.io/feed.rss" rel="alternate" type="application/rss+xml" title="Mohamed Said - themsaid"/>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/libs.css">
@@ -26,9 +26,9 @@
     <h1 class="blog-post-title">The magic behind Laravel Valet</h1>
 
                 <p>So yesterday <a href="https://twitter.com/taylorotwell">Taylor Otwell</a> and <a href="https://twitter.com/adamwathan">Adam Wathan</a> released <a href="https://laravel.com/docs/5.2/valet">Laravel Valet</a>, it's simply a tool that helps OS X users easily run their websites locally for development purposes, without the need to configure anything each time a new project needs to be created.</p>
-<p>The idea behind valet is that it configures PHP's built-in web server to always run in the background when the operating system starts, then it proxies all requests to a given domain to point to your localhost 127.0.0.1</p>
+<p>The idea behind valet is that it configures <del>PHP's built-in web server</del> <a href="https://caddyserver.com/">Caddy</a> to always run in the background when the operating system starts, then it proxies all requests to a given domain to point to your localhost 127.0.0.1</p>
 <h2>Installation</h2>
-<p>Installing valet is very easy, you need to have <a href="http://brew.sh/">Homebrew</a> installed and updated to the latest version, once confirmed install PHP 7.0 if it's not already installed, you may do this via <code>brew install php70</code>. You'll also need to <a href="https://getcomposer.org/doc/00-intro.md#globally">install composer</a>.</p>
+<p>Installing valet is very easy, you need to have <a href="http://brew.sh/">Homebrew</a> installed and updated to the latest version. You'll also need to <a href="https://getcomposer.org/doc/00-intro.md#globally">install composer</a>.</p>
 <p>Now you need to run the following command:</p>
 <pre><code class="language-shell">composer global require laravel/valet</code></pre>
 <p>To be able to use valet's binary file globally, you need to make sure <code>~/.composer/vendor/bin</code> directory is in your system's <code>PATH</code>, go ahead and check that:</p>
@@ -38,11 +38,21 @@
 <h2>How it works</h2>
 <p>The <code>install</code> command does the following things:</p>
 <ol>
-<li>Installs an OS X daemon to run PHP's built-in server at system boot.</li>
 <li>Creates the configuration file for valet as well as a sample driver.</li>
+<li>Installs an OS X daemon to run Caddy at system boot.</li>
+<li>Installs PHP if it's not already installed.</li>
+<li>Updates the PHP FPM configuration to use the current user instead of wwww.</li>
 <li>Installs <code>Dnsmasq</code> and configures it to respond to all <code>.dev</code> requests.</li>
 <li>Configures OS X to send all <code>.dev</code> requests to <code>127.0.0.1</code>.</li>
 </ol>
+<h3>Creating Valet's configuration files</h3>
+<p>This task is fairly simple, Valet creates a new directory <code>~/.valet</code> and adds an initial <code>config.json</code> file to it as well as a <code>Drivers</code> directory, we'll talk about <code>Drivers</code> shortly.</p>
+<p>During this step, Valet also ensures that the created configuration files and directories have the correct permissions.</p>
+<p>The initial content of the config file is as follows:</p>
+<pre><code class="language-json">{
+    "domain": "dev",
+    "paths": []
+}</code></pre>
 <h3>OS X Daemons</h3>
 <p>A daemon is a program running in the background without requiring user input, the job the daemon should run is described in a property list XML file, here's a sample one:</p>
 <pre><code class="language-plist">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -69,10 +79,8 @@
     &lt;string&gt;com.laravel.valetServer&lt;/string&gt;
     &lt;key&gt;ProgramArguments&lt;/key&gt;
     &lt;array&gt;
-        &lt;string&gt;/usr/local/bin/PHP&lt;/string&gt;
-        &lt;string&gt;-S&lt;/string&gt;
-        &lt;string&gt;127.0.0.1:80&lt;/string&gt;
-        &lt;string&gt;/Users/mac/.composer/vendor/laravel/valet/server.php&lt;/string&gt;
+        &lt;string&gt;./bin/caddy&lt;/string&gt;
+        &lt;string&gt;--conf=VALET_HOME_PATH/Caddyfile&lt;/string&gt;
     &lt;/array&gt;
     &lt;key&gt;RunAtLoad&lt;/key&gt;
     &lt;true/&gt;
@@ -81,22 +89,30 @@
 &lt;/dict&gt;
 &lt;/plist&gt;</code></pre>
 <p>The program this job runs is as simple as:</p>
-<pre><code class="language-shell">/usr/local/bin/PHP -S 127.0.0.1:80 /Users/mac/.composer/vendor/laravel/valet/server.php</code></pre>
-<p>This command starts PHP's built-in server using Valet's <code>server.php</code> as the router script.</p>
+<pre><code class="language-shell">./bin/caddy --conf=/Users/mac/.composer/vendor/laravel/valet/Caddyfile</code></pre>
+<p>This command starts Caddy and informs it about the path to the configuration file it should read.</p>
 <p>The daemon is configured to run the program once the daemon is loaded, which is at system boot.</p>
 <blockquote>
-<p>Please note that paths to PHP and Valet will be different on your system.</p>
+<p>Please note that paths will be different on your system.</p>
 </blockquote>
 <p>Valet adds this file to <code>/Library/LaunchDaemons/com.laravel.valetServer.plist</code> which is where your application's daemons are saved.</p>
 <p>Later on, Valet will use the <code>launchctl</code> command to tell the Mac's daemon to load the new file as it won't pick the changes immediately by default.</p>
-<h3>Creating Valet's configuration files</h3>
-<p>This task is fairly simple, Valet creates a new directory <code>~/.valet</code> and adds an initial <code>config.json</code> file to it as well as a <code>Drivers</code> directory, we'll talk about <code>Drivers</code> shortly.</p>
-<p>During this step, Valet also ensures that the created configuration files and directories have the correct permissions.</p>
-<p>The initial content of the config file is as follows:</p>
-<pre><code class="language-json">{
-    "domain": "dev",
-    "paths": []
+<h3>Configuring Caddy</h3>
+<p>Here's what the Caddy configuration file created by Valet looks like:</p>
+<pre><code>import /Users/USER/.valet/Caddy/*
+
+:80 {
+    fastcgi / 127.0.0.1:9000 php {
+        index server.php
+    }
+
+    rewrite {
+        to /server.php?{query}
+    }
 }</code></pre>
+<p>It first imports any custom configuration files you may want to add from the <code>.valet/Caddy</code> directory, then it adds instructions about the address/port the server is going to serve.</p>
+<p>Later, it proxies all requests to the FastCGI server at <code>127.0.0.1</code> specifying <code>server.php</code> as the file to try (the router).</p>
+<p>Finally, a simple rewrite rule is added.</p>
 <h3>Installing Dnsmasq</h3>
 <p>Dnsmasq is a lightweight DNS server, it accepts incoming requests and answers them from a local system or forwards them to a real DNS server. Laravel Valet uses Dnsmasq to listen to all <code>.dev</code> requests and resolve <code>127.0.0.1</code> in response.</p>
 <p>Valet makes sure that <code>dnsmasq</code> is installed or installs it otherwise using <code>brew</code>, it then creates a custom config file for <code>dnsmasq</code> in <code>.valet/dnsmasq.conf</code> and tells <code>dnsmasq</code> about it.</p>
@@ -110,7 +126,7 @@
 <pre><code class="language-shell">sudo brew services restart dnsmasq</code></pre>
 <p>It also restarts the daemon job we created above.</p>
 <h1>Serving Websites</h1>
-<p>When we set up PHP's built in server to run on boot, we also passed Valet's server.php to act as the router to requests coming to the server, in this file all the magic happens:</p>
+<p>When we set up Caddy to run on boot, we also passed Valet's server.php to act as the router to requests coming to the server, in this file all the magic happens:</p>
 <p><strong>First</strong>, Valet extracts the site name from <code>$_SERVER['HTTP_HOST']</code> so that when you hit <code>myAwesomeApp.dev</code> the site name value will be <code>myAwesomeApp</code>.</p>
 <p><strong>Second</strong>, it searches for any directories found inside the paths defined in the <code>config.json</code> file that matches the given site name. In this file, an array of paths is saved like this:</p>
 <pre><code class="language-json">{
