@@ -8,11 +8,11 @@ pageTitle: - Building Laravel Valet
 
 So yesterday [Taylor Otwell](https://twitter.com/taylorotwell) and [Adam Wathan](https://twitter.com/adamwathan) released [Laravel Valet](https://laravel.com/docs/5.2/valet), it's simply a tool that helps OS X users easily run their websites locally for development purposes, without the need to configure anything each time a new project needs to be created.
 
-The idea behind valet is that it configures PHP's built-in web server to always run in the background when the operating system starts, then it proxies all requests to a given domain to point to your localhost 127.0.0.1
+The idea behind valet is that it configures ~~PHP's built-in web server~~ [Caddy](https://caddyserver.com/) to always run in the background when the operating system starts, then it proxies all requests to a given domain to point to your localhost 127.0.0.1
 
 ## Installation
 
-Installing valet is very easy, you need to have [Homebrew](http://brew.sh/) installed and updated to the latest version, once confirmed install PHP 7.0 if it's not already installed, you may do this via `brew install php70`. You'll also need to [install composer](https://getcomposer.org/doc/00-intro.md#globally).
+Installing valet is very easy, you need to have [Homebrew](http://brew.sh/) installed and updated to the latest version. You'll also need to [install composer](https://getcomposer.org/doc/00-intro.md#globally).
 
 Now you need to run the following command:
 
@@ -36,10 +36,27 @@ valet install
 
 The `install` command does the following things:
 
-1. Installs an OS X daemon to run PHP's built-in server at system boot.
-2. Creates the configuration file for valet as well as a sample driver.
-3. Installs `Dnsmasq` and configures it to respond to all `.dev` requests.
-4. Configures OS X to send all `.dev` requests to `127.0.0.1`.
+1. Creates the configuration file for valet as well as a sample driver.
+2. Installs an OS X daemon to run Caddy at system boot.
+3. Installs PHP if it's not already installed.
+4. Updates the PHP FPM configuration to use the current user instead of wwww.
+5. Installs `Dnsmasq` and configures it to respond to all `.dev` requests.
+6. Configures OS X to send all `.dev` requests to `127.0.0.1`.
+
+### Creating Valet's configuration files
+
+This task is fairly simple, Valet creates a new directory `~/.valet` and adds an initial `config.json` file to it as well as a `Drivers` directory, we'll talk about `Drivers` shortly.
+
+During this step, Valet also ensures that the created configuration files and directories have the correct permissions.
+
+The initial content of the config file is as follows:
+
+```json
+{
+    "domain": "dev",
+    "paths": []
+}
+```
 
 ### OS X Daemons
 A daemon is a program running in the background without requiring user input, the job the daemon should run is described in a property list XML file, here's a sample one:
@@ -74,10 +91,8 @@ On the other hand, Laravel Valet installs the following job:
     <string>com.laravel.valetServer</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/usr/local/bin/PHP</string>
-        <string>-S</string>
-        <string>127.0.0.1:80</string>
-        <string>/Users/mac/.composer/vendor/laravel/valet/server.php</string>
+        <string>./bin/caddy</string>
+        <string>--conf=VALET_HOME_PATH/Caddyfile</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
@@ -90,33 +105,42 @@ On the other hand, Laravel Valet installs the following job:
 The program this job runs is as simple as:
 
 ```shell
-/usr/local/bin/PHP -S 127.0.0.1:80 /Users/mac/.composer/vendor/laravel/valet/server.php
+./bin/caddy --conf=/Users/mac/.composer/vendor/laravel/valet/Caddyfile
 ```
 
-This command starts PHP's built-in server using Valet's `server.php` as the router script.
+This command starts Caddy and informs it about the path to the configuration file it should read.
 
 The daemon is configured to run the program once the daemon is loaded, which is at system boot.
 
-> Please note that paths to PHP and Valet will be different on your system.
+> Please note that paths will be different on your system.
 
 Valet adds this file to `/Library/LaunchDaemons/com.laravel.valetServer.plist` which is where your application's daemons are saved.
 
 Later on, Valet will use the `launchctl` command to tell the Mac's daemon to load the new file as it won't pick the changes immediately by default.
 
-### Creating Valet's configuration files
+### Configuring Caddy
 
-This task is fairly simple, Valet creates a new directory `~/.valet` and adds an initial `config.json` file to it as well as a `Drivers` directory, we'll talk about `Drivers` shortly.
+Here's what the Caddy configuration file created by Valet looks like:
 
-During this step, Valet also ensures that the created configuration files and directories have the correct permissions.
+```
+import /Users/USER/.valet/Caddy/*
 
-The initial content of the config file is as follows:
+:80 {
+    fastcgi / 127.0.0.1:9000 php {
+        index server.php
+    }
 
-```json
-{
-    "domain": "dev",
-    "paths": []
+    rewrite {
+        to /server.php?{query}
+    }
 }
 ```
+
+It first imports any custom configuration files you may want to add from the `.valet/Caddy` directory, then it adds instructions about the address/port the server is going to serve.
+
+Later, it proxies all requests to the FastCGI server at `127.0.0.1` specifying `server.php` as the file to try (the router).
+
+Finally, a simple rewrite rule is added.
 
 ### Installing Dnsmasq
 
@@ -150,7 +174,7 @@ It also restarts the daemon job we created above.
 
 # Serving Websites
 
-When we set up PHP's built in server to run on boot, we also passed Valet's server.php to act as the router to requests coming to the server, in this file all the magic happens:
+When we set up Caddy to run on boot, we also passed Valet's server.php to act as the router to requests coming to the server, in this file all the magic happens:
 
 **First**, Valet extracts the site name from `$_SERVER['HTTP_HOST']` so that when you hit `myAwesomeApp.dev` the site name value will be `myAwesomeApp`.
 
