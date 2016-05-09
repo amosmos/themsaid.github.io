@@ -122,7 +122,7 @@ Later on, Valet will use the `launchctl` command to tell the Mac's daemon to loa
 
 Here's what the Caddy configuration file created by Valet looks like:
 
-```
+```bash
 import /Users/USER/.valet/Caddy/*
 
 :80 {

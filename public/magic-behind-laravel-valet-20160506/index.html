@@ -99,7 +99,7 @@
 <p>Later on, Valet will use the <code>launchctl</code> command to tell the Mac's daemon to load the new file as it won't pick the changes immediately by default.</p>
 <h3>Configuring Caddy</h3>
 <p>Here's what the Caddy configuration file created by Valet looks like:</p>
-<pre><code>import /Users/USER/.valet/Caddy/*
+<pre><code class="language-bash">import /Users/USER/.valet/Caddy/*
 
 :80 {
     fastcgi / 127.0.0.1:9000 php {
