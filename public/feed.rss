@@ -6,11 +6,6 @@
         <link>http:/themsaid.github.io/</link>
         <atom:link href="http:/themsaid.github.io/feed.xml" rel="self" type="application/rss+xml" />
                 <item>
-            <title>A look into acceptance testing a Laravel-Vue application</title>
-            <description>In this post I&#039;m sharing my experience with testing a Laravel-Vue based application, in my short journey I&#039;ve tried NightwatchJs, PHPUnit Selenium Extension, WebDriver, and Codeception.</description>
-            <link>http:/themsaid.github.io/acceptance-testing-laravel-vue-20160517/</link>
-        </item>
-                <item>
             <title>The magic behind Laravel Valet</title>
             <description>Laravel Valet was launched yesterday, I started testing projects I run locally on it and it just works! This post is me trying to understand how Valet is built &amp; what makes it work.</description>
             <link>http:/themsaid.github.io/magic-behind-laravel-valet-20160506/</link>
