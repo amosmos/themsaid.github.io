@@ -12,4 +12,4 @@ I wrote about my experience on writing acceptance tests for the project, it has 
 
 You can read about that on .Dev, a Medium publication dedicated to  developer news, tutorials, interviews and tools:
 
-https://dotdev.co/acceptance-testing-a-laravel-and-vue-js-application-4160b8e96156
+<a href="https://dotdev.co/acceptance-testing-a-laravel-and-vue-js-application-4160b8e96156"><img style="width:100%" src="http://s32.postimg.org/cirdmrwsl/Screen_Shot_2016_05_19_at_2_34_32_PM.png"></a>
