@@ -8,7 +8,7 @@ pageTitle: - Acceptance Testing a Laravel and Vue.js Application
 
 A few weeks ago I started writing tests for a relatively large application, writing tests for an application at a mature state is always thought to be hard but I think it's easier, things are already shaped and you know what exactly you need to test.
 
-I wrote about my experience on writing acceptance tests for the project, it has multiple of complex screens built using Vue.js, and as you know testing Javascript driven interfaces is not an easy thing to do, in this post I talk about my journey from using laravel's built in Crawler-based testing library to using Selenium server for automating user interactions.
+I wrote about my experience on writing acceptance tests for the project, it has multiple complex screens built using Vue.js, and as you know testing Javascript driven interfaces is not an easy thing to do, in this post I talk about my journey from using laravel's built in Crawler-based testing library to using Selenium server for automating user interactions.
 
 You can read about that on .Dev, a Medium publication dedicated to  developer news, tutorials, interviews and tools:
 
