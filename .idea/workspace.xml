@@ -2,16 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1fce0fe7-cf77-4fa0-9aa0-42a95577da1f" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/content/2016-05-17-acceptance-testing-laravel-vue.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016-05-17-acceptance-testing-laravel-vue/index.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-3-20150131/index.html" afterPath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-3-20150131/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-4-20150131/index.html" afterPath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-4-20150131/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/acceptance-testing-laravel-vue-20160517/index.html" afterPath="$PROJECT_DIR$/public/acceptance-testing-laravel-vue-20160517/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/better-readability-enumerators-php-20160420/index.html" afterPath="$PROJECT_DIR$/public/better-readability-enumerators-php-20160420/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/blog-page/1/index.html" afterPath="$PROJECT_DIR$/public/blog-page/1/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/building-interactive-ios-interface-with-swift-20150401/index.html" afterPath="$PROJECT_DIR$/public/building-interactive-ios-interface-with-swift-20150401/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/building-my-first-ios-app-part-5-20150201/index.html" afterPath="$PROJECT_DIR$/public/building-my-first-ios-app-part-5-20150201/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/building-testing-interactive-console-20160409/index.html" afterPath="$PROJECT_DIR$/public/building-testing-interactive-console-20160409/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/deployment-via-git-and-bitbucket-20150318/index.html" afterPath="$PROJECT_DIR$/public/deployment-via-git-and-bitbucket-20150318/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/draft/index.html" afterPath="$PROJECT_DIR$/public/draft/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/draft-to-eric/index.html" afterPath="$PROJECT_DIR$/public/draft-to-eric/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/faster-commits-using-bash-functions-20130930/index.html" afterPath="$PROJECT_DIR$/public/faster-commits-using-bash-functions-20130930/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/feed.rss" afterPath="$PROJECT_DIR$/public/feed.rss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/file-and-directory-permissions-20131225/index.html" afterPath="$PROJECT_DIR$/public/file-and-directory-permissions-20131225/index.html" />
@@ -45,13 +48,26 @@
   <component name="FavoritesManager">
     <favorites_list name="themsaid" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/content/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="552">
+              <caret line="106" column="3" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/content/blog.blade.php" />
         <option value="$PROJECT_DIR$/content/_blog/2016-02-28-today-is-the-best-day-of-your-life.blade.php" />
         <option value="$PROJECT_DIR$/content/prism.css" />
         <option value="$PROJECT_DIR$/content/_blog/2013-09-30-faster-commits-using-bash-functions.blade.php" />
@@ -102,6 +118,7 @@
         <option value="$PROJECT_DIR$/vendor/themsaid/katana-core/src/RSSFeedBuilder.php" />
         <option value="$PROJECT_DIR$/content/_includes/base.blade.php" />
         <option value="$PROJECT_DIR$/CNAME" />
+        <option value="$PROJECT_DIR$/content/_blog/2016-07-09-laravel-mysql-json-colum-fast-lookup.md" />
       </list>
     </option>
   </component>
@@ -195,20 +212,6 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themsaid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themsaid" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="content" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -284,11 +287,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/content/_blog" />
       <recent name="$PROJECT_DIR$/content" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/content/_includes" />
       <recent name="$PROJECT_DIR$/vendor/themsaid/katana-core/src" />
-      <recent name="$PROJECT_DIR$/content/_blog/test" />
     </key>
   </component>
   <component name="RunManager">
@@ -367,18 +370,21 @@
       <workItem from="1462483802401" duration="557000" />
       <workItem from="1463436651128" duration="211000" />
       <workItem from="1463437020929" duration="137000" />
+      <workItem from="1468095947317" duration="212000" />
+      <workItem from="1468096754522" duration="492000" />
+      <workItem from="1468098858943" duration="53000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16919000" />
+    <option name="totallyTimeSpent" value="17676000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="745" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2375" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2375" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -417,13 +423,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/content/_blog/2015-12-31-thoughts-on-2015-and-dreams-for-2016.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="58" column="16" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/content/_blog/2013-12-25-file-and-directory-permissions.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -697,13 +696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/content/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-797">
-          <caret line="85" column="12" selection-start-line="85" selection-start-column="12" selection-end-line="85" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -720,5 +712,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html" />
     <entry file="file://$PROJECT_DIR$/CNAME" />
+    <entry file="file://$PROJECT_DIR$/content/_blog/2016-07-09-laravel-mysql-json-colum-fast-lookup.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="121">
+            <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <folding>
+              <marker date="1468098727000" expanded="true" signature="1660:1763" placeholder="ALTER TABLE users... " />
+              <marker date="1468098727000" expanded="true" signature="1884:1934" placeholder="ALTER TABLE users... " />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="106" column="3" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

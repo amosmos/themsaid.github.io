@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid - Laravel/MySQL JSON documents faster lookup using generated columns</title>
+
+    <link href="http:/themsaid.github.io/feed.rss" rel="alternate" type="application/rss+xml" title="Mohamed Said - themsaid"/>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">Laravel/MySQL JSON documents faster lookup using generated columns</h1>
+
+                <p>laravel 5.3 is shipped with built-in support for updating and querying JSON type database fields, the support currently fully covers MySQL 5.7 JSON type fields updates and lookups, this allows us to have the following:</p>
+<pre><code class="language-php">DB::table('users')-&gt;where('meta-&gt;favorite_color', 'red')-&gt;get();</code></pre>
+<p>This will bring all users who have a favorite color of red, here's a sample table structure:</p>
+<table class="table table-bordered table-condensed">
+<tr>
+    <td><strong>id</strong></td>
+    <td><strong>name</strong></td>
+    <td><strong>meta</strong></td>
+</tr>
+<tr>
+    <td>1</td>
+    <td> Melisandre </td>
+    <td>{"favorite_color": "red", "religion": "R'hllor, the Lord of Light"}</td>
+</tr>
+</table>
+<p>You may also update the field like that:</p>
+<pre><code class="language-php">DB::table('users')
+    -&gt;where('id', 1)
+    -&gt;update(['meta-&gt;origin' =&gt; 'Asshai']);</code></pre>
+<p><a href="https://twitter.com/stauffermatt">Matt Stauffer</a> wrote up a post about the new features that you can <a href="https://mattstauffer.co/blog/new-json-column-where-and-update-syntax-in-laravel-5-3">check here</a>.</p>
+<p>In this post I'd like to show you how we can achieve faster lookups for data stored in JSON-type fields using MySQL generated columns.</p>
+<p>As mentioned in MySQL manual:</p>
+<blockquote>
+<p>JSON columns cannot be indexed. You can work around this restriction by creating an index on a generated column that extracts a scalar value from the JSON column.</p>
+</blockquote>
+<p>Let's see how we may create a generated column to store users favorite color for later indexing:</p>
+<pre><code class="language-sql">ALTER TABLE users 
+ADD meta_favorite_color VARCHAR(50) 
+    AS (JSON_UNQUOTE(meta-&gt;"$.favorite_color"));</code></pre>
+<p>This will create a virtual column that'll be generated with every read operation, now let's add an index:</p>
+<pre><code class="language-sql">ALTER TABLE users 
+ADD INDEX (meta_favorite_color);</code></pre>
+<p>The next time you query users' favorite colors you can point MySQL to scan the indexed column instead of the data stored in the JSON column.</p>
+<pre><code class="language-php">DB::table('users')-&gt;where('meta_favorite_color', 'red')-&gt;get();</code></pre>
+<h3>Using database migrations</h3>
+<p>You can achieve the effect of the sql commands mentioned above using laravel database migrations as well:</p>
+<pre><code class="language-php">Schema::table('users', function (Blueprint $table) {
+    $table-&gt;string('meta_favorite_color')-&gt;virtualAs('JSON_UNQUOTE(meta-&gt;"$.favorite_color")');
+    $table-&gt;index('meta_favorite_color');
+});</code></pre>
+            
+    <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
+
+    <div class="text-center">
+        <a href="https://twitter.com/share"
+           class="twitter-share-button"
+           data-text="Laravel/MySQL JSON documents faster lookup using generated columns"
+           data-via="themsaid">Tweet</a>
+        &nbsp&nbsp&nbsp
+        <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
+           class="twitter-mention-button"
+           data-related="themsaid">Tweet to @themsaid</a>
+    </div>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s7.postimg.org/weovsp0qz/themsaid.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer [PHP, Laravel, Vue.js] & iOS beginner.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs');</script>
+<script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-61501903-1', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
