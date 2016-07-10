@@ -53,7 +53,7 @@
 <p>Let's see how we may create a generated column to store users favorite color for later indexing:</p>
 <pre><code class="language-sql">ALTER TABLE users 
 ADD meta_favorite_color VARCHAR(50) 
-    AS (JSON_UNQUOTE(meta-&gt;"$.favorite_color"));</code></pre>
+    AS (meta-&gt;&gt;"$.favorite_color");</code></pre>
 <p>This will create a virtual column that'll be generated with every read operation, now let's add an index:</p>
 <pre><code class="language-sql">ALTER TABLE users 
 ADD INDEX (meta_favorite_color);</code></pre>
@@ -62,7 +62,7 @@ ADD INDEX (meta_favorite_color);</code></pre>
 <h3>Using database migrations</h3>
 <p>You can achieve the effect of the sql commands mentioned above using laravel database migrations as well:</p>
 <pre><code class="language-php">Schema::table('users', function (Blueprint $table) {
-    $table-&gt;string('meta_favorite_color')-&gt;virtualAs('JSON_UNQUOTE(meta-&gt;"$.favorite_color")');
+    $table-&gt;string('meta_favorite_color')-&gt;virtualAs('meta-&gt;&gt;"$.favorite_color"');
     $table-&gt;index('meta_favorite_color');
 });</code></pre>
             
