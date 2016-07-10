@@ -48,7 +48,7 @@ Let's see how we may create a generated column to store users favorite color for
 ```sql
 ALTER TABLE users 
 ADD meta_favorite_color VARCHAR(50) 
-    AS (JSON_UNQUOTE(meta->"$.favorite_color"));
+    AS (meta->>"$.favorite_color");
 ```
 
 This will create a virtual column that'll be generated with every read operation, now let's add an index:
@@ -70,7 +70,7 @@ You can achieve the effect of the sql commands mentioned above using laravel dat
 
 ```php
 Schema::table('users', function (Blueprint $table) {
-    $table->string('meta_favorite_color')->virtualAs('JSON_UNQUOTE(meta->"$.favorite_color")');
+    $table->string('meta_favorite_color')->virtualAs('meta->>"$.favorite_color"');
     $table->index('meta_favorite_color');
 });
 ```
