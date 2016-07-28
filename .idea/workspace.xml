@@ -49,12 +49,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="base.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/content/_includes/base.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="32" column="69" selection-start-line="32" selection-start-column="69" selection-end-line="32" selection-end-column="85" />
-              <folding />
+      <file leaf-file-name="2016-07-28-taylor-otwells-intro-laracon-2016.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/content/_blog/2016-07-28-taylor-otwells-intro-laracon-2016.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="144">
+                <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -67,7 +70,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/content/_blog/2016-02-28-today-is-the-best-day-of-your-life.blade.php" />
         <option value="$PROJECT_DIR$/content/prism.css" />
         <option value="$PROJECT_DIR$/content/_blog/2013-09-30-faster-commits-using-bash-functions.blade.php" />
         <option value="$PROJECT_DIR$/vendor/themsaid/katana-core/src/ParseDown.php" />
@@ -118,6 +120,7 @@
         <option value="$PROJECT_DIR$/CNAME" />
         <option value="$PROJECT_DIR$/content/_blog/2016-07-09-laravel-mysql-json-colum-fast-lookup.md" />
         <option value="$PROJECT_DIR$/content/_includes/base.blade.php" />
+        <option value="$PROJECT_DIR$/content/_blog/2016-07-28-taylor-otwells-intro-laracon-2016.md" />
       </list>
     </option>
   </component>
@@ -230,7 +233,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="_includes" />
+              <option name="myItemId" value="_blog" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -391,11 +394,13 @@
       <workItem from="1468096754522" duration="492000" />
       <workItem from="1468098858943" duration="162000" />
       <workItem from="1468100351161" duration="270000" />
+      <workItem from="1468336010651" duration="3000" />
+      <workItem from="1469713029049" duration="218000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18055000" />
+    <option name="totallyTimeSpent" value="18276000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="745" extended-state="6" />
@@ -441,13 +446,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/content/_blog/2013-12-25-file-and-directory-permissions.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/themsaid/katana-core/src/Katana.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -727,41 +725,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
           <caret line="106" column="3" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="3" />
-          <folding>
-            <marker date="1460831256000" expanded="true" signature="28:49" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="56:196" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="225:273" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="242:271" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="283:331" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="345:536" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="547:574" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="601:791" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="616:741" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="759:789" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="795:818" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="828:878" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="891:919" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="935:953" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="968:993" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1004:1050" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1065:1091" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1128:1156" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1173:1199" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1218:1287" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1306:1374" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1393:1461" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1468:1491" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1512:1628" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1648:1733" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1740:1766" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1779:1826" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1841:1959" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="1968:2011" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="2027:2081" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="2098:2152" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="2169:2223" placeholder="{...}" />
-            <marker date="1460831256000" expanded="true" signature="2237:2291" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -771,8 +734,8 @@
           <first_editor relative-caret-position="16">
             <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
             <folding>
-              <marker date="1468099027000" expanded="true" signature="1833:1936" placeholder="ALTER TABLE users... " />
-              <marker date="1468099027000" expanded="true" signature="2057:2107" placeholder="ALTER TABLE users... " />
+              <marker date="1468150424000" expanded="true" signature="1833:1897" placeholder="ALTER TABLE users... " />
+              <marker date="1468150424000" expanded="true" signature="2057:2107" placeholder="ALTER TABLE users... " />
             </folding>
           </first_editor>
           <second_editor />
@@ -783,7 +746,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
           <caret line="32" column="69" selection-start-line="32" selection-start-column="69" selection-end-line="32" selection-end-column="85" />
-          <folding />
+          <folding>
+            <marker date="1468100579000" expanded="true" signature="21:2559" placeholder="..." />
+            <marker date="1468100579000" expanded="true" signature="28:746" placeholder="..." />
+            <marker date="1468100579000" expanded="true" signature="754:2551" placeholder="..." />
+            <marker date="1468100579000" expanded="true" signature="779:1567" placeholder="..." />
+            <marker date="1468100579000" expanded="true" signature="810:1431" placeholder="..." />
+            <marker date="1468100579000" expanded="true" signature="854:896" placeholder="..." />
+            <marker date="1468100579000" expanded="true" signature="952:1420" placeholder="..." />
+            <marker date="1468100579000" expanded="true" signature="985:1093" placeholder="..." />
+            <marker date="1468100579000" expanded="true" signature="1455:1560" placeholder="..." />
+            <marker date="1468100579000" expanded="true" signature="1612:2008" placeholder="..." />
+            <marker date="1468100579000" expanded="true" signature="1634:1964" placeholder="{...}" />
+            <marker date="1468100579000" expanded="true" signature="1773:1958" placeholder="{...}" />
+            <marker date="1468100579000" expanded="true" signature="2017:2543" placeholder="..." />
+            <marker date="1468100579000" expanded="true" signature="2050:2384" placeholder="{...}" />
+            <marker date="1468100579000" expanded="true" signature="2127:2206" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/_blog/2016-07-28-taylor-otwells-intro-laracon-2016.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="144">
+            <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
