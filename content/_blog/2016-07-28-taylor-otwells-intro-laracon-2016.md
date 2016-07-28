@@ -3,7 +3,7 @@ view::extends: _includes.blog_post_base
 view::yields: post_body
 post::title: Taylor Otwell Introduction in laracon 2016
 pageTitle: - Taylor Otwell Introduction in laracon 2016
-post::brief: Taylor Otwell gave me a shout out during his talk in laracon 2016 :)
+post::brief: Taylor Otwell gave me a shout out during his talk in laracon 2016
 ---
 
 <iframe src="https://player.vimeo.com/video/176598446" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
