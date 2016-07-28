@@ -1,8 +1,8 @@
 ---
 view::extends: _includes.blog_post_base
 view::yields: post_body
-post::title: Taylor Otwell's Introduction in laracon 2016
-pageTitle: - Taylor Otwell's Introduction in laracon 2016
+post::title: Taylor Otwell Introduction in laracon 2016
+pageTitle: - Taylor Otwell Introduction in laracon 2016
 post::brief: Taylor Otwell gave me a shout out during his talk in laracon 2016 :)
 ---
 

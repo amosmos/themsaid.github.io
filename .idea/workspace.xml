@@ -2,19 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1fce0fe7-cf77-4fa0-9aa0-42a95577da1f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-3-20150131/index.html" afterPath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-3-20150131/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-4-20150131/index.html" afterPath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-4-20150131/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/acceptance-testing-laravel-vue-20160517/index.html" afterPath="$PROJECT_DIR$/public/acceptance-testing-laravel-vue-20160517/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/better-readability-enumerators-php-20160420/index.html" afterPath="$PROJECT_DIR$/public/better-readability-enumerators-php-20160420/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/blog-page/1/index.html" afterPath="$PROJECT_DIR$/public/blog-page/1/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/building-interactive-ios-interface-with-swift-20150401/index.html" afterPath="$PROJECT_DIR$/public/building-interactive-ios-interface-with-swift-20150401/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/building-my-first-ios-app-part-5-20150201/index.html" afterPath="$PROJECT_DIR$/public/building-my-first-ios-app-part-5-20150201/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/building-testing-interactive-console-20160409/index.html" afterPath="$PROJECT_DIR$/public/building-testing-interactive-console-20160409/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/deployment-via-git-and-bitbucket-20150318/index.html" afterPath="$PROJECT_DIR$/public/deployment-via-git-and-bitbucket-20150318/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/draft-to-eric/index.html" afterPath="$PROJECT_DIR$/public/draft-to-eric/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/faster-commits-using-bash-functions-20130930/index.html" afterPath="$PROJECT_DIR$/public/faster-commits-using-bash-functions-20130930/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/feed.rss" afterPath="$PROJECT_DIR$/public/feed.rss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/file-and-directory-permissions-20131225/index.html" afterPath="$PROJECT_DIR$/public/file-and-directory-permissions-20131225/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/iOS-development-first-trial-20150129/index.html" afterPath="$PROJECT_DIR$/public/iOS-development-first-trial-20150129/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
@@ -395,12 +392,12 @@
       <workItem from="1468098858943" duration="162000" />
       <workItem from="1468100351161" duration="270000" />
       <workItem from="1468336010651" duration="3000" />
-      <workItem from="1469713029049" duration="218000" />
+      <workItem from="1469713029049" duration="245000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18276000" />
+    <option name="totallyTimeSpent" value="18303000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="745" extended-state="6" />
