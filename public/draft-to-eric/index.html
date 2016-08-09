@@ -23,89 +23,101 @@
             
     <a href="/">Back to home</a>
 
-    <h1 class="blog-post-title">Laravel 5.3 Notifications</h1>
+    <h1 class="blog-post-title">A look at Laravel 5.3 Notification System</h1>
 
-                <pre><code class="language-php">class ServerReady extends Notification
+                <p>While Laravel is already shipped with many built-in solutions for many application development problems, it still presents new ones with every new release, Laravel 5.3 is no exception.</p>
+<p>One of the neat features of Laravel 5.3 is the all-new notification system. Being a built-in feature, notifications will never be a hard task to build again. Let's see how easy it is to build and send a notification:</p>
+<pre><code class="language-php">class NewPost extends \Illuminate\Notifications\Notification
 {
+    public function __construct($post)
+    {
+        $this-&gt;post = $post;
+    }
+
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
-    public function message()
+    public function toArray($notifiable)
     {
-        $this-&gt;application('Acme')
-            -&gt;line('Your server is ready!')
-            -&gt;action('Upload your files', 'https://acme.com/upload')
-            -&gt;line('Can\'t wait to see your cool project up and running.');
+        return [
+            'message' =&gt; 'A new post was published on Laravel News.',
+            'action' =&gt; url($this-&gt;post-&gt;slug)
+        ];
     }
 }</code></pre>
-<pre><code class="language-php">class ServerDestroyed extends Notification
+<p>All you need to do now is to send the notification to the selected users:</p>
+<pre><code class="language-php">$user-&gt;notify(new NewPost($post));</code></pre>
+<h2>Creating Notifications</h2>
+<p>Laravel 5.3 is shipped with a new console command for creating notifications:</p>
+<pre><code>php artisan make:notification NewPost</code></pre>
+<p>This will create a new class in <code>app/Notifications</code>, each notification class contains a <code>via()</code> method as well as different methods for building notifications for different channels.</p>
+<p>Using the <code>via()</code> method you can specifying the channels you'd like this particular notification to be sent through, check this example for the official documentation website:</p>
+<pre><code class="language-php">public function via($notifiable)
 {
-    public function via($notifiable)
-    {
-        return ['mail'];
-    }
-
-    public function message()
-    {
-        $this-&gt;application('Acme')
-            -&gt;error()
-            -&gt;line('Your server was destroyed!')
-            -&gt;action('Download Backup', 'https://acme.com/download')
-            -&gt;line('We\'re deeply sorry for your loss.');
-    }
+    return $notifiable-&gt;prefers_sms ? ['sms'] : ['mail', 'database'];
 }</code></pre>
-<p>If now application provided?
-$this-&gt;app['config']['app.name']
-$this-&gt;app['config']['app.logo']</p>
-<p>are used</p>
-<hr />
-<h1>Mohamed Said</h1>
-<p>I'm a software developer from Cairo, Egypt. Spending most of my time building web applications with Laravel, VueJS, MySQL, and HTML/CSS.</p>
-<p>I'm also an occasional writer on my <a href="http://themsaid.com/">blog</a> and <a href="https://medium.com/@themsaid">Medium space</a>, I write about software development and testing as well as my point of view regarding several issues.</p>
-<h2>Previous work Experience:</h2>
-<p>The most important projects I’ve worked on so far are the following:</p>
-<h3>nafham.com</h3>
-<p>It’s the biggest online education website in Egypt, it was built using laravel 4.0</p>
-<h3>jumpsuite.io</h3>
-<p>It’s an online marketplace that connects personal trainers with their clients, and allow people to search for a trainer. It was built using laravel 5.0 and Vue.js</p>
-<p>The backend has controllers for managing training programs, generating analytics, and handling customer support. An API is also provided for the operation of a mobile application.</p>
-<h3>foodics.com</h3>
-<p>Fooidcs is a restaurant management system built using laravel 5.2 and Vue.js, it’s basically an application that helps restaurant owners manage all the aspects of their business. The system is currently serving more than 100 restaurant in the Middleast.</p>
-<p>During my past experience I’ve been handling the entire development process from idea to deployment, most of the time I was the only developer in the team however since I joined foodics 2 years ago I’ve been managing a team of fronted, backend, and mobile developers.</p>
-<h2>Education:</h2>
-<p>My field of Education was Mechanical Engineering, however I dropped out 2 years ago as I got myself more involved in the software development industry.</p>
-<h2>Open Source Projects:</h2>
-<h4>Laravel</h4>
-<p>I’ve been contributing to laravel since January 2016, currently having 74 merged Pull Request in different areas of the framework.</p>
-<h4>Laravel Packages</h4>
-<p>Currently maintaining multiple laravel open-source packages</p>
-<ul>
-<li><a href="https://github.com/themsaid/laravel-model-transformer">https://github.com/themsaid/laravel-model-transformer</a></li>
-<li><a href="https://github.com/themsaid/laravel-mail-preview">https://github.com/themsaid/laravel-mail-preview</a></li>
-<li><a href="https://github.com/themsaid/laravel-multilingual">https://github.com/themsaid/laravel-multilingual</a></li>
-<li><a href="https://github.com/themsaid/laravel-langman">https://github.com/themsaid/laravel-langman</a></li>
-</ul>
-<h4>A Static Site Generator</h4>
-<p>Maintaining a Blade-based static site generator named “Katana”: <a href="https://github.com/themsaid/katana">https://github.com/themsaid/katana</a></p>
-<h2>My Interests:</h2>
-<p>The most interesting activity I do other than coding is swimming, I’m not a professional athlete but I take all the opportunities I get to jump into the water.</p>
-<p>I love Trance music, House music and Eminem oldies.</p>
-<p>As for movies, unlike many other coders I’m not so much into Start Trek or Star Wars, maybe because they weren’t very popular in Egypt by the time I started watching movies.</p>
-<p>However I love a lot of movies including: Cast Away, Braveheart, The Termintor, Intersteller, and all Marvel movies.</p>
-<h2>Contacts</h2>
-<p><strong>Github Profile:</strong> <a href="https://github.com/themsaid">https://github.com/themsaid</a>
-<strong>Twitter Profile:</strong> <a href="https://twitter.com/themsaid">https://twitter.com/themsaid</a>
-<strong>Email:</strong> themsaid@gmail.com
-<strong>Website</strong>: <a href="http://themsaid.com">http://themsaid.com</a></p>
+<p>The via method receives a <code>$notifiable</code> instance, which is the model you're sending the notification to, in most cases it'll be the user model but it's not limited to that.</p>
+<p>Available channels are: <code>mail</code>, <code>nexmo</code>, <code>database</code>, <code>broadcast</code>, and <code>slack</code>.</p>
+<h3>Formatting Email Notifications</h3>
+<p>You can format how notifications are sent through different channels, for instance let's take a look at formatting a mail notification:</p>
+<pre><code class="language-php">public function toMail($notifiable)
+{
+    return (new MailMessage)
+                   -&gt;subject('New Post!')
+                -&gt;line('A new post was published on Laravel News!')
+                -&gt;action('Read Post', url($this-&gt;post-&gt;slug))
+                -&gt;line('Please don\'t forget to share.');
+}</code></pre>
+<p>This will create a mail message using a nice built-in responsive template that you can publish using the <code>vendor:publish</code> console command.</p>
+<p>The notification system will automatically look for an <code>email</code> property in your model, however you can customise this behaviour by defining a <code>routeNotificationForMail</code> in your Model and return the email address this Model will be contacted on.</p>
+<h3>Formatting Nexmo SMS Notifications</h3>
+<p>Same as in the case of an email notification, you need to define a <code>toNexmo</code> method in your notification class:</p>
+<pre><code class="language-php">public function toNexmo($notifiable)
+{
+    return (new NexmoMessage)
+        -&gt;from(123456789)
+        -&gt;content('New post on Laravel News!');
+}</code></pre>
+<p>In the case of Nexmo notifications, laravel will look for a <code>phone_number</code> property in the model. You can override that by defining a <code>routeNotificationForNexmo</code> method.</p>
+<p>You can set a global <code>from</code> number in your nexmo configuration file, that way you won't have to provide a <code>from</code> number in each notification.</p>
+<h3>Formatting Database Notifications</h3>
+<p>To Format a database notification you may define a <code>toDatabase</code> method:</p>
+<pre><code class="language-php">public function toDatabase($notifiable)
+{
+    return new DatabaseMessage([
+        'message' =&gt; 'A new post was published on Laravel News.',
+        'action' =&gt; url($this-&gt;post-&gt;slug)
+    ]);
+}</code></pre>
+<p>To start using the database channel you may read the full documentation on the <a href="https://laravel.com/docs/master/notifications#database-notifications">official website</a>.</p>
+<h2>Sending Notifications</h2>
+<p>You can send notifications using the <code>notify()</code> method on your mode, this method exists on the <code>Notifiable</code> trait which you'll need to add to your Model.</p>
+<pre><code class="language-php">$user-&gt;notify(new NewPost($post));</code></pre>
+<p>You can also use the Notification facade, this will allow you to send notifications to multiple notifiables at the same time:</p>
+<pre><code>Notification::send(User::all(), new NewPost($post));</code></pre>
+<h2>Queueing Notifications</h2>
+<p>You can easily queue sending notifications by using the <code>ShouldQueue</code> interface on the Notification class and including the <code>Queueable</code> trait.</p>
+<pre><code class="language-php">&lt;?php
+
+namespace App\Notifications;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class NewPost extends Notification implements ShouldQueue
+{
+    use Queueable;
+}</code></pre>
             
     <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
 
     <div class="text-center">
         <a href="https://twitter.com/share"
            class="twitter-share-button"
-           data-text="Laravel 5.3 Notifications"
+           data-text="A look at Laravel 5.3 Notification System"
            data-via="themsaid">Tweet</a>
         &nbsp&nbsp&nbsp
         <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
