@@ -42,7 +42,7 @@ $user->notify(new NewPost($post));
 
 Laravel 5.3 is shipped with a new console command for creating notifications:
 
-```
+```bash
 php artisan make:notification NewPost
 ```
 
@@ -124,7 +124,7 @@ $user->notify(new NewPost($post));
 
 You can also use the Notification facade, this will allow you to send notifications to multiple notifiables at the same time:
 
-```
+```php
 Notification::send(User::all(), new NewPost($post));
 ```
 

@@ -51,7 +51,7 @@
 <pre><code class="language-php">$user-&gt;notify(new NewPost($post));</code></pre>
 <h2>Creating Notifications</h2>
 <p>Laravel 5.3 is shipped with a new console command for creating notifications:</p>
-<pre><code>php artisan make:notification NewPost</code></pre>
+<pre><code class="language-bash">php artisan make:notification NewPost</code></pre>
 <p>This will create a new class in <code>app/Notifications</code>, each notification class contains a <code>via()</code> method as well as different methods for building notifications for different channels.</p>
 <p>Using the <code>via()</code> method you can specifying the channels you'd like this particular notification to be sent through, check this example for the official documentation website:</p>
 <pre><code class="language-php">public function via($notifiable)
@@ -96,7 +96,7 @@
 <p>You can send notifications using the <code>notify()</code> method on your mode, this method exists on the <code>Notifiable</code> trait which you'll need to add to your Model.</p>
 <pre><code class="language-php">$user-&gt;notify(new NewPost($post));</code></pre>
 <p>You can also use the Notification facade, this will allow you to send notifications to multiple notifiables at the same time:</p>
-<pre><code>Notification::send(User::all(), new NewPost($post));</code></pre>
+<pre><code class="language-php">Notification::send(User::all(), new NewPost($post));</code></pre>
 <h2>Queueing Notifications</h2>
 <p>You can easily queue sending notifications by using the <code>ShouldQueue</code> interface on the Notification class and including the <code>Queueable</code> trait.</p>
 <pre><code class="language-php">&lt;?php
