@@ -1,7 +1,7 @@
 ---
 view::extends: _includes.blog_post_base
 view::yields: post_body
-post::title: A look at Laravel 5.3 Notification System
+post::title: Pusher introduces a FREE mobile Push Notifications service
 post::brief: 
 ---
 
