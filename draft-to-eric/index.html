@@ -25,92 +25,36 @@
 
     <h1 class="blog-post-title">A look at Laravel 5.3 Notification System</h1>
 
-                <p>While Laravel is already shipped with many built-in solutions for many application development problems, it still presents new ones with every new release, Laravel 5.3 is no exception.</p>
-<p>One of the neat features of Laravel 5.3 is the all-new notification system. Being a built-in feature, notifications will never be a hard task to build again. Let's see how easy it is to build and send a notification:</p>
-<pre><code class="language-php">class NewPost extends \Illuminate\Notifications\Notification
+                <p>Pusher, a realtime communication platform, has recently introduced an all-new FREE service for application developers, it's a unified API to send native Push Notifications to iOS and Android devices.</p>
+<p>Using native Push Notifications allows you to communicate with your users even when the app is closed or inactive, this has a great effect on user engagement.</p>
+<p>Being able to send iOS and Android Push Notifications using a unified API saves the hassle of having to apply multiple setup procedures. All you have to do is to upload your APNS certificate for iOS devices or add your GCM API key for android devices, and that's it.</p>
+<p>Now since <a href="https://laravel-news.com/2016/08/laravel-notifications-easily-send-quick-updates-through-slack-sms-email-and-more/">Laravel 5.3 will be shipped with a notification system</a> that includes a Nexmo SMS driver, a Mail driver, and a few others with the ability to include custom drivers, now that we have this system built-in we can use the new Pusher service from inside our Laravel applications.</p>
+<p>All we need to do is to create a custom driver and that's it, we'll be able to send Push notifications to our Mobile devices right away.</p>
+<p>With the help of <a href="https://twitter.com/@freekmurze">Freek Van der Herten</a> and <a href="https://twitter.com/marcelpociot">Marcel Pociot</a> we managed to build an easy to use driver for Pusher Push Notifications.</p>
+<p>Using this driver you'll be able to send push notifications like this:</p>
+<pre><code class="language-php">class AccountApproved extends Notification
 {
-    public function __construct($post)
-    {
-        $this-&gt;post = $post;
-    }
-
     public function via($notifiable)
     {
-        return ['database'];
+        return [Channel::class];
     }
 
-    public function toArray($notifiable)
+    public function toPushNotification($notifiable)
     {
-        return [
-            'message' =&gt; 'A new post was published on Laravel News.',
-            'action' =&gt; url($this-&gt;post-&gt;slug)
-        ];
+        return (new Message())
+            -&gt;iOS()
+            -&gt;badge(1)
+            -&gt;sound('success')
+            -&gt;body("Your {$notifiable-&gt;service} account was approved!");
     }
 }</code></pre>
-<p>All you need to do now is to send the notification to the selected users:</p>
-<pre><code class="language-php">$user-&gt;notify(new NewPost($post));</code></pre>
-<h2>Creating Notifications</h2>
-<p>Laravel 5.3 is shipped with a new console command for creating notifications:</p>
-<pre><code class="language-bash">php artisan make:notification NewPost</code></pre>
-<p>This will create a new class in <code>app/Notifications</code>, each notification class contains a <code>via()</code> method as well as different methods for building notifications for different channels.</p>
-<p>Using the <code>via()</code> method you can specifying the channels you'd like this particular notification to be sent through, check this example for the official documentation website:</p>
-<pre><code class="language-php">public function via($notifiable)
-{
-    return $notifiable-&gt;prefers_sms ? ['sms'] : ['mail', 'database'];
-}</code></pre>
-<p>The via method receives a <code>$notifiable</code> instance, which is the model you're sending the notification to, in most cases it'll be the user model but it's not limited to that.</p>
-<p>Available channels are: <code>mail</code>, <code>nexmo</code>, <code>database</code>, <code>broadcast</code>, and <code>slack</code>.</p>
-<h3>Formatting Email Notifications</h3>
-<p>You can format how notifications are sent through different channels, for instance let's take a look at formatting a mail notification:</p>
-<pre><code class="language-php">public function toMail($notifiable)
-{
-    return (new MailMessage)
-                   -&gt;subject('New Post!')
-                -&gt;line('A new post was published on Laravel News!')
-                -&gt;action('Read Post', url($this-&gt;post-&gt;slug))
-                -&gt;line('Please don\'t forget to share.');
-}</code></pre>
-<p>This will create a mail message using a nice built-in responsive template that you can publish using the <code>vendor:publish</code> console command.</p>
-<p>The notification system will automatically look for an <code>email</code> property in your model, however you can customise this behaviour by defining a <code>routeNotificationForMail</code> in your Model and return the email address this Model will be contacted on.</p>
-<h3>Formatting Nexmo SMS Notifications</h3>
-<p>Same as in the case of an email notification, you need to define a <code>toNexmo</code> method in your notification class:</p>
-<pre><code class="language-php">public function toNexmo($notifiable)
-{
-    return (new NexmoMessage)
-        -&gt;from(123456789)
-        -&gt;content('New post on Laravel News!');
-}</code></pre>
-<p>In the case of Nexmo notifications, laravel will look for a <code>phone_number</code> property in the model. You can override that by defining a <code>routeNotificationForNexmo</code> method.</p>
-<p>You can set a global <code>from</code> number in your nexmo configuration file, that way you won't have to provide a <code>from</code> number in each notification.</p>
-<h3>Formatting Database Notifications</h3>
-<p>To Format a database notification you may define a <code>toDatabase</code> method:</p>
-<pre><code class="language-php">public function toDatabase($notifiable)
-{
-    return new DatabaseMessage([
-        'message' =&gt; 'A new post was published on Laravel News.',
-        'action' =&gt; url($this-&gt;post-&gt;slug)
-    ]);
-}</code></pre>
-<p>To start using the database channel you may read the full documentation on the <a href="https://laravel.com/docs/master/notifications#database-notifications">official website</a>.</p>
-<h2>Sending Notifications</h2>
-<p>You can send notifications using the <code>notify()</code> method on your mode, this method exists on the <code>Notifiable</code> trait which you'll need to add to your Model.</p>
-<pre><code class="language-php">$user-&gt;notify(new NewPost($post));</code></pre>
-<p>You can also use the Notification facade, this will allow you to send notifications to multiple notifiables at the same time:</p>
-<pre><code class="language-php">Notification::send(User::all(), new NewPost($post));</code></pre>
-<h2>Queueing Notifications</h2>
-<p>You can easily queue sending notifications by using the <code>ShouldQueue</code> interface on the Notification class and including the <code>Queueable</code> trait.</p>
-<pre><code class="language-php">&lt;?php
-
-namespace App\Notifications;
-
-use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-
-class NewPost extends Notification implements ShouldQueue
-{
-    use Queueable;
-}</code></pre>
+<p>We believe that this driver will allow you to send Push Notifications with a laravel-style sort of code syntax, as fluent as possible.</p>
+<p>You may check it out here:</p>
+<p><a href="https://github.com/laravel-notification-channels/pusher-push-notifications">https://github.com/laravel-notification-channels/pusher-push-notifications</a></p>
+<h2>Building custom drivers</h2>
+<p>There are many platforms that send notifications, and with the new system in Laravel 5.3 we believe that it's a good idea to collect all the custom drivers in a single place, just as socialiteproviders.github.io is a one-stop-shop for all Socialite Providers, for that we created a GitHub organisation where we'll collect and host all custom drivers:</p>
+<p><a href="https://github.com/laravel-notification-channels">https://github.com/laravel-notification-channels</a></p>
+<p>It's still in the making but contributions are most welcomed, if you have an idea for a custom channel, please <a href="https://github.com/laravel-notification-channels/skeleton">check this skeleton repo</a> where you can use as boilerplate.</p>
             
     <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
 
