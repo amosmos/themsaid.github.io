@@ -1,7 +1,7 @@
 ---
 view::extends: _includes.blog_post_base
 view::yields: post_body
-post::title: Pusher introduces a FREE mobile Push Notifications service
+post::title: Mobile push notifications, Telegram, Web notifications, and more custom channels for Laravel 5.3
 post::brief: 
 ---
 
@@ -49,5 +49,7 @@ https://github.com/laravel-notification-channels/pusher-push-notifications
 There are many platforms that send notifications, and with the new system in Laravel 5.3 we believe that it's a good idea to collect all the custom drivers in a single place, just as socialiteproviders.github.io is a one-stop-shop for all Socialite Providers, for that we created a GitHub organisation where we'll collect and host all custom drivers:
 
 https://github.com/laravel-notification-channels
+
+We've already received contributions for a telegram channel, web notifications channel, OneSignal, Pushover, and more.
 
 It's still in the making but contributions are most welcomed, if you have an idea for a custom channel, please [check this skeleton repo](https://github.com/laravel-notification-channels/skeleton) where you can use as boilerplate.
