@@ -31,7 +31,7 @@
 <p>Before going any further, we need to understand the following definitions:</p>
 <h3>Client</h3>
 <p>This is the application trying to consume our API, creating clients in Passport is done via this console command:</p>
-<pre><code>php artisan passport:client</code></pre>
+<pre><code class="language-bash">php artisan passport:client</code></pre>
 <p>Every client will have a key, name, secret, redirect URI, and a user (Application Creator/Owner).</p>
 <h3>Resource Owner</h3>
 <p>This is the entity (User) that owns the data a client is trying to consume.</p>
@@ -52,7 +52,7 @@
 <p>That's the token an app (client) needs to communicate with the server (API).</p>
 <h1>Authorizing third-party apps</h1>
 <p>First we need to create a test app using the following command:</p>
-<pre><code>php artisan passport:client</code></pre>
+<pre><code class="language-bash">php artisan passport:client</code></pre>
 <p>Passport will prompt asking you for the user ID, app name, and the redirect URI.</p>
 <p>Now that we have the client registered we can now get an access token using the &quot;Authorization Code Grant&quot;.</p>
 <p>This type of grants works by pointing the browser to the authorization server where the user can log in to his account and grant access to the app, once an access is given the app shall send another request  asking for an access token, using this token the app will be able to make further requests.</p>
@@ -61,7 +61,7 @@
 <p>From the client app, you'll need to point the user to <code>http://resources.dev/oauth/authorize?client_id={CLIENT_ID}&amp;redirect_uri={URI}&amp;response_type=code&amp;scope={SCOPE}</code></p>
 <p>Using the correct <code>CLIENT_ID</code> &amp; <code>URI</code> as in the client created by passport.</p>
 <p>You can list the scopes as a space separated list of permissions you'd like to get from the resource owner, for example:</p>
-<pre><code>read-tweets post-tweets follow-others</code></pre>
+<pre><code class="language-bash">read-tweets post-tweets follow-others</code></pre>
 <p>Now if Passport was installed correctly such that the routes are published in your <code>AuthServiceProvider</code>, if all is well the above request will show a nice screen asking the user to give permission to the app, the screen will list all the scopes the app is asking for.</p>
 <p>In case the user denied access, Passport will redirect the user to the given <code>redirect_uri</code> with <code>error=access_denied</code> in the URL.</p>
 <p>However, if the user approved access, Passport will redirect to the <code>redirect_uri</code> with <code>code={authorization_code_here}</code>.</p>
