@@ -58,7 +58,8 @@
 <p>This type of grants works by pointing the browser to the authorization server where the user can log in to his account and grant access to the app, once an access is given the app shall send another request  asking for an access token, using this token the app will be able to make further requests.</p>
 <p>For most of the cases you'll be using this grant type to allow all kind of applications to consume your laravel-based API private endpoints, this includes server-side apps, JavaScript apps, &amp; native mobile apps.</p>
 <h2>Step 1: Asking for permission</h2>
-<p>From the client app, you'll need to point the user to <code>http://resources.dev/oauth/authorize?client_id={CLIENT_ID}&amp;redirect_uri={URI}&amp;response_type=code&amp;scope={SCOPE}</code></p>
+<p>From the client app, you'll need to point the user to the following URL:</p>
+<pre><code class="language-url">http://resources.dev/oauth/authorize?client_id={CLIENT_ID}&amp;redirect_uri={URI}&amp;response_type=code&amp;scope={SCOPE}</code></pre>
 <p>Using the correct <code>CLIENT_ID</code> &amp; <code>URI</code> as in the client created by passport.</p>
 <p>You can list the scopes as a space separated list of permissions you'd like to get from the resource owner, for example:</p>
 <pre><code class="language-bash">read-tweets post-tweets follow-others</code></pre>

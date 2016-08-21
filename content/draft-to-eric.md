@@ -68,7 +68,11 @@ For most of the cases you'll be using this grant type to allow all kind of appli
 
 ## Step 1: Asking for permission
 
-From the client app, you'll need to point the user to `http://resources.dev/oauth/authorize?client_id={CLIENT_ID}&redirect_uri={URI}&response_type=code&scope={SCOPE}`
+From the client app, you'll need to point the user to the following URL:
+
+```url
+http://resources.dev/oauth/authorize?client_id={CLIENT_ID}&redirect_uri={URI}&response_type=code&scope={SCOPE}
+```
 
 Using the correct `CLIENT_ID` & `URI` as in the client created by passport.
 
