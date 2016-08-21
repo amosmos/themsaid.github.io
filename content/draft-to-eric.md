@@ -16,7 +16,7 @@ Before going any further, we need to understand the following definitions:
 ### Client
 This is the application trying to consume our API, creating clients in Passport is done via this console command:
 
-```
+```bash
 php artisan passport:client
 ```
 
@@ -54,7 +54,7 @@ That's the token an app (client) needs to communicate with the server (API).
 
 First we need to create a test app using the following command:
 
-```
+```bash
 php artisan passport:client
 ```
 
@@ -74,7 +74,7 @@ Using the correct `CLIENT_ID` & `URI` as in the client created by passport.
 
 You can list the scopes as a space separated list of permissions you'd like to get from the resource owner, for example:
 
-```
+```bash
 read-tweets post-tweets follow-others
 ```
 
