@@ -23,46 +23,108 @@
             
     <a href="/">Back to home</a>
 
-    <h1 class="blog-post-title">Mobile push notifications, Telegram, Web notifications, and more custom channels for Laravel 5.3</h1>
+    <h1 class="blog-post-title">Grant Types in Laravel Passport</h1>
 
-                <p>Pusher, a realtime communication platform, has recently introduced an all-new FREE service for application developers, it's a unified API to send native Push Notifications to iOS and Android devices.</p>
-<p>Using native Push Notifications allows you to communicate with your users even when the app is closed or inactive, this has a great effect on user engagement.</p>
-<p>Being able to send iOS and Android Push Notifications using a unified API saves the hassle of having to apply multiple setup procedures. All you have to do is to upload your APNS certificate for iOS devices or add your GCM API key for android devices, and that's it.</p>
-<p>Now since <a href="https://laravel-news.com/2016/08/laravel-notifications-easily-send-quick-updates-through-slack-sms-email-and-more/">Laravel 5.3 will be shipped with a notification system</a> that includes a Nexmo SMS driver, a Mail driver, and a few others with the ability to include custom drivers, now that we have this system built-in we can use the new Pusher service from inside our Laravel applications.</p>
-<p>All we need to do is to create a custom driver and that's it, we'll be able to send Push notifications to our Mobile devices right away.</p>
-<p>With the help of <a href="https://twitter.com/@freekmurze">Freek Van der Herten</a> and <a href="https://twitter.com/marcelpociot">Marcel Pociot</a> we managed to build an easy to use driver for Pusher Push Notifications.</p>
-<p>Using this driver you'll be able to send push notifications like this:</p>
-<pre><code class="language-php">class AccountApproved extends Notification
-{
-    public function via($notifiable)
-    {
-        return [Channel::class];
-    }
-
-    public function toPushNotification($notifiable)
-    {
-        return (new Message())
-            -&gt;iOS()
-            -&gt;badge(1)
-            -&gt;sound('success')
-            -&gt;body("Your {$notifiable-&gt;service} account was approved!");
-    }
+                <p>OAuth2 is a security framework that controls access to protected areas of an application, it's mainly used to control how different clients consume an API insuring they have the proper permissions to access the requested resources.</p>
+<p><a href="https://laravel.com/docs/master/passport">Laravel Passport</a> is a full OAuth2 server implementation, it was built to make it easy to apply authentication over an API for laravel-based web applications. </p>
+<p>Before going any further, we need to understand the following definitions:</p>
+<h4>Client</h4>
+<p>This is the application trying to consume our API, creating clients in Passport is done via this console command:</p>
+<pre><code>php artisan passport:client</code></pre>
+<p>Every client will have a key, name, secret, redirect URI, and a user (Application Creator/Owner).</p>
+<h4>Resource Owner</h4>
+<p>This is the entity (User) that owns the data a client is trying to consume.</p>
+<h4>Resource Server</h4>
+<p>That's our API, it may have public data that doesn't require an owner permission to read, and other private data that requires an owner permission.</p>
+<p>Public endpoints can be, for example, the endpoint for searching tweets, that doesn't require a specific resource owner permission.</p>
+<p>On the other hand, an endpoint that posts tweets on behalf of a user is a private endpoint, interacting with such endpoints requires a permission from the resource owner.</p>
+<h4>Scope</h4>
+<p>It's a permission to access certain data, or perform a certain action.</p>
+<p>You may define scopes using <code>Passport::tokensCan()</code> method inside your <code>AuthServiceProvider</code>.</p>
+<pre><code class="language-php">Passport::tokensCan([
+    'read-tweets' =&gt; 'Read all tweets',
+    'post-tweet' =&gt; 'Post new tweet',
+]);</code></pre>
+<h4>Grant</h4>
+<p>It's the method used to get an access token.</p>
+<h4>Access token</h4>
+<p>That's the token an app (client) needs to communicate with the server (API).</p>
+<h2>Authorizing third-party apps</h2>
+<p>First we need to create a test app using the following command:</p>
+<pre><code>php artisan passport:client</code></pre>
+<p>Passport will prompt asking you for the user ID, app name, and the redirect URI.</p>
+<p>Now that we have the client registered we can now get an access token using the &quot;Authorization Code Grant&quot;.</p>
+<p>This type of grants works by pointing the browser to the authorization server where the user can log in to his account and grant access to the app, once an access is given the app shall send another request  asking for an access token, using this token the app will be able to make further requests.</p>
+<p>For most of the cases you'll be using this grant type to allow all kind of applications to consume your laravel-based API private endpoints, this includes server-side apps, JavaScript apps, &amp; native mobile apps.</p>
+<h3>Step 1: Asking for permission</h3>
+<p>From the client app, you'll need to point the user to <code>http://resources.dev/oauth/authorize?client_id={CLIENT_ID}&amp;redirect_uri={URI}&amp;response_type=code&amp;scope={SCOPE}</code></p>
+<p>Using the correct <code>CLIENT_ID</code> &amp; <code>URI</code> as in the client created by passport.</p>
+<p>You can list the scopes as a space separated list of permissions you'd like to get from the resource owner, for example:</p>
+<pre><code>read-tweets post-tweets follow-others</code></pre>
+<p>Now if Passport was installed correctly such that the routes are published in your <code>AuthServiceProvider</code>, if all is well the above request will show a nice screen asking the user to give permission to the app, the screen will list all the scopes the app is asking for.</p>
+<p>In case the user denied access, Passport will redirect the user to the given <code>redirect_uri</code> with <code>error=access_denied</code> in the URL.</p>
+<p>However, if the user approved access, Passport will redirect to the <code>redirect_uri</code> with <code>code={authorization_code_here}</code>.</p>
+<h3>Step 2: Getting an access token</h3>
+<p>Now that we have the Authorization Code, we need to send a <code>POST</code> request to <code>http://resources.dev/oauth/token</code> to get the access token, the body of the request should contain the following:</p>
+<ul>
+<li><code>grant_type</code>: <code>authorization_code</code></li>
+<li><code>client_id</code>: the one created by Passport</li>
+<li><code>client_secret</code></li>
+<li><code>redirect_uri</code></li>
+<li><code>code</code>: The given Authorization Code</li>
+</ul>
+<p>The response is going to be a JSON object with the following keys:</p>
+<pre><code class="language-json">{
+    "token_type": "Bearer",
+    "expires_in": 3155673600,
+    "access_token": "eyJ0eXAiOiJKV1QiL....",
+    "refresh_token": "XslU/K6lFZShiGxF1dPyC4ztIXBx9W1g..."
 }</code></pre>
-<p>We believe that this driver will allow you to send Push Notifications with a laravel-style sort of code syntax, as fluent as possible.</p>
-<p>You may check it out here:</p>
-<p><a href="https://github.com/laravel-notification-channels/pusher-push-notifications">https://github.com/laravel-notification-channels/pusher-push-notifications</a></p>
-<h2>Building custom drivers</h2>
-<p>There are many platforms that send notifications, and with the new system in Laravel 5.3 we believe that it's a good idea to collect all the custom drivers in a single place, just as socialiteproviders.github.io is a one-stop-shop for all Socialite Providers, for that we created a GitHub organisation where we'll collect and host all custom drivers:</p>
-<p><a href="https://github.com/laravel-notification-channels">https://github.com/laravel-notification-channels</a></p>
-<p>We've already received contributions for a telegram channel, web notifications channel, OneSignal, Pushover, and more.</p>
-<p>It's still in the making but contributions are most welcomed, if you have an idea for a custom channel, please <a href="https://github.com/laravel-notification-channels/skeleton">check this skeleton repo</a> where you can use as boilerplate.</p>
+<h3>Refreshing an access token</h3>
+<p>By default the <code>access_token</code> won't expire before a 100 years, if you don't mind this then you don't need to save the refresh token, if otherwise you'd like the access_tokens to have a short life then you need to tell Passport about that:</p>
+<pre><code class="language-php">Passport::tokensExpireIn(Carbon::now()-&gt;addDays(15));
+
+Passport::refreshTokensExpireIn(Carbon::now()-&gt;addDays(30));</code></pre>
+<p>If your tokens are short-lived, then the client needs to save the refresh_token in order to use it later to issue a new access token.</p>
+<p>To refresh an access token the client needs to make a request to <code>http://resources.dev/oauth/token</code> with the following parameters:</p>
+<ul>
+<li><code>grant_type</code>: <code>refresh_token</code></li>
+<li><code>client_id</code>: the one created by Passport</li>
+<li><code>client_secret</code></li>
+<li><code>refresh_token</code></li>
+<li><code>scope</code></li>
+</ul>
+<h2>Authorizing first-party apps</h2>
+<p>If you're authorising a trusted app of your own there's no need for such a long road to get an access token, you only need to ask the user to provide a username/email &amp; password in order for the app to get an access token. This type of grants is called <code>Password grant</code>.</p>
+<p>You need to check your database to grab the password client created by Passport.</p>
+<p>To get an access token for a first-party app you need to make a <code>POST</code> request to <code>http://your-app.com/oauth/token</code> with the following parameters:</p>
+<ul>
+<li><code>grant_type</code>: <code>password</code></li>
+<li><code>client_id</code>:</li>
+<li><code>client_secret</code></li>
+<li><code>username</code></li>
+<li><code>password</code></li>
+<li><code>scope</code></li>
+</ul>
+<p>The response is going to be a JSON object with the following keys:</p>
+<pre><code class="language-json">{
+    "token_type": "Bearer",
+    "expires_in": 3155673600,
+    "access_token": "eyJ0eXAiOiJKV1QiL....",
+    "refresh_token": "XslU/K6lFZShiGxF1dPyC4ztIXBx9W1g..."
+}</code></pre>
+<h2>Authorizing an app manually</h2>
+<p>Passport is also shipped with a way to create access tokens manually, this is useful in multiple situations such as testing during development or maybe if you allow authenticating users on a third-party application via their mobile number instead of a login web form.</p>
+<p>For example, a third party app may show a phone field for the user, when filled a service on your server sends an SMS to that number with an access code, the user will input this code upon reception in which the app will exchange with an access token from your server.</p>
+<p>To create an access token:</p>
+<pre><code>$token = $user-&gt;createToken('Pizza App', ['place-orders', 'list-orders'])-&gt;accessToken;</code></pre>
             
     <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
 
     <div class="text-center">
         <a href="https://twitter.com/share"
            class="twitter-share-button"
-           data-text="Mobile push notifications, Telegram, Web notifications, and more custom channels for Laravel 5...."
+           data-text="Grant Types in Laravel Passport"
            data-via="themsaid">Tweet</a>
         &nbsp&nbsp&nbsp
         <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
