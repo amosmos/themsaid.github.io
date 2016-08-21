@@ -9,9 +9,11 @@ OAuth2 is a security framework that controls access to protected areas of an app
 
 [Laravel Passport](https://laravel.com/docs/master/passport) is a full OAuth2 server implementation, it was built to make it easy to apply authentication over an API for laravel-based web applications. 
 
+# Terminology
+
 Before going any further, we need to understand the following definitions:
 
-#### Client
+### Client
 This is the application trying to consume our API, creating clients in Passport is done via this console command:
 
 ```
@@ -20,17 +22,17 @@ php artisan passport:client
 
 Every client will have a key, name, secret, redirect URI, and a user (Application Creator/Owner).
 
-#### Resource Owner
+### Resource Owner
 This is the entity (User) that owns the data a client is trying to consume.
 
-#### Resource Server
+### Resource Server
 That's our API, it may have public data that doesn't require an owner permission to read, and other private data that requires an owner permission.
 
 Public endpoints can be, for example, the endpoint for searching tweets, that doesn't require a specific resource owner permission.
 
 On the other hand, an endpoint that posts tweets on behalf of a user is a private endpoint, interacting with such endpoints requires a permission from the resource owner.
 
-#### Scope
+### Scope
 It's a permission to access certain data, or perform a certain action.
 
 You may define scopes using `Passport::tokensCan()` method inside your `AuthServiceProvider`.
@@ -42,13 +44,13 @@ Passport::tokensCan([
 ]);
 ```
 
-#### Grant
+### Grant
 It's the method used to get an access token.
 
-#### Access token
+### Access token
 That's the token an app (client) needs to communicate with the server (API).
 
-## Authorizing third-party apps
+# Authorizing third-party apps
 
 First we need to create a test app using the following command:
 
@@ -64,7 +66,7 @@ This type of grants works by pointing the browser to the authorization server wh
 
 For most of the cases you'll be using this grant type to allow all kind of applications to consume your laravel-based API private endpoints, this includes server-side apps, JavaScript apps, & native mobile apps.
 
-### Step 1: Asking for permission
+## Step 1: Asking for permission
 
 From the client app, you'll need to point the user to `http://resources.dev/oauth/authorize?client_id={CLIENT_ID}&redirect_uri={URI}&response_type=code&scope={SCOPE}`
 
@@ -82,7 +84,7 @@ In case the user denied access, Passport will redirect the user to the given `re
 
 However, if the user approved access, Passport will redirect to the `redirect_uri` with `code={authorization_code_here}`.
 
-### Step 2: Getting an access token
+## Step 2: Getting an access token
 
 Now that we have the Authorization Code, we need to send a `POST` request to `http://resources.dev/oauth/token` to get the access token, the body of the request should contain the following:
 
@@ -103,7 +105,7 @@ The response is going to be a JSON object with the following keys:
 }
 ```
 
-### Refreshing an access token
+## Refreshing an access token
 
 By default the `access_token` won't expire before a 100 years, if you don't mind this then you don't need to save the refresh token, if otherwise you'd like the access_tokens to have a short life then you need to tell Passport about that:
 
@@ -123,7 +125,7 @@ To refresh an access token the client needs to make a request to `http://resourc
 - `refresh_token`
 - `scope`
 
-## Authorizing first-party apps
+# Authorizing first-party apps
 
 If you're authorising a trusted app of your own there's no need for such a long road to get an access token, you only need to ask the user to provide a username/email & password in order for the app to get an access token. This type of grants is called `Password grant`.
 
@@ -149,7 +151,7 @@ The response is going to be a JSON object with the following keys:
 }
 ```
 
-## Authorizing an app manually
+# Authorizing an app manually
 
 Passport is also shipped with a way to create access tokens manually, this is useful in multiple situations such as testing during development or maybe if you allow authenticating users on a third-party application via their mobile number instead of a login web form.
 
@@ -157,6 +159,6 @@ For example, a third party app may show a phone field for the user, when filled 
 
 To create an access token:
 
-```
+```php
 $token = $user->createToken('Pizza App', ['place-orders', 'list-orders'])->accessToken;
 ```
