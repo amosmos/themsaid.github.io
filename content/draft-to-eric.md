@@ -1,7 +1,7 @@
 ---
 view::extends: _includes.blog_post_base
 view::yields: post_body
-post::title: Grant Types in Laravel Passport
+post::title: Laravel core team changes how you access sessions in a controller constructor
 post::brief: 
 ---
 
