@@ -25,101 +25,51 @@
 
     <h1 class="blog-post-title">Grant Types in Laravel Passport</h1>
 
-                <p>OAuth2 is a security framework that controls access to protected areas of an application, it's mainly used to control how different clients consume an API insuring they have the proper permissions to access the requested resources.</p>
-<p><a href="https://laravel.com/docs/master/passport">Laravel Passport</a> is a full OAuth2 server implementation, it was built to make it easy to apply authentication over an API for laravel-based web applications. </p>
-<h1>Terminology</h1>
-<p>Before going any further, we need to understand the following definitions:</p>
-<h3>Client</h3>
-<p>This is the application trying to consume our API, creating clients in Passport is done via this console command:</p>
-<pre><code class="language-bash">php artisan passport:client</code></pre>
-<p>Every client will have a key, name, secret, redirect URI, and a user (Application Creator/Owner).</p>
-<h3>Resource Owner</h3>
-<p>This is the entity (User) that owns the data a client is trying to consume.</p>
-<h3>Resource Server</h3>
-<p>That's our API, it may have public data that doesn't require an owner permission to read, and other private data that requires an owner permission.</p>
-<p>Public endpoints can be, for example, the endpoint for searching tweets, that doesn't require a specific resource owner permission.</p>
-<p>On the other hand, an endpoint that posts tweets on behalf of a user is a private endpoint, interacting with such endpoints requires a permission from the resource owner.</p>
-<h3>Scope</h3>
-<p>It's a permission to access certain data, or perform a certain action.</p>
-<p>You may define scopes using <code>Passport::tokensCan()</code> method inside your <code>AuthServiceProvider</code>.</p>
-<pre><code class="language-php">Passport::tokensCan([
-    'read-tweets' =&gt; 'Read all tweets',
-    'post-tweet' =&gt; 'Post new tweet',
-]);</code></pre>
-<h3>Grant</h3>
-<p>It's the method used to get an access token.</p>
-<h3>Access token</h3>
-<p>That's the token an app (client) needs to communicate with the server (API).</p>
-<h1>Authorizing third-party apps</h1>
-<p>First we need to create a test app using the following command:</p>
-<pre><code class="language-bash">php artisan passport:client</code></pre>
-<p>Passport will prompt asking you for the user ID, app name, and the redirect URI.</p>
-<p>Now that we have the client registered we can now get an access token using the &quot;Authorization Code Grant&quot;.</p>
-<p>This type of grants works by pointing the browser to the authorization server where the user can log in to his account and grant access to the app, once an access is given the app shall send another request  asking for an access token, using this token the app will be able to make further requests.</p>
-<p>For most of the cases you'll be using this grant type to allow all kind of applications to consume your laravel-based API private endpoints, this includes server-side apps, JavaScript apps, &amp; native mobile apps.</p>
-<h2>Step 1: Asking for permission</h2>
-<p>From the client app, you'll need to point the user to the following URL:</p>
-<pre><code class="language-url">http://resources.dev/oauth/authorize?client_id={CLIENT_ID}&amp;redirect_uri={URI}&amp;response_type=code&amp;scope={SCOPE}</code></pre>
-<p>Using the correct <code>CLIENT_ID</code> &amp; <code>URI</code> as in the client created by passport.</p>
-<p>You can list the scopes as a space separated list of permissions you'd like to get from the resource owner, for example:</p>
-<pre><code class="language-bash">read-tweets post-tweets follow-others</code></pre>
-<p>Now if Passport was installed correctly such that the routes are published in your <code>AuthServiceProvider</code>, if all is well the above request will show a nice screen asking the user to give permission to the app, the screen will list all the scopes the app is asking for.</p>
-<p>In case the user denied access, Passport will redirect the user to the given <code>redirect_uri</code> with <code>error=access_denied</code> in the URL.</p>
-<p>However, if the user approved access, Passport will redirect to the <code>redirect_uri</code> with <code>code={authorization_code_here}</code>.</p>
-<h2>Step 2: Getting an access token</h2>
-<p>Now that we have the Authorization Code, we need to send a <code>POST</code> request to <code>http://resources.dev/oauth/token</code> to get the access token, the body of the request should contain the following:</p>
-<ul>
-<li><code>grant_type</code>: <code>authorization_code</code></li>
-<li><code>client_id</code>: the one created by Passport</li>
-<li><code>client_secret</code></li>
-<li><code>redirect_uri</code></li>
-<li><code>code</code>: The given Authorization Code</li>
-</ul>
-<p>The response is going to be a JSON object with the following keys:</p>
-<pre><code class="language-json">{
-    "token_type": "Bearer",
-    "expires_in": 3155673600,
-    "access_token": "eyJ0eXAiOiJKV1QiL....",
-    "refresh_token": "XslU/K6lFZShiGxF1dPyC4ztIXBx9W1g..."
-}</code></pre>
-<h2>Refreshing an access token</h2>
-<p>By default the <code>access_token</code> won't expire before a 100 years, if you don't mind this then you don't need to save the refresh token, if otherwise you'd like the access_tokens to have a short life then you need to tell Passport about that:</p>
-<pre><code class="language-php">Passport::tokensExpireIn(Carbon::now()-&gt;addDays(15));
+                <p>Back in laravel 5.2 a developer was able to interact with the session directly in a controller constructor, however this has changed in laravel 5.3.</p>
+<p>The difference between how 5.3 &amp; 5.2 handle an incoming request is that in 5.2 the request goes through 3 pipelines:</p>
+<ol>
+<li>The global middleware pipleline</li>
+<li>The route middleware pipeline</li>
+<li>The controller middleware pipeline</li>
+</ol>
+<p>By default the global middlware only contains a check for maintenance mode, the route middleware is that you assign to a route in your routes.php file, and by default a web group is assigned to all web routes that contains several middlware including the middleware that starts the session.</p>
+<p>And then finally Laravel instantiates your controller to check for controller middleware, at this point the request is all set up during the first and second pipelines, that's why we were able to use sessions and auth in the controller constructor, because the request is totally ready for it.</p>
+<p>In 5.3 the request goes through only 2 Pipelines:</p>
+<ol>
+<li>The global middleware pipeline</li>
+<li>The route &amp; controller middleware in 1 stack</li>
+</ol>
+<p>So laravel collects all route specific middlewares first before running the request through the pipeline, and while collecting the controller middleware an instance of the controller is created, thus the constructor is called, however at this point the request isn't ready yet, and that's where the change in behaviour you notice in 5.3 exists.</p>
+<p>The reason for this change is as <a href="https://github.com/laravel/framework/issues/15072#issuecomment-242769373">Taylor described</a>:</p>
+<blockquote>
+<p>It's very bad to use session or auth in your constructor as no request has happened yet and session and auth are INHERENTLY tied to an HTTP request. You should receive this request in an actual controller method which you can call multiple times with multiple different requests. By forcing your controller to resolve session or auth information in the constructor you are now forcing your entire controller to ignore the actual incoming request which can cause significant problems when testing, etc.</p>
+</blockquote>
+<h3>Using sessions in your constructor in 5.3</h3>
+<p>Maybe it was a bad practise to use the constructor of the controller to access session variables, however it looks like a good chunk of laravel developers were using this approach and considered the constructor as an inline middeware where they can check if the user can access certain methods in this controller or not.</p>
+<p>So the core team came up with a nice solution for this matter, it's described in the upgrade guide as follow:</p>
+<blockquote>
+<p>As an alternative, you may define a Closure based middleware directly in your controller's constructor. Before using this feature, make sure that your application is running Laravel 5.3.4 or above:</p>
+</blockquote>
+<p>Here's the example from the docs:</p>
+<pre><code class="language-php">&lt;?php
 
-Passport::refreshTokensExpireIn(Carbon::now()-&gt;addDays(30));</code></pre>
-<p>If your tokens are short-lived, then the client needs to save the refresh_token in order to use it later to issue a new access token.</p>
-<p>To refresh an access token the client needs to make a request to <code>http://resources.dev/oauth/token</code> with the following parameters:</p>
-<ul>
-<li><code>grant_type</code>: <code>refresh_token</code></li>
-<li><code>client_id</code>: the one created by Passport</li>
-<li><code>client_secret</code></li>
-<li><code>refresh_token</code></li>
-<li><code>scope</code></li>
-</ul>
-<h1>Authorizing first-party apps</h1>
-<p>If you're authorising a trusted app of your own there's no need for such a long road to get an access token, you only need to ask the user to provide a username/email &amp; password in order for the app to get an access token. This type of grants is called <code>Password grant</code>.</p>
-<p>You need to check your database to grab the password client created by Passport.</p>
-<p>To get an access token for a first-party app you need to make a <code>POST</code> request to <code>http://your-app.com/oauth/token</code> with the following parameters:</p>
-<ul>
-<li><code>grant_type</code>: <code>password</code></li>
-<li><code>client_id</code>:</li>
-<li><code>client_secret</code></li>
-<li><code>username</code></li>
-<li><code>password</code></li>
-<li><code>scope</code></li>
-</ul>
-<p>The response is going to be a JSON object with the following keys:</p>
-<pre><code class="language-json">{
-    "token_type": "Bearer",
-    "expires_in": 3155673600,
-    "access_token": "eyJ0eXAiOiJKV1QiL....",
-    "refresh_token": "XslU/K6lFZShiGxF1dPyC4ztIXBx9W1g..."
+namespace App\Http\Controllers;
+
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+
+class ProjectController extends Controller
+{
+    public function __construct()
+    {
+        $this-&gt;middleware(function ($request, $next) {
+            $this-&gt;projects = Auth::user()-&gt;projects;
+
+            return $next($request);
+        });
+    }
 }</code></pre>
-<h1>Authorizing an app manually</h1>
-<p>Passport is also shipped with a way to create access tokens manually, this is useful in multiple situations such as testing during development or maybe if you allow authenticating users on a third-party application via their mobile number instead of a login web form.</p>
-<p>For example, a third party app may show a phone field for the user, when filled a service on your server sends an SMS to that number with an access code, the user will input this code upon reception in which the app will exchange with an access token from your server.</p>
-<p>To create an access token:</p>
-<pre><code class="language-php">$token = $user-&gt;createToken('Pizza App', ['place-orders', 'list-orders'])-&gt;accessToken;</code></pre>
             
     <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
 

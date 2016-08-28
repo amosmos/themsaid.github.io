@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1fce0fe7-cf77-4fa0-9aa0-42a95577da1f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-3-20150131/index.html" afterPath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-3-20150131/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-4-20150131/index.html" afterPath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-4-20150131/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/acceptance-testing-laravel-vue-20160517/index.html" afterPath="$PROJECT_DIR$/public/acceptance-testing-laravel-vue-20160517/index.html" />
@@ -51,12 +50,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="blog_post_base.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/content/_includes/blog_post_base.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-              <folding />
+      <file leaf-file-name="2016-05-06-magic-behind-laravel-valet.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/content/_blog/2016-05-06-magic-behind-laravel-valet.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="0">
+                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="3" />
+                <folding>
+                  <marker date="1462828788000" expanded="true" signature="2413:2453" placeholder="{&quot;domain&quot;: &quot;dev&quot;...}" />
+                  <marker date="1462828788000" expanded="true" signature="6928:7054" placeholder="{&quot;domain&quot;: &quot;dev&quot;...}" />
+                  <marker date="1462828788000" expanded="true" signature="6964:7052" placeholder="[...]" />
+                </folding>
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -231,7 +237,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="_includes" />
+              <option name="myItemId" value="_blog" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -407,11 +413,12 @@
       <workItem from="1471002269019" duration="3000" />
       <workItem from="1471104123985" duration="7000" />
       <workItem from="1471187019004" duration="100000" />
+      <workItem from="1472208958113" duration="6000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19100000" />
+    <option name="totallyTimeSpent" value="19106000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="745" extended-state="6" />
@@ -457,13 +464,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/illuminate/view/View.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="65" column="28" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/illuminate/view/Factory.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="353">
@@ -685,7 +685,6 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="112">
             <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -738,7 +737,6 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="80">
             <caret line="5" column="9" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="9" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -748,11 +746,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="21" column="31" selection-start-line="0" selection-start-column="0" selection-end-line="178" selection-end-column="5" />
-          <folding>
-            <marker date="1460831256000" expanded="true" signature="97:383" placeholder="..." />
-            <marker date="1460831256000" expanded="true" signature="107:337" placeholder="..." />
-            <marker date="1460831256000" expanded="true" signature="411:13573" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -760,9 +753,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1460831256000" expanded="true" signature="0:119" placeholder="/*...*/" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -770,23 +760,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
           <caret line="45" column="19" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="19" />
-          <folding>
-            <marker date="1468100579000" expanded="true" signature="21:2559" placeholder="..." />
-            <marker date="1468100579000" expanded="true" signature="28:746" placeholder="..." />
-            <marker date="1468100579000" expanded="true" signature="754:2551" placeholder="..." />
-            <marker date="1468100579000" expanded="true" signature="779:1567" placeholder="..." />
-            <marker date="1468100579000" expanded="true" signature="810:1431" placeholder="..." />
-            <marker date="1468100579000" expanded="true" signature="854:896" placeholder="..." />
-            <marker date="1468100579000" expanded="true" signature="952:1420" placeholder="..." />
-            <marker date="1468100579000" expanded="true" signature="985:1093" placeholder="..." />
-            <marker date="1468100579000" expanded="true" signature="1455:1560" placeholder="..." />
-            <marker date="1468100579000" expanded="true" signature="1612:2008" placeholder="..." />
-            <marker date="1468100579000" expanded="true" signature="1634:1964" placeholder="{...}" />
-            <marker date="1468100579000" expanded="true" signature="1773:1958" placeholder="{...}" />
-            <marker date="1468100579000" expanded="true" signature="2017:2543" placeholder="..." />
-            <marker date="1468100579000" expanded="true" signature="2050:2384" placeholder="{...}" />
-            <marker date="1468100579000" expanded="true" signature="2127:2206" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -794,9 +767,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-          <folding>
-            <marker date="1460831256000" expanded="true" signature="23:264" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -805,7 +775,6 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="0">
             <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="3" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -815,7 +784,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
           <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-          <folding />
+          <folding>
+            <marker date="1460831256000" expanded="true" signature="44:705" placeholder="..." />
+            <marker date="1460831256000" expanded="true" signature="294:703" placeholder="..." />
+            <marker date="1460831256000" expanded="true" signature="339:496" placeholder="..." />
+            <marker date="1460831256000" expanded="true" signature="593:692" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/_blog/2016-05-06-magic-behind-laravel-valet.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="3" />
+            <folding>
+              <marker date="1462828788000" expanded="true" signature="2413:2453" placeholder="{&quot;domain&quot;: &quot;dev&quot;...}" />
+              <marker date="1462828788000" expanded="true" signature="6928:7054" placeholder="{&quot;domain&quot;: &quot;dev&quot;...}" />
+              <marker date="1462828788000" expanded="true" signature="6964:7052" placeholder="[...]" />
+            </folding>
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
