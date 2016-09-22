@@ -5,7 +5,7 @@ post::title: Laravel core team changes how you access sessions in a controller c
 post::brief: 
 ---
 
-Back in laravel 5.2 a developer was able to interact with the session directly in a controller constructor, however this has changed in laravel 5.3.
+Back in laravel 5.2 developers were able to interact with the session directly in a controller constructor, however this has changed in laravel 5.3.
 
 The difference between how 5.3 & 5.2 handle an incoming request is that in 5.2 the request goes through 3 pipelines:
 

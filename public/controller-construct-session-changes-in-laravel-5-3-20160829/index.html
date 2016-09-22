@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
 
-    <title>themsaid - Taylor Otwell's Introduction in laracon 2016</title>
+    <title>themsaid Controller Construct Session Changes in Laravel 5.3</title>
 
     <link href="http:/themsaid.github.io/feed.rss" rel="alternate" type="application/rss+xml" title="Mohamed Said - themsaid"/>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
@@ -23,17 +23,32 @@
             
     <a href="/">Back to home</a>
 
-    <h1 class="blog-post-title">Taylor Otwell's Introduction in laracon 2016</h1>
+    <h1 class="blog-post-title">Controller Construct Session Changes in Laravel 5.3</h1>
 
-                <iframe src="https://player.vimeo.com/video/176598446" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-<p><a href="https://vimeo.com/176598446">Taylor Otwell&#039;s Introduction from laracon 2016</a> from <a href="https://vimeo.com/user54858035">Mohamed Said</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+                <p>Back in laravel 5.2, a developer was able to interact with the session directly in a controller constructor. However, this has changed in laravel 5.3.</p>
+<p>The difference between how the 5.3 &amp; 5.2 handle an incoming request is that in 5.2 the request goes through 3 pipelines:</p>
+<ol>
+<li>The global middleware pipeline</li>
+<li>The route middleware pipeline</li>
+<li>The controller middleware pipeline</li>
+</ol>
+<p>In 5.3 the request goes through only 2 Pipelines:</p>
+<ol>
+<li>The global middleware pipeline</li>
+<li>The route &amp; controller middleware in 1 stack</li>
+</ol>
+<p>In this post I wrote for <a href="https://laravel-news.com">Laravel News</a> I explain the effect of this difference and how to deal with it:</p>
+<p><a href="https://laravel-news.com/2016/08/controller-construct-session-changes-in-laravel-5-3/"></p>
+<img src="http://s10.postimg.org/gyz46kb09/Screen_Shot_2016_09_22_at_9_11_17_AM.png" width="100%">
+<p></a></p>
+<p><a href="https://laravel-news.com/2016/08/controller-construct-session-changes-in-laravel-5-3/">https://laravel-news.com/2016/08/controller-construct-session-changes-in-laravel-5-3/</a></p>
             
     <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
 
     <div class="text-center">
         <a href="https://twitter.com/share"
            class="twitter-share-button"
-           data-text="Taylor Otwell&#039;s Introduction in laracon 2016"
+           data-text="Controller Construct Session Changes in Laravel 5.3"
            data-via="themsaid">Tweet</a>
         &nbsp&nbsp&nbsp
         <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
