@@ -6,6 +6,21 @@
         <link>http:/themsaid.github.io/</link>
         <atom:link href="http:/themsaid.github.io/feed.xml" rel="self" type="application/rss+xml" />
                 <item>
+            <title>Controller Construct Session Changes in Laravel 5.3</title>
+            <description>Back in laravel 5.2, a developer was able to interact with the session directly in a controller constructor. However, this has changed in laravel 5.3.</description>
+            <link>http:/themsaid.github.io/controller-construct-session-changes-in-laravel-5-3-20160829/</link>
+        </item>
+                <item>
+            <title>Learn about Grant Types in Laravel Passport</title>
+            <description>Laravel Passport is a full OAuth2 server implementation; it was built to make it easy to apply authentication over an API for laravel-based web applications.</description>
+            <link>http:/themsaid.github.io/laravel-passport-grant-types-20160824/</link>
+        </item>
+                <item>
+            <title>Laravel 5.3 Notifications &ndash; Easily send quick updates</title>
+            <description>Laravel Notifications is an all new feature coming to Laravel 5.3 that allows you to make quick notification updates through services like Slack, SMS, Email, and more. Let&#8217;s see how easy it is to build and send a notification using this new feature.</description>
+            <link>http:/themsaid.github.io/laravel-notifications-easily-send-quick-updates-through-slack-sms-email-20160809/</link>
+        </item>
+                <item>
             <title>Taylor Otwell&#039;s Introduction in laracon 2016</title>
             <description>Taylor Otwell&#039;s gave me a shout out during his talk in laracon 2016</description>
             <link>http:/themsaid.github.io/taylor-otwells-intro-laracon-2016-20160728/</link>
