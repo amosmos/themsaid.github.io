@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid - Building my first iOS app: Part 5</title>
+
+    <link href="http:/themsaid.github.io/feed.rss" rel="alternate" type="application/rss+xml" title="Mohamed Said - themsaid"/>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">Building my first iOS app: Part 5</h1>
+
+    
+    <p>In the first 4 parts of the series we added the following features to the app:</p>
+<ol>
+<li>User can view the list of sections</li>
+<li>User can add a new section</li>
+<li>User can edit sections</li>
+<li>User can delete sections</li>
+<li>Data is saved on the device so that it'll get loaded correctly even if the app was terminated</li>
+</ol>
+<h2>Using the collection view controller</h2>
+<p>In all the previous views we used the table view, now let's play around with the Collection View Controller.</p>
+<p>Open Main.storyboard and add a new Collection View Controller to the canvas.</p>
+<p>Click on the view controller, open the attributes inspector, and change the Controller title to &quot;Section Items&quot;.</p>
+<p>Click on the Collection View, and in the attributes inspector change the background to White Colour. Also in the side inspector, set the Cell Width and Height to 250.</p>
+<p>Open the identity inspector and add &quot;ItemsViewController&quot; to the class field.</p>
+<p>Add a new Navigation Controller to the canvas, delete the accompanied table view controller, and build a segue between the new Navigation controller and the Collection controller and select &quot;root view controller&quot; from the menu. Now the collection view is on the top of the stack of views this navigation controller has.</p>
+<p>Create a new swift file and call it &quot;Item.swift&quot;, save the file under the Models group.</p>
+<p>Add the following the newly created Item.swift file:</p>
+<pre><code class="language-swift">class Item: NSObject, NSCoding{
+var name = ""
+var imageName: String
+
+init(name: String, imageName: String){
+self.name = name
+self.imageName = imageName
+
+super.init()
+}
+
+func encodeWithCoder(aCoder: NSCoder) {
+aCoder.encodeObject(name, forKey: "name")
+aCoder.encodeObject(imageName, forKey: "imageName")
+}
+
+required init(coder aDecoder: NSCoder) {
+name = aDecoder.decodeObjectForKey("name") as String
+imageName = aDecoder.decodeObjectForKey("imageName") as String
+super.init()
+}
+}</code></pre>
+<p>Create a new iOS Cocoa Touch Class file inside the controllers group and name it &quot;ItemsViewController&quot; and make it extend the &quot;UICollectionViewController&quot; class.</p>
+<pre><code class="language-swift">class ItemsViewController: UICollectionViewController {
+var section: Section!
+
+override func viewDidLoad() {
+super.viewDidLoad()
+
+title = "\(section.name) items"
+}
+
+override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -&gt; Int {
+return 5
+}
+
+override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -&gt; UICollectionViewCell {
+let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Item", forIndexPath: indexPath) as UICollectionViewCell
+
+return cell
+}
+}</code></pre>
+<h3>Making the link</h3>
+<p>Create a new segue between the prototype cell of the Clozet Scene and the Navigation controller of the Items scene, choose &quot;show&quot; from the dropdown.</p>
+<p>Click on the segue and in the attributes inspector add &quot;ShowSection&quot; as the identifier.</p>
+<p>Also click on the prototype cell of the collection view add the Reuse identifier &quot;Item&quot;</p>
+<p>Now open SectionsViewCotroller, and change the prepareForSegue method to be like this:</p>
+<pre><code class="language-swift">override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+if segue.identifier == "AddSection" || segue.identifier == "EditSection"{
+let navigationController = segue.destinationViewController as UINavigationController
+let controller = navigationController.topViewController as AddEditSectionViewController
+
+controller.delegate = self
+
+if segue.identifier == "AddSection"{
+controller.section = nil
+}else if segue.identifier == "EditSection"{
+let cell = sender as UITableViewCell
+let indexPath = self.tableView.indexPathForCell(cell)!
+
+controller.section = dataSource.sections[indexPath.row]
+}
+
+}else if segue.identifier == "ShowSection"{
+let controller = segue.destinationViewController as ItemsViewController
+
+let cell = sender as UITableViewCell
+let indexPath = self.tableView.indexPathForCell(cell)!
+
+controller.section = dataSource.sections[indexPath.row]
+}
+}</code></pre>
+<p>There's one final step to make this installation complete, we need to add the items variable to the Section object, it'll hold the items the section contains.</p>
+<p>Open Section.swift and modify the file as follow:</p>
+<pre><code class="language-swift">class Section: NSObject, NSCoding{
+var name = ""
+var items = [Item]()
+
+init(name: String){
+self.name = name
+
+super.init()
+}
+
+func encodeWithCoder(aCoder: NSCoder) {
+aCoder.encodeObject(name, forKey: "name")
+aCoder.encodeObject(items, forKey: "items")
+}
+
+required init(coder aDecoder: NSCoder) {
+name = aDecoder.decodeObjectForKey("name") as String
+items = aDecoder.decodeObjectForKey("items") as [Item]
+super.init()
+}
+}</code></pre>
+<p>Before you can run the app, open the iOS simulator and select &quot;Reset content and settings&quot; from the iOS Simulator menu.</p>
+<p>Now run the app, add new sections, click on any of them and a screen will show up with the navigation bar having the section name.</p>
+<p>Now running the app and clicking on a section will show 5 blue boxes each represents a cell in our UICollectionView.</p>
+<h2>Adding items to the section</h2>
+<p>In the sections items scene, add a new bar button at the right side of the navigation bar of the view.</p>
+<p>From the attributes controller, choose &quot;Add&quot; as the Identifier value.</p>
+<p>Now add a new navigation controller with its table view controller, and draw a segue between the newly added bar button and the navigation controller and select &quot;present modally&quot;.</p>
+<p>Now clicking on the button will open the new table view under the navigation controller we just added.</p>
+<p>Select the newly created table view controller, and from the attributes inspector set the title to &quot;Add/Edit Item&quot;, navigate to the identity inspector and set the Class to &quot;AddEditItemViewController&quot;.</p>
+<p>Select the table view inside the scene and from the attributes inspector set Content to &quot;Static Cells&quot; and Style to &quot;Grouped&quot;.</p>
+<p>Now select the &quot;Table View Section&quot; from the Document Outline, and set the Rows to 2.</p>
+<p>Now we have to table rows inside the view, for the first row add a text field. Click on the field and add a placeholder &quot;Add Item name&quot;, also select the &quot;None&quot; border style. Add constrains so that it fills the whole row</p>
+<h3>Creating the view controller class</h3>
+<p>Now let's create that new AddEditItemViewController class, add a new Cocoa Touch class in the controllers group and make it extend the UITableViewController.</p>
+<p>Add a new outlet inside AddEditItemViewController and make the class look like this:</p>
+<pre><code class="language-swift">class AddEditItemViewController: UITableViewController {
+@IBOutlet  weak var textField: UITextField!
+
+override func viewDidLoad() {
+super.viewDidLoad()
+tableView.rowHeight = 44
+
+}
+}</code></pre>
+<p>Connect the outlet to the text field of the Add/Edit item view in the storyboard.</p>
+<hr />
+<h1>stop.restart()</h1>
+<p>After moving through the process of building Clozet I found out that there are some missing elements that I don't know about yet, like how to interact with the Camera for example, and so I decided I'll hold it for a while and start following a couple of other tutorials until I reach some solid understanding of the process of building an app, and then I'll come later and finish this app.</p>
+
+    <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
+
+    <div class="text-center">
+        <a href="https://twitter.com/share"
+           class="twitter-share-button"
+           data-text="Building my first iOS app: Part 5"
+           data-via="themsaid">Tweet</a>
+        &nbsp&nbsp&nbsp
+        <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
+           class="twitter-mention-button"
+           data-related="themsaid">Tweet to @themsaid</a>
+    </div>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s16.postimg.org/5nstumeut/Toim_KRp_Y.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer at Laravel.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs');</script>
+<script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-61501903-1', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>

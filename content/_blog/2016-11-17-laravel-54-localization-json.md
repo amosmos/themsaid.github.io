@@ -9,7 +9,7 @@ post::brief: Laravel 5.4 introduces a new method of localization, it works by re
 In previous version of Laravel, localization was done by converting language keys to plain values based on the application current locale, this was done by using a syntax like this:
 
 ```php
-{{ trans('catalogue.products.save') }}
+trans('catalogue.products.save')
 ```
 
 Using this key laravel will start looking for a `catalogue.php` file inside your `resources/lang/en` directory, and then look into the file for a `save` key that looks like this:
@@ -27,7 +27,7 @@ Using this key laravel will start looking for a `catalogue.php` file inside your
 This is fine for simple language strings, but it gets really nasty when you need to translate a paragraph or a sentence:
 
 ```php
-{{ trans('catalogue.error_product_must_have_atleast_one_size') }}
+trans('catalogue.error_product_must_have_atleast_one_size')
 ```
 
 Coming up with a descriptive key name for the translation is challenging, because you don't want to change that key in the future and you also want to know what this key is about when you look at it out of its context.
@@ -35,7 +35,7 @@ Coming up with a descriptive key name for the translation is challenging, becaus
 ### What's new in Laravel 5.4
 
 ```php
-{{ __("A product must have at least one size") }}
+__("A product must have at least one size")
 ```
 
 That's what's new, just write translation lines in your preferred language and laravel will look for translations in a `resources/lang/de.json` file, the file would look like this:
@@ -49,7 +49,7 @@ That's what's new, just write translation lines in your preferred language and l
 If a translation line wasn't found in the language file the same key is returned:
 
 ```php
-{{ __("A key that doesn't exist") }}
+__("A key that doesn't exist")
 
 // Will print "A key that doesn't exist"
 ```
@@ -57,7 +57,7 @@ If a translation line wasn't found in the language file the same key is returned
 And here's how you can pass parameters:
 
 ```php
-{{ __('Product ":p" must be member of :g group.', [$product->name, $group->name]) }}
+__('Product ":p" must be member of :g group.', [$product->name, $group->name])
 ```
 
 It's also worth mentioning that parameters replacement will also happen if the key wasn't found in a language file, that means you don't really have to create a language file for your application's main language.

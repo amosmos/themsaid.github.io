@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid </title>
+
+    <link href="http:/themsaid.github.io/feed.rss" rel="alternate" type="application/rss+xml" title="Mohamed Said - themsaid"/>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">Laravel core team changes how you access sessions in a controller constructor</h1>
+
+                <p>Back in laravel 5.2 developers were able to interact with the session directly in a controller constructor, however this has changed in laravel 5.3.</p>
+<p>The difference between how 5.3 &amp; 5.2 handle an incoming request is that in 5.2 the request goes through 3 pipelines:</p>
+<ol>
+<li>The global middleware pipleline</li>
+<li>The route middleware pipeline</li>
+<li>The controller middleware pipeline</li>
+</ol>
+<p>By default the global middlware only contains a check for maintenance mode, the route middleware is that you assign to a route in your routes.php file, and by default a web group is assigned to all web routes that contains several middlware including the middleware that starts the session.</p>
+<p>And then finally Laravel instantiates your controller to check for controller middleware, at this point the request is all set up during the first and second pipelines, that's why we were able to use sessions and auth in the controller constructor, because the request is totally ready for it.</p>
+<p>In 5.3 the request goes through only 2 Pipelines:</p>
+<ol>
+<li>The global middleware pipeline</li>
+<li>The route &amp; controller middleware in 1 stack</li>
+</ol>
+<p>So laravel collects all route specific middlewares first before running the request through the pipeline, and while collecting the controller middleware an instance of the controller is created, thus the constructor is called, however at this point the request isn't ready yet, and that's where the change in behaviour you notice in 5.3 exists.</p>
+<p>The reason for this change is as <a href="https://github.com/laravel/framework/issues/15072#issuecomment-242769373">Taylor described</a>:</p>
+<blockquote>
+<p>It's very bad to use session or auth in your constructor as no request has happened yet and session and auth are INHERENTLY tied to an HTTP request. You should receive this request in an actual controller method which you can call multiple times with multiple different requests. By forcing your controller to resolve session or auth information in the constructor you are now forcing your entire controller to ignore the actual incoming request which can cause significant problems when testing, etc.</p>
+</blockquote>
+<h3>Using sessions in your constructor in 5.3</h3>
+<p>Maybe it was a bad practise to use the constructor of the controller to access session variables, however it looks like a good chunk of laravel developers were using this approach and considered the constructor as an inline middeware where they can check if the user can access certain methods in this controller or not.</p>
+<p>So the core team came up with a nice solution for this matter, it's described in the upgrade guide as follow:</p>
+<blockquote>
+<p>As an alternative, you may define a Closure based middleware directly in your controller's constructor. Before using this feature, make sure that your application is running Laravel 5.3.4 or above:</p>
+</blockquote>
+<p>Here's the example from the docs:</p>
+<pre><code class="language-php">&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+
+class ProjectController extends Controller
+{
+    public function __construct()
+    {
+        $this-&gt;middleware(function ($request, $next) {
+            $this-&gt;projects = Auth::user()-&gt;projects;
+
+            return $next($request);
+        });
+    }
+}</code></pre>
+            
+    <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
+
+    <div class="text-center">
+        <a href="https://twitter.com/share"
+           class="twitter-share-button"
+           data-text="Laravel core team changes how you access sessions in a controller constructor"
+           data-via="themsaid">Tweet</a>
+        &nbsp&nbsp&nbsp
+        <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
+           class="twitter-mention-button"
+           data-related="themsaid">Tweet to @themsaid</a>
+    </div>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s16.postimg.org/5nstumeut/Toim_KRp_Y.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer at Laravel.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs');</script>
+<script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-61501903-1', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
