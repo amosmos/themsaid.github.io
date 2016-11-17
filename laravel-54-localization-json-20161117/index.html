@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid New in Laravel 5.4 - Localization using JSON files</title>
+
+    <link href="http:/themsaid.github.io/feed.rss" rel="alternate" type="application/rss+xml" title="Mohamed Said - themsaid"/>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">New in Laravel 5.4 - Localization using JSON files</h1>
+
+                <p>In previous version of Laravel, localization was done by converting language keys to plain values based on the application current locale, this was done by using a syntax like this:</p>
+<pre><code class="language-php">trans('catalogue.products.save')</code></pre>
+<p>Using this key laravel will start looking for a <code>catalogue.php</code> file inside your <code>resources/lang/en</code> directory, and then look into the file for a <code>save</code> key that looks like this:</p>
+<pre><code class="language-php">[
+    // ...
+    "products" =&gt; [
+        "save" =&gt; "Save Product"
+    ]
+    // ...
+]</code></pre>
+<p>This is fine for simple language strings, but it gets really nasty when you need to translate a paragraph or a sentence:</p>
+<pre><code class="language-php">trans('catalogue.error_product_must_have_atleast_one_size')</code></pre>
+<p>Coming up with a descriptive key name for the translation is challenging, because you don't want to change that key in the future and you also want to know what this key is about when you look at it out of its context.</p>
+<h3>What's new in Laravel 5.4</h3>
+<pre><code class="language-php">__("A product must have at least one size")</code></pre>
+<p>That's what's new, just write translation lines in your preferred language and laravel will look for translations in a <code>resources/lang/de.json</code> file, the file would look like this:</p>
+<pre><code class="language-json">{
+    "A product must have at least one size": "Das Produkt muss mindestens eine Größe haben."
+}</code></pre>
+<p>If a translation line wasn't found in the language file the same key is returned:</p>
+<pre><code class="language-php">__("A key that doesn't exist")
+
+// Will print "A key that doesn't exist"</code></pre>
+<p>And here's how you can pass parameters:</p>
+<pre><code class="language-php">__('Product ":p" must be member of :g group.', [$product-&gt;name, $group-&gt;name])</code></pre>
+<p>It's also worth mentioning that parameters replacement will also happen if the key wasn't found in a language file, that means you don't really have to create a language file for your application's main language.</p>
+<h3>About saving translations in JSON files</h3>
+<p>Saving language lines in JSON format makes it really easy for you to manage the translations using your IDE, in one file, you only need to search for the line that matches the one you see in the interface and update it as you wish.</p>
+<p>It also opens the door for package maintainers to build easy tools to handle translations.</p>
+<h3>Final Thoughts</h3>
+<p>This is an early draft of the functionality, I'm really interested to know what you think about it and see if we can make it even better.</p>
+            
+    <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
+
+    <div class="text-center">
+        <a href="https://twitter.com/share"
+           class="twitter-share-button"
+           data-text="New in Laravel 5.4 - Localization using JSON files"
+           data-via="themsaid">Tweet</a>
+        &nbsp&nbsp&nbsp
+        <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
+           class="twitter-mention-button"
+           data-related="themsaid">Tweet to @themsaid</a>
+    </div>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s16.postimg.org/5nstumeut/Toim_KRp_Y.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer at Laravel.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs');</script>
+<script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-61501903-1', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
