@@ -57,7 +57,7 @@ The new thing here is that parameter replacement will happen even if the languag
 
 In version 5.4, Laravel introduces a new enhancement to the `@trans` blade directive, you'll be able to do the following.
 
-```
+```html
 @trans(['name' => $user->name, 'unread' => $notifications->count])
 	Hello :name, you have :unread messages.
 @endtrans
