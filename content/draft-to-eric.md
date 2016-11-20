@@ -1,61 +1,66 @@
 ---
 view::extends: _includes.blog_post_base
 view::yields: post_body
-post::title: Laravel core team changes how you access sessions in a controller constructor
-post::brief: 
+post::title: Coming up in Laravel 5.4, JSON-based translator
 ---
 
-Back in laravel 5.2 developers were able to interact with the session directly in a controller constructor, however this has changed in laravel 5.3.
+One of the most wanted requests we receive at Laravel is introducing better support for multi-lingual web applications, there are already packages out there that add some nice functionality to laravel for better handling of multilingual projects requirements, but one of the painful issues when building such applications is managing translation keys.
 
-The difference between how 5.3 & 5.2 handle an incoming request is that in 5.2 the request goes through 3 pipelines:
+In previous versions of Laravel you could insert translated lines using the `trans()` or `trans_choice()` helper functions:
 
-1. The global middleware pipleline
-2. The route middleware pipeline
-3. The controller middleware pipeline
+```php
+trans('auth.verification_number_instructions')
+```
 
-By default the global middlware only contains a check for maintenance mode, the route middleware is that you assign to a route in your routes.php file, and by default a web group is assigned to all web routes that contains several middlware including the middleware that starts the session.
-
-And then finally Laravel instantiates your controller to check for controller middleware, at this point the request is all set up during the first and second pipelines, that's why we were able to use sessions and auth in the controller constructor, because the request is totally ready for it.
-
-In 5.3 the request goes through only 2 Pipelines:
-
-1. The global middleware pipeline
-2. The route & controller middleware in 1 stack
-
-So laravel collects all route specific middlewares first before running the request through the pipeline, and while collecting the controller middleware an instance of the controller is created, thus the constructor is called, however at this point the request isn't ready yet, and that's where the change in behaviour you notice in 5.3 exists.
-
-The reason for this change is as [Taylor described](https://github.com/laravel/framework/issues/15072#issuecomment-242769373):
-
-> It's very bad to use session or auth in your constructor as no request has happened yet and session and auth are INHERENTLY tied to an HTTP request. You should receive this request in an actual controller method which you can call multiple times with multiple different requests. By forcing your controller to resolve session or auth information in the constructor you are now forcing your entire controller to ignore the actual incoming request which can cause significant problems when testing, etc.
-
-### Using sessions in your constructor in 5.3
-
-Maybe it was a bad practise to use the constructor of the controller to access session variables, however it looks like a good chunk of laravel developers were using this approach and considered the constructor as an inline middeware where they can check if the user can access certain methods in this controller or not.
-
-So the core team came up with a nice solution for this matter, it's described in the upgrade guide as follow:
-
-> As an alternative, you may define a Closure based middleware directly in your controller's constructor. Before using this feature, make sure that your application is running Laravel 5.3.4 or above:
-
-Here's the example from the docs:
+And then you have to include translations for that key in every language your project supports, so for english you'll need to have a `resources/lang/en/auth.php` file that looks like this:
 
 ```php
 <?php
 
-namespace App\Http\Controllers;
-
-use App\User;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
-
-class ProjectController extends Controller
-{
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            $this->projects = Auth::user()->projects;
-
-            return $next($request);
-        });
-    }
-}
+return [
+	'auth.verification_number_instructions' => 'Please enter your 4-digit verification number:'
+];
 ```
+
+For small projects the number of translation keys are limited so it's not that hard to manage it; however, for large projects coming up with translation keys that are easy to understand and remember is a serious pain, and for that reason Laravel 5.4 is shipped with a new translation helper function:
+
+```php
+__("Please enter your 4-digit verification number:")
+```
+
+This new function will look for a `resources/lang/en.json` file, decode it, and bring the corresponding translation value for the line provided based on the application's current language. The json file looks like this:
+
+```json
+{"Please enter your 4-digit verification number:": "men fadlak adkhel raqam al tareef"}
+```
+
+This new feature will allow developers to use plain language lines while writing the application, and defer the need to manage translations to a later stage.
+
+As for why we use JSON files, the decision is based on the fact that JSON is easy to read by humans and also computer software, we believe that having translations stored in JSON opens the door for package developers to create better tools for handling application translations.
+
+## Passing parameters to the translator
+
+Using the `__()` method you'll be able to pass parameters to the translator just like we used to do in previous versions of laravel:
+
+```php
+__(
+	"Hello :name, you have :unread messages", 
+	['name' => $user->name, 'unread' => $notifications->count]
+)
+```
+
+The new thing here is that parameter replacement will happen even if the language line wasn't found, that means you don't even have to build a translation file for your applications main language. So in the above example even if there's no `en.json` file, the output of the method will be something like:
+
+> Hello Mohamed, you have 23 messages.
+
+## Translation lines in Blade
+
+In version 5.4, Laravel introduces a new enhancement to the `@trans` blade directive, you'll be able to do the following.
+
+```
+@trans(['name' => $user->name, 'unread' => $notifications->count])
+	Hello :name, you have :unread messages.
+@endtrans
+```
+
+We believe that this syntax ensures better readability for long translation lines.
