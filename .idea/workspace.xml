@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1fce0fe7-cf77-4fa0-9aa0-42a95577da1f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/content/draft.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/_blog/2016-11-17-laravel-54-localization-json.md" afterPath="$PROJECT_DIR$/content/_blog/2016-11-17-laravel-54-localization-json.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-3-20150131/index.html" afterPath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-3-20150131/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-4-20150131/index.html" afterPath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-4-20150131/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/acceptance-testing-laravel-vue-20160517/index.html" afterPath="$PROJECT_DIR$/public/acceptance-testing-laravel-vue-20160517/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/better-readability-enumerators-php-20160420/index.html" afterPath="$PROJECT_DIR$/public/better-readability-enumerators-php-20160420/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/blog-page/1/index.html" afterPath="$PROJECT_DIR$/public/blog-page/1/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/building-interactive-ios-interface-with-swift-20150401/index.html" afterPath="$PROJECT_DIR$/public/building-interactive-ios-interface-with-swift-20150401/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/building-my-first-ios-app-part-5-20150201/index.html" afterPath="$PROJECT_DIR$/public/building-my-first-ios-app-part-5-20150201/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/building-testing-interactive-console-20160409/index.html" afterPath="$PROJECT_DIR$/public/building-testing-interactive-console-20160409/index.html" />
@@ -15,6 +16,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/deployment-via-git-and-bitbucket-20150318/index.html" afterPath="$PROJECT_DIR$/public/deployment-via-git-and-bitbucket-20150318/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/draft-to-eric/index.html" afterPath="$PROJECT_DIR$/public/draft-to-eric/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/faster-commits-using-bash-functions-20130930/index.html" afterPath="$PROJECT_DIR$/public/faster-commits-using-bash-functions-20130930/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/feed.rss" afterPath="$PROJECT_DIR$/public/feed.rss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/file-and-directory-permissions-20131225/index.html" afterPath="$PROJECT_DIR$/public/file-and-directory-permissions-20131225/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/iOS-development-first-trial-20150129/index.html" afterPath="$PROJECT_DIR$/public/iOS-development-first-trial-20150129/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
@@ -22,6 +24,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/ios-sidemenu-3d-rotation-reveal-effect-20150402/index.html" afterPath="$PROJECT_DIR$/public/ios-sidemenu-3d-rotation-reveal-effect-20150402/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/laravel-5-2-23-20160305/index.html" afterPath="$PROJECT_DIR$/public/laravel-5-2-23-20160305/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/laravel-5-3-20160318/index.html" afterPath="$PROJECT_DIR$/public/laravel-5-3-20160318/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/laravel-54-localization-json-20161117/index.html" afterPath="$PROJECT_DIR$/public/laravel-54-localization-json-20161117/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/laravel-api-3rd-party-20160327/index.html" afterPath="$PROJECT_DIR$/public/laravel-api-3rd-party-20160327/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/laravel-mysql-json-colum-fast-lookup-20160709/index.html" afterPath="$PROJECT_DIR$/public/laravel-mysql-json-colum-fast-lookup-20160709/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/laravel-notifications-easily-send-quick-updates-through-slack-sms-email-20160809/index.html" afterPath="$PROJECT_DIR$/public/laravel-notifications-easily-send-quick-updates-through-slack-sms-email-20160809/index.html" />
@@ -51,27 +54,12 @@
   <component name="FavoritesManager">
     <favorites_list name="themsaid" />
   </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="d0691887eec79e5b980bb8b98cd088cf3585e533.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_cache/d0691887eec79e5b980bb8b98cd088cf3585e533.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/content/_blog/2014-12-24-2-my-plan-for-2015.blade.php" />
         <option value="$PROJECT_DIR$/content/_blog/2015-01-29-iOS-development-first-trial.blade.php" />
         <option value="$PROJECT_DIR$/content/_blog/2015-01-30-ios-development-building-the-first-application.blade.php" />
         <option value="$PROJECT_DIR$/content/_blog/2015-01-31-Building my first iOS App-Part-3.blade.php" />
@@ -122,6 +110,7 @@
         <option value="$PROJECT_DIR$/vendor/themsaid/katana-core/src/Commands/BuildCommand.php" />
         <option value="$PROJECT_DIR$/vendor/themsaid/katana-core/src/SiteBuilder.php" />
         <option value="$PROJECT_DIR$/_cache/d0691887eec79e5b980bb8b98cd088cf3585e533.php" />
+        <option value="$PROJECT_DIR$/content/_blog/2017-01-02-my-thoughts-on-2016-and-dreams-for-2017.md" />
       </list>
     </option>
   </component>
@@ -216,7 +205,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
+              <option name="myItemId" value="content" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -230,85 +219,11 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
+              <option name="myItemId" value="content" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="themsaid" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="katana-core" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themsaid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themsaid" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themsaid" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="katana-core" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themsaid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themsaid" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themsaid" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="katana-core" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Commands" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themsaid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themsaid" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_cache" />
+              <option name="myItemId" value="_blog" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -376,20 +291,31 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="SearchEverywhereHistoryKey" value="asset&#9;null&#9;null&#10;data_get&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/content/_blog" />
       <recent name="$PROJECT_DIR$/content" />
+      <recent name="$PROJECT_DIR$/content/_blog" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/content/_includes" />
       <recent name="$PROJECT_DIR$/vendor/themsaid/katana-core/src" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
@@ -487,18 +413,19 @@
       <workItem from="1474527272077" duration="1162000" />
       <workItem from="1479391209594" duration="29000" />
       <workItem from="1479391399713" duration="387000" />
+      <workItem from="1483366290975" duration="2755000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20816000" />
+    <option name="totallyTimeSpent" value="23571000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="745" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2375" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2375" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -537,20 +464,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/finder/Finder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="630" column="21" selection-start-line="630" selection-start-column="21" selection-end-line="630" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/SPL_c1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/finder/SplFileInfo.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -816,20 +729,6 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="384">
             <caret line="24" column="83" selection-start-line="24" selection-start-column="83" selection-end-line="24" selection-end-column="83" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/content/_blog/2016-11-17-laravel-54-localization-json.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding>
-              <marker date="1479391699000" expanded="true" signature="1519:1612" placeholder="{&quot;A product must have at least one size&quot;: &quot;Das Produkt muss mindestens eine Größe haben.&quot;...}" />
-            </folding>
           </first_editor>
           <second_editor />
         </state>
@@ -839,33 +738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1458248755000" expanded="false" signature="30:390" placeholder="..." />
-            <marker date="1458248755000" expanded="true" signature="404:3374" placeholder="{...}" />
-            <marker date="1458248755000" expanded="true" signature="414:491" placeholder=" The Symfony console instance. ..." />
-            <marker date="1458248755000" expanded="true" signature="528:595" placeholder=" The view factory instance. ..." />
-            <marker date="1458248755000" expanded="true" signature="632:701" placeholder=" The file system instance. ..." />
-            <marker date="1458248755000" expanded="true" signature="737:819" placeholder=" Katana constructor. ..." />
-            <marker date="1458248755000" expanded="true" signature="882:1079" placeholder="{...}" />
-            <marker date="1458248755000" expanded="true" signature="1088:1162" placeholder=" Handle incoming console requests. ..." />
-            <marker date="1458248755000" expanded="true" signature="1193:1276" placeholder="{...}" />
-            <marker date="1458248755000" expanded="true" signature="1285:1356" placeholder=" Register application commands. ..." />
-            <marker date="1458248755000" expanded="true" signature="1398:1532" placeholder="{...}" />
-            <marker date="1458248755000" expanded="true" signature="1445:1524" placeholder="..." />
-            <marker date="1458248755000" expanded="true" signature="1446:1523" placeholder="..." />
-            <marker date="1458248755000" expanded="true" signature="1541:1631" placeholder=" Create the view factory with a Blade Compiler. ..." />
-            <marker date="1458248755000" expanded="true" signature="1674:2479" placeholder="{...}" />
-            <marker date="1458248755000" expanded="true" signature="1808:1916" placeholder="..." />
-            <marker date="1458248755000" expanded="true" signature="1851:1915" placeholder="..." />
-            <marker date="1458248755000" expanded="true" signature="1989:2311" placeholder="..." />
-            <marker date="1458248755000" expanded="true" signature="2017:2310" placeholder="..." />
-            <marker date="1458248755000" expanded="true" signature="2033:2226" placeholder=" On rendering Blade views we will mute error reporting as ..." />
-            <marker date="1458248755000" expanded="true" signature="2488:2573" placeholder=" Create the Blade Compiler instance. ..." />
-            <marker date="1458248755000" expanded="true" signature="2618:2916" placeholder="{...}" />
-            <marker date="1458248755000" expanded="true" signature="2690:2763" placeholder="..." />
-            <marker date="1458248755000" expanded="true" signature="2925:2992" placeholder=" Register global constants. ..." />
-            <marker date="1458248755000" expanded="true" signature="3035:3372" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -873,21 +745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
           <caret line="73" column="24" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
-          <folding>
-            <marker date="1479391440000" expanded="false" signature="39:327" placeholder="..." />
-            <marker date="1479391440000" expanded="true" signature="363:1876" placeholder="{...}" />
-            <marker date="1479391440000" expanded="true" signature="373:441" placeholder=" The FileSystem instance. ..." />
-            <marker date="1479391440000" expanded="true" signature="477:544" placeholder=" The view factory instance. ..." />
-            <marker date="1479391440000" expanded="true" signature="581:699" placeholder=" BuildCommand constructor. ..." />
-            <marker date="1479391440000" expanded="true" signature="779:908" placeholder="{...}" />
-            <marker date="1479391440000" expanded="true" signature="917:980" placeholder=" Configure the command. ..." />
-            <marker date="1479391440000" expanded="true" signature="1017:1331" placeholder="{...}" />
-            <marker date="1479391440000" expanded="true" signature="1085:1118" placeholder="..." />
-            <marker date="1479391440000" expanded="true" signature="1144:1223" placeholder="..." />
-            <marker date="1479391440000" expanded="true" signature="1249:1323" placeholder="..." />
-            <marker date="1479391440000" expanded="true" signature="1340:1482" placeholder=" Execute the command. ..." />
-            <marker date="1479391440000" expanded="true" signature="1563:1874" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -895,17 +752,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1479391701000" expanded="true" signature="921:1240" placeholder="..." />
-            <marker date="1479391701000" expanded="true" signature="1733:2146" placeholder="..." />
-            <marker date="1479391701000" expanded="true" signature="2366:3362" placeholder="..." />
-            <marker date="1479391701000" expanded="true" signature="3596:3708" placeholder="..." />
-            <marker date="1479391701000" expanded="true" signature="3623:3702" placeholder="..." />
-            <marker date="1479391701000" expanded="true" signature="4249:4680" placeholder="..." />
-            <marker date="1479391701000" expanded="true" signature="4276:4674" placeholder="..." />
-            <marker date="1479391701000" expanded="true" signature="5203:5358" placeholder="..." />
-            <marker date="1479391701000" expanded="true" signature="5230:5352" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -913,10 +759,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1479391644000" expanded="true" signature="469:2409" placeholder="..." />
-            <marker date="1479391644000" expanded="true" signature="477:2405" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -924,11 +766,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1479391644000" expanded="true" signature="346:769" placeholder="..." />
-            <marker date="1479391644000" expanded="true" signature="391:562" placeholder="..." />
-            <marker date="1479391644000" expanded="true" signature="659:758" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -936,10 +773,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1479391701000" expanded="true" signature="291:495" placeholder="..." />
-            <marker date="1479391701000" expanded="false" signature="1531:1541" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -947,10 +780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
           <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding>
-            <marker date="1479391644000" expanded="true" signature="413:4995" placeholder="..." />
-            <marker date="1479391644000" expanded="true" signature="421:4991" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -958,55 +787,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
           <caret line="191" column="32" selection-start-line="191" selection-start-column="32" selection-end-line="191" selection-end-column="32" />
-          <folding>
-            <marker date="1479391674000" expanded="false" signature="30:240" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="259:6254" placeholder="{...}" />
-            <marker date="1479391674000" expanded="true" signature="377:445" placeholder=" The application environment. ..." />
-            <marker date="1479391674000" expanded="true" signature="482:545" placeholder=" The site configurations. ..." />
-            <marker date="1479391674000" expanded="true" signature="578:664" placeholder=" The data included in every view file of a post. ..." />
-            <marker date="1479391674000" expanded="true" signature="699:769" placeholder=" The data to pass to every view. ..." />
-            <marker date="1479391674000" expanded="true" signature="804:887" placeholder=" The directory that contains blade sub views. ..." />
-            <marker date="1479391674000" expanded="true" signature="946:1024" placeholder=" The directory that contains blog posts. ..." />
-            <marker date="1479391674000" expanded="true" signature="1075:1146" placeholder=" Clear the cache before building. ..." />
-            <marker date="1479391674000" expanded="true" signature="1192:1343" placeholder=" SiteBuilder constructor. ..." />
-            <marker date="1479391674000" expanded="true" signature="1458:1797" placeholder="{...}" />
-            <marker date="1479391674000" expanded="true" signature="1806:1879" placeholder=" Build the site from blade views. ..." />
-            <marker date="1479391674000" expanded="true" signature="1909:2838" placeholder="{...}" />
-            <marker date="1479391674000" expanded="true" signature="1996:2100" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="2022:2099" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="2139:2245" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="2165:2244" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="2324:2388" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="2520:2594" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="2687:2831" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="2847:2975" placeholder=" Set a configuration value. ..." />
-            <marker date="1479391674000" expanded="true" signature="3021:3072" placeholder="{...}" />
-            <marker date="1479391674000" expanded="true" signature="3081:3326" placeholder=" Read site configurations based on the current environment. ..." />
-            <marker date="1479391674000" expanded="true" signature="3363:3758" placeholder="{...}" />
-            <marker date="1479391674000" expanded="true" signature="3591:3678" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="3767:3869" placeholder=" Handle non-blog site files. ..." />
-            <marker date="1479391674000" expanded="true" signature="3916:4021" placeholder="{...}" />
-            <marker date="1479391674000" expanded="true" signature="3958:4014" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="4030:4129" placeholder=" Handle blog posts files. ..." />
-            <marker date="1479391674000" expanded="true" signature="4181:4391" placeholder="{...}" />
-            <marker date="1479391674000" expanded="true" signature="4223:4384" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="4240:4304" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="4326:4374" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="4400:4503" placeholder=" Get the site files that will be converted into pages. ..." />
-            <marker date="1479391674000" expanded="true" signature="4541:4968" placeholder="{...}" />
-            <marker date="1479391674000" expanded="true" signature="4578:4761" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="4657:4760" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="4838:4937" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="4977:5085" placeholder=" Read the data of every blog post. ..." />
-            <marker date="1479391674000" expanded="true" signature="5134:5269" placeholder="{...}" />
-            <marker date="1479391674000" expanded="true" signature="5176:5262" placeholder="..." />
-            <marker date="1479391674000" expanded="true" signature="5278:5366" placeholder=" Build array of data to be passed to every view. ..." />
-            <marker date="1479391674000" expanded="true" signature="5406:5642" placeholder="{...}" />
-            <marker date="1479391674000" expanded="true" signature="5651:5724" placeholder=" Build the blog pagination files. ..." />
-            <marker date="1479391674000" expanded="true" signature="5769:5958" placeholder="{...}" />
-            <marker date="1479391674000" expanded="true" signature="5967:6032" placeholder=" Build the blog RSS feed. ..." />
-            <marker date="1479391674000" expanded="true" signature="6070:6252" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1014,7 +794,49 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
           <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1479391701000" expanded="true" signature="1069:1199" placeholder="..." />
+            <marker date="1479391701000" expanded="true" signature="1096:1193" placeholder="..." />
+            <marker date="1479391701000" expanded="true" signature="1987:2124" placeholder="..." />
+            <marker date="1479391701000" expanded="true" signature="2015:2118" placeholder="..." />
+            <marker date="1479391701000" expanded="true" signature="2219:2331" placeholder="..." />
+            <marker date="1479391701000" expanded="true" signature="2246:2325" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/_blog/2016-11-17-laravel-54-localization-json.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="-48">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding>
+              <marker date="1479391699000" expanded="true" signature="1519:1612" placeholder="{&quot;A product must have at least one size&quot;: &quot;Das Produkt muss mindestens eine Größe haben.&quot;...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/_blog/2015-12-31-thoughts-on-2015-and-dreams-for-2016.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-269">
+          <caret line="3" column="82" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="82" />
+          <folding>
+            <marker date="1460831256000" expanded="true" signature="104:234" placeholder="..." />
+            <marker date="1460831256000" expanded="true" signature="262:6230" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/_blog/2017-01-02-my-thoughts-on-2016-and-dreams-for-2017.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="336">
+            <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
