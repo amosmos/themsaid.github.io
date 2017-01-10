@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid </title>
+
+    <link href="http:/themsaid.github.io/feed.rss" rel="alternate" type="application/rss+xml" title="Mohamed Said - themsaid"/>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">Conditional Validation Rules</h1>
+
+                <p>Laravel's validation library is very powerful and easy to use, using a few keystrokes you can build a strong defense around your application, preventing invalid user input from
+corrupting the application flow and potentially introducing bugs.</p>
+<p>In this post I'd like to highlight a trick related to conditionally adding validation rules, this trick is specially important since I've seen many people on
+Laravel's GitHub repository opening issues complaining about an un-expected validator behaviour:</p>
+<p>Let's say you have a contact form where you have a set of predefined subjects the user can select from, he can also select <code>custom</code> to provide his own message subject,
+a simple validation for this could be:</p>
+<pre><code class="language-php">validator($data,
+    [
+        'subject' =&gt; 'required_if:type,custom|min:10'
+    ]
+);</code></pre>
+<p>This will make sure the subject field is required only if the type is custom, it also ensures the user inputs a value not less than 10 characters, <em>however</em>; having the
+given rules, what do you think the result of validation will be like in case the type is <strong>not</strong> custom? Here's the error you'll receive:</p>
+<pre><code class="language-php">array:1 [
+  "subject" =&gt; array:1 [
+    0 =&gt; "The subject must be at least 10 characters."
+  ]
+]</code></pre>
+<p>If this result doesn't make sense then let me tell you that the problem is that you assumed the validator will skip validation entirely for the field if the type is not custom,
+but that's not how it works, the conditional rule <code>required_if</code> implies that the field is only <strong>required</strong> if the type is custom, so when the type is not custom the field won't
+be required, but the rest of the rules are independent from this condition so the validator will still run these checks.</p>
+<p>This confusion occurs because when a required rule fails validation is skipped so no other checks are run:</p>
+<pre><code class="language-php">validator($data,
+    [
+        'subject' =&gt; 'required|min:10'
+    ]
+);</code></pre>
+<p>In this example, if the subject is not given the required rule will fail and no other checks will run, so the <code>min</code> check will be skipped.</p>
+<p>So you need to understand the difference between a <code>required</code> rule failing and a conditional required rule being skipped, failing ones makes the validator stop further checks
+but skipped ones doesn't have the same effect.</p>
+<h2>How to conditionally add validation rules</h2>
+<p>Enter one of the most unpopular yet powerful validator methods, <code>sometimes()</code>, this method accepts three arguments:</p>
+<ul>
+<li>A filed name, or an array of field names.</li>
+<li>A rule definition, of an array of rules.</li>
+<li>A callback.</li>
+</ul>
+<p>You can use this magical method to conditionally add rules to the validator, all you need to do is to specify the successful condition by returning true from within the callback.</p>
+<pre><code class="language-php">$validator = validator($data,
+    [
+        'subject' =&gt; 'required_if:type,custom'
+    ]
+);
+
+$validator-&gt;sometimes('subject', 'min:10', function($data){
+   return $data-&gt;type == 'custom';
+});</code></pre>
+<p>Using the above example the validator will only run the <code>min</code> check if <code>$data-&gt;type</code> is equal to <code>custom</code>, which is exactly what we need.</p>
+<p>Using sometimes you may pass any number of fields as well:</p>
+<pre><code class="language-php">$validator-&gt;sometimes(['parent_name', 'parent_email'], 'required', function($data){
+   return $data-&gt;age &lt; 16;
+});</code></pre>
+<p>You can also append multiple rules:</p>
+<pre><code class="language-php">$validator-&gt;sometimes(['teacher_email', 'parent_email'], 'required|email', function($data){
+   return $data-&gt;age &lt; 16;
+});</code></pre>
+<h2>There you go!</h2>
+<p>You've just discovered one more trick that makes validating user input much easier, here's one final example for a trick I use to make distinction between validating
+user input in a creation operation and update operation:</p>
+<pre><code class="language-php">$validator = validator($data,
+    [
+        'name' =&gt; 'required',
+        'age' =&gt; 'integer|min:16',
+    ]
+);
+
+$validator-&gt;sometimes(['name', 'age'], 'sometimes', function($data) use ($user){
+   return $user-&gt;exists;
+});</code></pre>
+<p>Yes you've read it correct <code>-&gt;sometimes(...., 'sometimes'</code>, what I do here is that I'm adding the <code>sometimes</code> rule to the fields only if the model already exists, that way
+the fields will be required on creation, and will be required on updating <strong>only</strong> if they're provided.</p>
+<p>To eliminate the closure I also have something like this:</p>
+<pre><code class="language-php">$validator-&gt;sometimes(['name', 'age'], 'sometimes', evaluate($user-&gt;exists));</code></pre>
+<p>And here's the definition of the <code>evaluate()</code> helper method:</p>
+<pre><code class="language-php">function evaluate($condition)
+{
+    return function () use ($condition) {
+        return $condition;
+    };
+}</code></pre>
+            
+    <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
+
+    <div class="text-center">
+        <a href="https://twitter.com/share"
+           class="twitter-share-button"
+           data-text="Conditional Validation Rules"
+           data-via="themsaid">Tweet</a>
+        &nbsp&nbsp&nbsp
+        <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
+           class="twitter-mention-button"
+           data-related="themsaid">Tweet to @themsaid</a>
+    </div>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s16.postimg.org/5nstumeut/Toim_KRp_Y.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer at Laravel.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs');</script>
+<script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-61501903-1', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
