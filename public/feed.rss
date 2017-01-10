@@ -6,6 +6,11 @@
         <link>http:/themsaid.github.io/</link>
         <atom:link href="http:/themsaid.github.io/feed.xml" rel="self" type="application/rss+xml" />
                 <item>
+            <title>Conditional Validation Rules</title>
+            <description>In this post I&#039;d like to highlight a trick related to conditionally adding validation rules, this trick is specially important since I&#039;ve seen many people on Laravel&#039;s GitHub repository opening issues complaining about an un-expected validator behaviour...</description>
+            <link>http:/themsaid.github.io/advanced-validation-techniques-20170109/</link>
+        </item>
+                <item>
             <title>New in Laravel 5.4 - Localization using JSON files</title>
             <description>Laravel 5.4 introduces a new method of localization, it works by reading from JSON files instead of PHP files.</description>
             <link>http:/themsaid.github.io/laravel-54-localization-json-20161117/</link>

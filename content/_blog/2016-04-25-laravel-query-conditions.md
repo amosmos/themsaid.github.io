@@ -17,7 +17,7 @@ So you're using laravel's query builder to get all orders that belong to a speci
 ```php
 $results = DB::table('orders')
 	->where('branch_id', Auth::user()->branch_id);
-	
+
 if($request->customer_id){
 	$results->where('customer_id', $request->customer_id);
 }
