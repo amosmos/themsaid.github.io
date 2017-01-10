@@ -5,7 +5,7 @@ post::title: Conditional Validation Rules
 post::brief: In this post I'd like to highlight a trick related to conditionally adding validation rules, this trick is specially important since I've seen many people on Laravel's GitHub repository opening issues complaining about an un-expected validator behaviour...
 ---
 
-Laravel's validation library is very powerful and easy to use, using a few keystrokes you can build a strong defense around your application, preventing invalid user input from
+Laravel's validation library is very powerful and easy to use, using a few keystrokes you can build a strong defence around your application, preventing invalid user input from
 corrupting the application flow and potentially introducing bugs.
 
 In this post I'd like to highlight a trick related to conditionally adding validation rules, this trick is specially important since I've seen many people on
