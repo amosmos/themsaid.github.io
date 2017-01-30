@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid </title>
+
+    <link href="http:/themsaid.github.io/feed.rss" rel="alternate" type="application/rss+xml" title="Mohamed Said - themsaid"/>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">Validation considerations in Laravel 5.4</h1>
+
+                <p>Laravel 5.4 introduces two new built-in middleware <code>ConvertEmptyStringsToNull</code> and <code>TrimStrings</code>, the first middleware transforms request parameters with empty
+string as a value to <code>null</code>, the latter trims the leading and trailing white space from the values of request parameters.</p>
+<p>So for example if we have <code>?age=&amp;email=%20jon@snow.com</code>, in laravel 5.3 the value of &quot;age&quot; would be an empty string <code>""</code> and the value of &quot;email&quot; would be <code>[ ]jon@snow.com</code>,
+but in laravel 5.4 the value of &quot;age&quot; would be <code>null</code> and the value of &quot;email&quot; would be <code>jon@snow.com</code>.</p>
+<blockquote>
+<p>Notice the leading space in the email value when we test using laravel 5.3</p>
+</blockquote>
+<h2>Considerations while using the Validator</h2>
+<p>While using the validator in laravel 5.4, you should put in mind that empty strings passed from a request object will be converted to null,
+that means the following rule will fail:</p>
+<pre><code class="language-php"> "age" =&gt; "integer"</code></pre>
+<p>That's because the value of age from the previous example is <code>null</code>, in order to make it pass you need to add the <code>nullable</code> flag to your rules set:</p>
+<pre><code class="language-php">"age" =&gt; "nullable|integer"</code></pre>
+<h2>Conclusion</h2>
+<p>If you decided to use the <code>ConvertEmptyStringsToNull</code> you need to make sure you use the <code>nullable</code> flag on all your optional keys.</p>
+            
+    <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
+
+    <div class="text-center">
+        <a href="https://twitter.com/share"
+           class="twitter-share-button"
+           data-text="Validation considerations in Laravel 5.4"
+           data-via="themsaid">Tweet</a>
+        &nbsp&nbsp&nbsp
+        <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
+           class="twitter-mention-button"
+           data-related="themsaid">Tweet to @themsaid</a>
+    </div>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s16.postimg.org/5nstumeut/Toim_KRp_Y.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer at Laravel.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs');</script>
+<script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-61501903-1', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
