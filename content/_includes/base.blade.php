@@ -39,7 +39,7 @@
     </div>
 
     <p class="footer">
-        © Mohamed Said 2016 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+        © Mohamed Said 2017 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
     </p>
 </div>
 
