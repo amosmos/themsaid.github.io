@@ -6,7 +6,7 @@
         <link>http:/themsaid.github.io/</link>
         <atom:link href="http:/themsaid.github.io/feed.xml" rel="self" type="application/rss+xml" />
                 <item>
-            <title>Conditionally queue event listeners in laravel</title>
+            <title>Conditionally pushing event listeners to queue.</title>
             <description>On how to push a queued listener to queue based on a specific condition, this might be a smart way to avoid exhausting your workers on unnecessary jobs.</description>
             <link>http:/themsaid.github.io/conditionally-queue-listeners-laravel-20170505/</link>
         </item>
