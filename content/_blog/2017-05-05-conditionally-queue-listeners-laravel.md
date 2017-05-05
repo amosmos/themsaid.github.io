@@ -1,7 +1,7 @@
 ---
 view::extends: _includes.blog_post_base
 view::yields: post_body
-post::title: Conditionally pushing event listeners to queue.
+post::title: Conditionally pushing event listeners to queue
 post::brief: On how to push a queued listener to queue based on a specific condition, this might be a smart way to avoid exhausting your workers on unnecessary jobs.
 ---
 
