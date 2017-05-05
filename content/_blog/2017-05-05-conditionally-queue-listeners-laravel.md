@@ -69,7 +69,7 @@ to the listener class:
 ```php
 public function queue($queue, $job, $data)
 {
-    $event = unserialize($data['data'])[0]);
+    $event = unserialize($data['data'])[0];
 
     if ($event->customer->purchases < 10000 || $event->customer->wasGifted()) {
         return;
