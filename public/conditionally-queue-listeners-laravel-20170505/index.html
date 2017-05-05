@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
+
+    <title>themsaid </title>
+
+    <link href="http:/themsaid.github.io/feed.rss" rel="alternate" type="application/rss+xml" title="Mohamed Said - themsaid"/>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/libs.css">
+    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row main-row">
+        <div class="col-md-8 main-content">
+            
+    <a href="/">Back to home</a>
+
+    <h1 class="blog-post-title">Conditionally queue event listeners in laravel</h1>
+
+                <p>Here's the situation, you're building an online store that should handle thousands of orders every day, one of the cool things about this store is that customers who make
+purchases above 10K should receive a gift coupon, let's see how we can implement such thing in laravel:</p>
+<p>On every new purchase a <code>NewPurchase</code> event is dispatched, we can easily setup as much listeners as we want to this event from within our <code>EventServiceProvider</code>:</p>
+<pre><code class="language-php">class EventServiceProvider extends ServiceProvider
+{
+    protected $listen = [
+        NewPurchase::class =&gt; [
+            SendInvoice::class,
+            UpdateMetrics::class,
+            SendShippingOrder::class,
+            SendGiftCoupon::class,
+        ],
+    ];
+}</code></pre>
+<p>Now for every new purchase a <code>SendGiftCoupon</code> will be called, it might look like this:</p>
+<pre><code class="language-php">class SendGiftCoupon
+{
+    public function handle($event)
+    {
+        $customer = $event-&gt;customer;
+
+        if ($customer-&gt;purchases &gt;= 10000 &amp;&amp; ! $customer-&gt;wasGifted()){
+            $coupon = Coupon::createForCustomer($customer);
+
+            Mail::to($customer)-&gt;send(new CouponGift($customer));
+        }
+    }</code></pre>
+<p>This listener will check if the customer should receive the gift coupon, creates the coupon if so, and finally sends it to him vai email.</p>
+<p>The problem is that we don't want the customer to wait for all these steps to complete, it'd be better if we just process the order and send him to a nice YAY! screen
+while we do all these stuff in the background, for that we'll queue the listener by implementing the <code>ShouldQueue</code> interface:</p>
+<pre><code class="language-php">class SendGiftCoupon implements ShouldQueue
+{
+    // ...
+}</code></pre>
+<p>It looks like we're done here, for every new purchase the listener will check if the customer should receive the coupon &amp; then gets this job done.</p>
+<h2>Problem</h2>
+<p>How many customers will reach the 10K purchase milestone? does it make sense to push a Job to queue for every single purchase while there's a huge chance that this
+job will just do nothing at all? IMHO this is a waste of resources, you might end up filling your queue with thousands of unnecessary jobs.</p>
+<h2>Idea</h2>
+<p>It might be a good thing if we can check for that condition before queueing the listener, fortunately that's very easy in laravel, all we need to do is add a <code>queue</code> method
+to the listener class:</p>
+<pre><code class="language-php">public function queue($queue, $job, $data)
+{
+    $event = unserialize($data['data'])[0]);
+
+    if ($event-&gt;customer-&gt;purchases &lt; 10000 || $event-&gt;customer-&gt;wasGifted()) {
+        return;
+    }
+
+    $queue-&gt;push($job, $data);
+}</code></pre>
+<p>Now before pushing the listener to queue we'll check if the customer should receive the coupon, and only if that's true we'll push that listener into the queue.</p>
+<h2>Conclusion</h2>
+<p>Instead of having our queue filled with thousands of unnecessary jobs that might be delaying more important ones we'll just push the job only if needed.</p>
+            
+    <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
+
+    <div class="text-center">
+        <a href="https://twitter.com/share"
+           class="twitter-share-button"
+           data-text="Conditionally queue event listeners in laravel"
+           data-via="themsaid">Tweet</a>
+        &nbsp&nbsp&nbsp
+        <a href="https://twitter.com/intent/tweet?screen_name=themsaid"
+           class="twitter-mention-button"
+           data-related="themsaid">Tweet to @themsaid</a>
+    </div>
+        </div>
+
+        <div class="col-md-3 col-md-offset-1 sidebar">
+            <div class="avatar">
+                <a href="/"><img src="http://s16.postimg.org/5nstumeut/Toim_KRp_Y.jpg"></a>
+            </div>
+
+            <h1>themsaid</h1>
+
+            <p>Mohamed Said is a web developer at Laravel.</p>
+
+            <a href="https://github.com/themsaid">@github</a> ·
+            <a href="https://twitter.com/themsaid">@twitter</a> ·
+            <a href="mailto:themsaid@gmail.com">@email</a>
+        </div>
+    </div>
+
+    <p class="footer">
+        © Mohamed Said 2017 · Built with <a href="http://themsaid.github.io/katana/">Katana</a>
+    </p>
+</div>
+
+<script src="/prism.js"></script>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs');</script>
+<script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-61501903-1', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
