@@ -2,7 +2,7 @@
 view::extends: _includes.blog_post_base
 view::yields: post_body
 post::title: Conditionally queue event listeners in laravel
-post::brief:
+post::brief: On how to push a queued listener to queue based on a specific condition, this might be a smart way to avoid exhausting your workers on unnecessary jobs.
 ---
 
 Here's the situation, you're building an online store that should handle thousands of orders every day, one of the cool things about this store is that customers who make
