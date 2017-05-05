@@ -68,7 +68,7 @@ job will just do nothing at all? IMHO this is a waste of resources, you might en
 to the listener class:</p>
 <pre><code class="language-php">public function queue($queue, $job, $data)
 {
-    $event = unserialize($data['data'])[0]);
+    $event = unserialize($data['data'])[0];
 
     if ($event-&gt;customer-&gt;purchases &lt; 10000 || $event-&gt;customer-&gt;wasGifted()) {
         return;
