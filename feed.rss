@@ -103,51 +103,6 @@ stuff to the framework on a daily basis. This is a wrap up for the new stuff in 
             <link>http:/themsaid.github.io/thoughts-on-2015-and-dreams-for-2016-20151231/</link>
         </item>
                 <item>
-            <title>[iOS] Implementing a 3D rotation reveal effect for a side menu</title>
-            <description></description>
-            <link>http:/themsaid.github.io/ios-sidemenu-3d-rotation-reveal-effect-20150402/</link>
-        </item>
-                <item>
-            <title>Building an interactive iOS App interface using Swift</title>
-            <description>This is my third trial to build an interactive interface for an iOS app using swift, I was searching online on bechance for a design that involves some ideas I can try to implement and I found this lovely design of an app called yohago.</description>
-            <link>http:/themsaid.github.io/building-interactive-ios-interface-with-swift-20150401/</link>
-        </item>
-                <item>
-            <title>Deployment via git and Bitbucket</title>
-            <description>On how to automate deployment for your project via git and Bitbucket.</description>
-            <link>http:/themsaid.github.io/deployment-via-git-and-bitbucket-20150318/</link>
-        </item>
-                <item>
-            <title>Building my first iOS app: Part 5</title>
-            <description>Wrapping up my first trial to build an iOS app.</description>
-            <link>http:/themsaid.github.io/building-my-first-ios-app-part-5-20150201/</link>
-        </item>
-                <item>
-            <title>My First iOS application: Part 4</title>
-            <description>In the first 3 parts of the series we created a screen that lists the sections of &quot;Clozet&quot;, with the ability to add new or edit/delete sections.</description>
-            <link>http:/themsaid.github.io/Building-my-first-iOS-App-Part-4-20150131/</link>
-        </item>
-                <item>
-            <title>My First iOS application: Part 3</title>
-            <description>In Part 1 and 2 of this series, we built an interface that lists the sections of &quot;Clozet&quot;, also a bar button that leads to another modal screen that allows us to add a new section. No let us see how to allow the user to edit and delete sections</description>
-            <link>http:/themsaid.github.io/Building-my-first-iOS-App-Part-3-20150131/</link>
-        </item>
-                <item>
-            <title>My First iOS application: Part 2</title>
-            <description>At the end of the last post we were able to create the sections screen for &quot;Clozet&quot;, a table view that has 3 dummy rows. Now we will start adding some real data and see how to build a screen a user can use to add more sections and edit existing ones.</description>
-            <link>http:/themsaid.github.io/ios-development-building-the-first-application-20150130/</link>
-        </item>
-                <item>
-            <title>My First iOS application: Part 1</title>
-            <description> What I am going to build is a very basic app called &quot;Clozet&quot;, it is a closet organiser, you create sections and add items to each section so that you can come back and check what items you do have in your closet.</description>
-            <link>http:/themsaid.github.io/iOS-development-first-trial-20150129/</link>
-        </item>
-                <item>
-            <title>File and Directory permissions</title>
-            <description>Here I&#8217;m going to explain the whole permissions issue, and I recommend you read about it if you are going to deal with servers.</description>
-            <link>http:/themsaid.github.io/file-and-directory-permissions-20131225/</link>
-        </item>
-                <item>
             <title>Faster git commits using bash functions</title>
             <description>A shortcut for git add --all, commit -m, and push</description>
             <link>http:/themsaid.github.io/faster-commits-using-bash-functions-20130930/</link>

@@ -19,7 +19,7 @@
 
 <div class="container">
     <div class="row main-row">
-        <div class="col-xs-8 col-xs-offset-2 main-content">
+        <div class="col-md-8 col-md-offset-2 main-content">
             <div class="row intro" style="margin-bottom: 70px">
                 <div class="col-md-2">
                     <div class="avatar">
