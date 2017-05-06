@@ -26,23 +26,11 @@ body {
     vertical-align: middle;
     border-radius: 100%;
     background: #f0f0f0;
-    border: solid 5px #fff;
-    box-shadow: 0 0 3px 1px #DEDEDE;
-    width: 150px;
+    width: 100%;
+    max-width: 150px;
 }
 
-.sidebar {
-    text-align: center;
-}
-
-@media (max-width: 55em) {
-    .sidebar {
-        border-top: solid 5px #b3ebf1;
-        padding-top: 20px;
-        margin-top: 40px;
-        text-align: left;
-    }
-
+@media (max-width: 70em) {
     .avatar img {
         display: none;
     }
@@ -63,6 +51,8 @@ a:hover {
 
 .blog-post h3 {
     margin: 0;
+    font-weight: 500 !important;
+    font-size: 25px !important;
 }
 
 .blog-post p {
@@ -109,10 +99,10 @@ table{
 }
 
 h1.blog-post-title {
-    font-weight: 200;
+    font-weight: 500;
     font-size: 40px;
     margin-top: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     line-height: 45px;
 }
 
