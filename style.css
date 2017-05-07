@@ -64,7 +64,9 @@ a:hover {
 }
 
 p.footer {
+    text-align: center;
     margin-top: 50px;
+    font-size: 13px;
     padding: 20px 0;
 }
 
@@ -141,10 +143,14 @@ blockquote {
 
 .post-footer {
     display: block;
-    letter-spacing: -1px;
+    letter-spacing: -4px;
     text-align: center;
     margin: 50px 0 20px;
     color: #85A8BB;
+}
+
+.post-footer span{
+    letter-spacing: 1px;
 }
 
 .alert {
