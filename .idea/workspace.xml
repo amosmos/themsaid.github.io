@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1fce0fe7-cf77-4fa0-9aa0-42a95577da1f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.php" afterPath="$PROJECT_DIR$/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/_includes/base.blade.php" afterPath="$PROJECT_DIR$/content/_includes/base.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/_includes/blog_post_base.blade.php" afterPath="$PROJECT_DIR$/content/_includes/blog_post_base.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/index.blade.php" afterPath="$PROJECT_DIR$/content/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/style.css" afterPath="$PROJECT_DIR$/content/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/acceptance-testing-laravel-vue-20160517/index.html" afterPath="$PROJECT_DIR$/public/acceptance-testing-laravel-vue-20160517/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/better-readability-enumerators-php-20160420/index.html" afterPath="$PROJECT_DIR$/public/better-readability-enumerators-php-20160420/index.html" />
@@ -29,6 +26,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/laravel-passport-grant-types-20160824/index.html" afterPath="$PROJECT_DIR$/public/laravel-passport-grant-types-20160824/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/laravel-query-conditions-20160425/index.html" afterPath="$PROJECT_DIR$/public/laravel-query-conditions-20160425/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/laravel/index.html" afterPath="$PROJECT_DIR$/public/laravel/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/lets-talk/index.html" afterPath="$PROJECT_DIR$/public/lets-talk/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/magic-behind-laravel-valet-20160506/index.html" afterPath="$PROJECT_DIR$/public/magic-behind-laravel-valet-20160506/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/mysql-json-data-type-20160311/index.html" afterPath="$PROJECT_DIR$/public/mysql-json-data-type-20160311/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/style.css" afterPath="$PROJECT_DIR$/public/style.css" />
@@ -58,8 +56,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/content/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+            <state relative-caret-position="280">
+              <caret line="68" column="17" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -117,12 +115,12 @@
         <option value="$PROJECT_DIR$/content/_blog/2017-01-30-laravel-convert-empty-strings-to-null.md" />
         <option value="$PROJECT_DIR$/content/_blog/2017-05-05-conditionally-queue-listeners-laravel.md" />
         <option value="$PROJECT_DIR$/content/index.blade.php" />
-        <option value="$PROJECT_DIR$/content/_includes/blog_post_base.blade.php" />
         <option value="$PROJECT_DIR$/content/_includes/base.blade.php" />
         <option value="$PROJECT_DIR$/vendor/themsaid/katana-core/src/FileHandlers/BlogPostHandler.php" />
         <option value="$PROJECT_DIR$/content/lets-talk.blade.php" />
         <option value="$PROJECT_DIR$/config.php" />
         <option value="$PROJECT_DIR$/content/_includes/blog_base.blade.php" />
+        <option value="$PROJECT_DIR$/content/_includes/blog_post_base.blade.php" />
         <option value="$PROJECT_DIR$/content/style.css" />
       </list>
     </option>
@@ -566,12 +564,13 @@
       <workItem from="1494143432291" duration="190000" />
       <workItem from="1494143847581" duration="740000" />
       <workItem from="1494167600569" duration="240000" />
-      <workItem from="1494170292757" duration="817000" />
+      <workItem from="1494170292757" duration="930000" />
+      <workItem from="1494191174753" duration="256000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43222000" />
+    <option name="totallyTimeSpent" value="43591000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="745" extended-state="6" />
@@ -881,20 +880,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/content/_includes/blog_post_base.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/content/_includes/base.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" column="118" selection-start-line="11" selection-start-column="118" selection-end-line="11" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/content/_blog/2017-05-05-conditionally-queue-listeners-laravel.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
@@ -1033,10 +1018,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/content/_includes/base.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="11" column="118" selection-start-line="11" selection-start-column="118" selection-end-line="11" selection-end-column="118" />
+          <folding>
+            <marker date="1494144040000" expanded="true" signature="21:1763" placeholder="..." />
+            <marker date="1494144040000" expanded="true" signature="28:746" placeholder="..." />
+            <marker date="1494144040000" expanded="true" signature="754:1755" placeholder="..." />
+            <marker date="1494144040000" expanded="true" signature="816:1212" placeholder="..." />
+            <marker date="1494144040000" expanded="true" signature="838:1168" placeholder="{...}" />
+            <marker date="1494144040000" expanded="true" signature="977:1162" placeholder="{...}" />
+            <marker date="1494144040000" expanded="true" signature="1221:1747" placeholder="..." />
+            <marker date="1494144040000" expanded="true" signature="1254:1588" placeholder="{...}" />
+            <marker date="1494144040000" expanded="true" signature="1331:1410" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/_includes/blog_post_base.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" column="36" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="36" />
+          <folding>
+            <marker date="1494191394000" expanded="true" signature="54:734" placeholder="..." />
+            <marker date="1494191394000" expanded="true" signature="323:732" placeholder="..." />
+            <marker date="1494191394000" expanded="true" signature="368:525" placeholder="..." />
+            <marker date="1494191394000" expanded="true" signature="622:721" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/content/_includes/blog_base.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="7" column="61" selection-start-line="7" selection-start-column="61" selection-end-line="7" selection-end-column="61" />
+        <state relative-caret-position="448">
+          <caret line="28" column="32" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="32" />
           <folding>
             <marker date="1494171044000" expanded="true" signature="44:1388" placeholder="..." />
             <marker date="1494171044000" expanded="true" signature="72:1386" placeholder="..." />
@@ -1055,8 +1071,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/content/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+        <state relative-caret-position="280">
+          <caret line="68" column="17" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
           <folding />
         </state>
       </provider>

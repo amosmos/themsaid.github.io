@@ -8,7 +8,7 @@
 
     @yield('post_body')
 
-    <span class="post-footer">—————————————&nbsp&nbspThat's all folks&nbsp&nbsp—————————————</span>
+    <span class="post-footer">————————————————<span>&nbsp&nbspThat's all folks&nbsp&nbsp</span>————————————————</span>
 
     <div class="text-center">
         <a href="https://twitter.com/share"
