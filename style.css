@@ -2,12 +2,12 @@ html, body, .main-container {
     height: 100%;
 }
 
-p{
+p {
     margin: 0 0 28px;
 }
 
 body {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     line-height: 26px;
     font-size: 1.5rem;
     color: #3A4B54;
@@ -68,12 +68,19 @@ p.footer {
     padding: 20px 0;
 }
 
-.intro{
+.intro {
     font-size: 14px;
     line-height: 1.58;
+    margin-bottom: 50px;
+    opacity: .6;
 }
 
-.main-content{
+.intro.home {
+    margin-bottom: 70px;
+    opacity: 1;
+}
+
+.main-content {
     font-size: 17px;
     line-height: 1.70;
 }
@@ -104,7 +111,7 @@ h1, h2, h3, h4 {
     margin-top: 40px;
 }
 
-table{
+table {
     margin: 30px 0;
 }
 
