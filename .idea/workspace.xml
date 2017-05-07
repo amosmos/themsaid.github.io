@@ -2,26 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1fce0fe7-cf77-4fa0-9aa0-42a95577da1f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/content/_blog/2013-12-25-file-and-directory-permissions.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/content/_blog/2015-01-29-iOS-development-first-trial.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/content/_blog/2015-01-30-ios-development-building-the-first-application.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/content/_blog/2015-01-31-Building-my-first-iOS-App-Part-3.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/content/_blog/2015-01-31-Building-my-first-iOS-App-Part-4.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/content/_blog/2015-02-01-building-my-first-ios-app-part-5.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/content/_blog/2015-03-18-deployment-via-git-and-bitbucket.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/content/_blog/2015-04-01-building-interactive-ios-interface-with-swift.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/content/_blog/2015-04-02-ios-sidemenu-3d-rotation-reveal-effect.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-3-20150131/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/Building-my-first-iOS-App-Part-4-20150131/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/building-interactive-ios-interface-with-swift-20150401/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/building-my-first-ios-app-part-5-20150201/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/deployment-via-git-and-bitbucket-20150318/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/file-and-directory-permissions-20131225/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/iOS-development-first-trial-20150129/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/ios-development-building-the-first-application-20150130/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/ios-sidemenu-3d-rotation-reveal-effect-20150402/index.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.php" afterPath="$PROJECT_DIR$/config.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/_includes/base.blade.php" afterPath="$PROJECT_DIR$/content/_includes/base.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/_includes/blog_post_base.blade.php" afterPath="$PROJECT_DIR$/content/_includes/blog_post_base.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/index.blade.php" afterPath="$PROJECT_DIR$/content/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/style.css" afterPath="$PROJECT_DIR$/content/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/acceptance-testing-laravel-vue-20160517/index.html" afterPath="$PROJECT_DIR$/public/acceptance-testing-laravel-vue-20160517/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/better-readability-enumerators-php-20160420/index.html" afterPath="$PROJECT_DIR$/public/better-readability-enumerators-php-20160420/index.html" />
@@ -73,8 +58,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/content/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="76" column="17" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
+            <state relative-caret-position="344">
+              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -88,8 +73,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/content/_blog/2015-03-18-deployment-via-git-and-bitbucket.blade.php" />
-        <option value="$PROJECT_DIR$/content/_blog/2015-04-01-building-interactive-ios-interface-with-swift.blade.php" />
         <option value="$PROJECT_DIR$/content/_blog/2015-04-02-ios-sidemenu-3d-rotation-reveal-effect.blade.php" />
         <option value="$PROJECT_DIR$/vendor/illuminate/view/Engines/PhpEngine.php" />
         <option value="$PROJECT_DIR$/content/_blog/2015-12-31-thoughts-on-2015-and-dreams-for-2016.blade.php" />
@@ -104,17 +87,14 @@
         <option value="$PROJECT_DIR$/vendor/illuminate/view/Compilers/BladeCompiler.php" />
         <option value="$PROJECT_DIR$/vendor/illuminate/view/Factory.php" />
         <option value="$PROJECT_DIR$/vendor/illuminate/view/View.php" />
-        <option value="$PROJECT_DIR$/content/_includes/blog_post_base.blade.php" />
         <option value="$PROJECT_DIR$/content/about/index.blade.php" />
         <option value="$PROJECT_DIR$/vendor/themsaid/katana-core/src/FileHandlers/BaseHandler.php" />
         <option value="$PROJECT_DIR$/content/_blog/test/123.blade.php" />
         <option value="$PROJECT_DIR$/content/_blog/2016-03-05-laravel-5-2-23.blade.php" />
         <option value="$PROJECT_DIR$/vendor/themsaid/katana-core/src/BlogPaginationBuilder.php" />
         <option value="$PROJECT_DIR$/content/_includes/blog_paginator.blade.php" />
-        <option value="$PROJECT_DIR$/vendor/themsaid/katana-core/src/FileHandlers/BlogPostHandler.php" />
         <option value="$PROJECT_DIR$/vendor/symfony/finder/Finder.php" />
         <option value="$PROJECT_DIR$/vendor/themsaid/katana-core/src/Blade.php" />
-        <option value="$PROJECT_DIR$/config.php" />
         <option value="$PROJECT_DIR$/content/_includes/rss.blade.php" />
         <option value="$PROJECT_DIR$/config-production.php" />
         <option value="$PROJECT_DIR$/public/feed.xml" />
@@ -136,8 +116,13 @@
         <option value="$PROJECT_DIR$/content/_blog/2017-01-10-laravel-advanced-validation-conditionally-adding-rules.md" />
         <option value="$PROJECT_DIR$/content/_blog/2017-01-30-laravel-convert-empty-strings-to-null.md" />
         <option value="$PROJECT_DIR$/content/_blog/2017-05-05-conditionally-queue-listeners-laravel.md" />
-        <option value="$PROJECT_DIR$/content/_includes/base.blade.php" />
         <option value="$PROJECT_DIR$/content/index.blade.php" />
+        <option value="$PROJECT_DIR$/content/_includes/blog_post_base.blade.php" />
+        <option value="$PROJECT_DIR$/content/_includes/base.blade.php" />
+        <option value="$PROJECT_DIR$/vendor/themsaid/katana-core/src/FileHandlers/BlogPostHandler.php" />
+        <option value="$PROJECT_DIR$/content/lets-talk.blade.php" />
+        <option value="$PROJECT_DIR$/config.php" />
+        <option value="$PROJECT_DIR$/content/_includes/blog_base.blade.php" />
         <option value="$PROJECT_DIR$/content/style.css" />
       </list>
     </option>
@@ -417,10 +402,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/content/_blog" />
-      <recent name="$PROJECT_DIR$/content" />
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/content/_includes" />
+      <recent name="$PROJECT_DIR$/content" />
+      <recent name="$PROJECT_DIR$/content/_blog" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/vendor/themsaid/katana-core/src" />
     </key>
   </component>
@@ -575,12 +560,18 @@
       <workItem from="1493989684038" duration="58000" />
       <workItem from="1493992121269" duration="7000" />
       <workItem from="1493993478794" duration="166000" />
-      <workItem from="1494077046023" duration="3722000" />
+      <workItem from="1494077046023" duration="3852000" />
+      <workItem from="1494085840955" duration="410000" />
+      <workItem from="1494091236422" duration="2553000" />
+      <workItem from="1494143432291" duration="190000" />
+      <workItem from="1494143847581" duration="740000" />
+      <workItem from="1494167600569" duration="240000" />
+      <workItem from="1494170292757" duration="817000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38142000" />
+    <option name="totallyTimeSpent" value="43222000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="745" extended-state="6" />
@@ -594,7 +585,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -626,27 +617,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/content/_blog/2015-01-31-Building-my-first-iOS-App-Part-3.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/content/_blog/2015-02-01-building-my-first-ios-app-part-5.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/themsaid/katana-core/src/Blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="63" column="73" selection-start-line="63" selection-start-column="65" selection-end-line="63" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -690,16 +660,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/content/laravel.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="112">
-            <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/content/prism.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1629">
@@ -714,13 +674,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/content/_blog/2015-01-30-ios-development-building-the-first-application.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/content/_blog/2015-01-30-ios-development-building-the-first-application.blade.php" />
     <entry file="file://$PROJECT_DIR$/content/_blog/2016-04-09-building-testing-interactive-console.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -731,13 +685,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/content/_blog/2015-01-29-iOS-development-first-trial.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="21" column="31" selection-start-line="0" selection-start-column="0" selection-end-line="178" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/content/_blog/2015-01-29-iOS-development-first-trial.blade.php" />
     <entry file="file://$PROJECT_DIR$/content/prism.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -908,29 +856,106 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/content/_blog/2017-05-05-conditionally-queue-listeners-laravel.md">
+    <entry file="file://$PROJECT_DIR$/content/_includes/blog_paginator.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="29" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/laravel.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="249">
-            <caret line="63" column="7" selection-start-line="63" selection-start-column="7" selection-end-line="63" selection-end-column="7" />
+          <first_editor relative-caret-position="384">
+            <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
             <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.php">
+    <entry file="file://$PROJECT_DIR$/content/_includes/blog_post_base.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="37" column="25" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
+        <state relative-caret-position="192">
+          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/_includes/base.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="11" column="118" selection-start-line="11" selection-start-column="118" selection-end-line="11" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/_blog/2017-05-05-conditionally-queue-listeners-laravel.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="32">
+            <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/themsaid/katana-core/src/BlogPaginationBuilder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1104">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/themsaid/katana-core/src/FileHandlers/BlogPostHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="42" column="9" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
           <folding>
-            <marker date="1461425373000" expanded="true" signature="15:2387" placeholder="..." />
-            <marker date="1461425373000" expanded="true" signature="23:362" placeholder=" -------------------------------------------------------------------------- ..." />
-            <marker date="1461425373000" expanded="true" signature="415:875" placeholder=" -------------------------------------------------------------------------- ..." />
-            <marker date="1461425373000" expanded="true" signature="913:1204" placeholder=" -------------------------------------------------------------------------- ..." />
-            <marker date="1461425373000" expanded="true" signature="1241:1575" placeholder=" -------------------------------------------------------------------------- ..." />
-            <marker date="1461425373000" expanded="true" signature="1619:1912" placeholder=" -------------------------------------------------------------------------- ..." />
-            <marker date="1461425373000" expanded="true" signature="1962:2271" placeholder=" -------------------------------------------------------------------------- ..." />
+            <marker date="1494144561000" expanded="false" signature="43:101" placeholder="..." />
+            <marker date="1494144561000" expanded="true" signature="144:2441" placeholder="{...}" />
+            <marker date="1494144561000" expanded="true" signature="154:262" placeholder=" Get the blog post data. ..." />
+            <marker date="1494144561000" expanded="true" signature="315:1346" placeholder="{...}" />
+            <marker date="1494144561000" expanded="true" signature="402:491" placeholder="..." />
+            <marker date="1494144561000" expanded="true" signature="499:793" placeholder="..." />
+            <marker date="1494144561000" expanded="true" signature="669:782" placeholder="..." />
+            <marker date="1494144561000" expanded="true" signature="704:781" placeholder="..." />
+            <marker date="1494144561000" expanded="true" signature="886:972" placeholder="..." />
+            <marker date="1494144561000" expanded="true" signature="914:971" placeholder="..." />
+            <marker date="1494144561000" expanded="true" signature="1068:1177" placeholder="..." />
+            <marker date="1494144561000" expanded="true" signature="1355:1449" placeholder=" Generate directory path to be used for pretty URLs. ..." />
+            <marker date="1494144561000" expanded="true" signature="1499:2112" placeholder="{...}" />
+            <marker date="1494144561000" expanded="true" signature="1845:1934" placeholder="..." />
+            <marker date="1494144561000" expanded="true" signature="2121:2230" placeholder=" Generate blog post slug. ..." />
+            <marker date="1494144561000" expanded="true" signature="2284:2439" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/lets-talk.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <marker date="1494170323000" expanded="true" signature="44:1449" placeholder="..." />
+            <marker date="1494170323000" expanded="true" signature="71:1447" placeholder="..." />
+            <marker date="1494170323000" expanded="true" signature="106:1436" placeholder="..." />
+            <marker date="1494170323000" expanded="true" signature="170:1421" placeholder="..." />
+            <marker date="1494170323000" expanded="true" signature="204:790" placeholder="..." />
+            <marker date="1494170323000" expanded="true" signature="248:594" placeholder="..." />
+            <marker date="1494170323000" expanded="true" signature="276:567" placeholder="..." />
+            <marker date="1494170323000" expanded="false" signature="319:334" placeholder="..." />
+            <marker date="1494170323000" expanded="true" signature="637:767" placeholder="..." />
+            <marker date="1494170323000" expanded="false" signature="729:739" placeholder="..." />
+            <marker date="1494170323000" expanded="false" signature="819:836" placeholder="..." />
+            <marker date="1494170323000" expanded="true" signature="837:1126" placeholder="..." />
+            <marker date="1494170323000" expanded="true" signature="1147:1369" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -946,35 +971,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/themsaid/katana-core/src/FileHandlers/BlogPostHandler.php">
+    <entry file="file://$PROJECT_DIR$/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="44" column="36" selection-start-line="44" selection-start-column="36" selection-end-line="44" selection-end-column="36" />
+        <state relative-caret-position="208">
+          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
           <folding>
-            <marker date="1460553567000" expanded="false" signature="43:101" placeholder="..." />
-            <marker date="1460553567000" expanded="true" signature="144:2441" placeholder="{...}" />
-            <marker date="1460553567000" expanded="true" signature="154:262" placeholder=" Get the blog post data. ..." />
-            <marker date="1460553567000" expanded="true" signature="315:1346" placeholder="{...}" />
-            <marker date="1460553567000" expanded="true" signature="402:491" placeholder="..." />
-            <marker date="1460553567000" expanded="true" signature="499:793" placeholder="..." />
-            <marker date="1460553567000" expanded="true" signature="669:782" placeholder="..." />
-            <marker date="1460553567000" expanded="true" signature="704:781" placeholder="..." />
-            <marker date="1460553567000" expanded="true" signature="886:972" placeholder="..." />
-            <marker date="1460553567000" expanded="true" signature="914:971" placeholder="..." />
-            <marker date="1460553567000" expanded="true" signature="1068:1177" placeholder="..." />
-            <marker date="1460553567000" expanded="true" signature="1355:1449" placeholder=" Generate directory path to be used for pretty URLs. ..." />
-            <marker date="1460553567000" expanded="true" signature="1499:2112" placeholder="{...}" />
-            <marker date="1460553567000" expanded="true" signature="1845:1934" placeholder="..." />
-            <marker date="1460553567000" expanded="true" signature="2121:2230" placeholder=" Generate blog post slug. ..." />
-            <marker date="1460553567000" expanded="true" signature="2284:2439" placeholder="{...}" />
+            <marker date="1494170622000" expanded="true" signature="15:2387" placeholder="..." />
+            <marker date="1494170622000" expanded="true" signature="23:362" placeholder=" -------------------------------------------------------------------------- ..." />
+            <marker date="1494170622000" expanded="true" signature="415:875" placeholder=" -------------------------------------------------------------------------- ..." />
+            <marker date="1494170622000" expanded="true" signature="913:1204" placeholder=" -------------------------------------------------------------------------- ..." />
+            <marker date="1494170622000" expanded="true" signature="1241:1575" placeholder=" -------------------------------------------------------------------------- ..." />
+            <marker date="1494170622000" expanded="true" signature="1619:1912" placeholder=" -------------------------------------------------------------------------- ..." />
+            <marker date="1494170622000" expanded="true" signature="1962:2271" placeholder=" -------------------------------------------------------------------------- ..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/themsaid/katana-core/src/FileHandlers/BaseHandler.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="205" column="41" selection-start-line="205" selection-start-column="26" selection-end-line="205" selection-end-column="41" />
+        <state relative-caret-position="419">
+          <caret line="207" column="40" selection-start-line="207" selection-start-column="26" selection-end-line="207" selection-end-column="40" />
           <folding>
             <marker date="1459904376000" expanded="false" signature="43:179" placeholder="..." />
             <marker date="1459904376000" expanded="true" signature="198:5351" placeholder="{...}" />
@@ -1017,73 +1033,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/content/_includes/blog_paginator.blade.php">
+    <entry file="file://$PROJECT_DIR$/content/_includes/blog_base.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        <state relative-caret-position="112">
+          <caret line="7" column="61" selection-start-line="7" selection-start-column="61" selection-end-line="7" selection-end-column="61" />
           <folding>
-            <marker date="1460831256000" expanded="true" signature="23:264" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/content/_includes/blog_post_base.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="30" />
-          <folding>
-            <marker date="1460831256000" expanded="true" signature="44:705" placeholder="..." />
-            <marker date="1460831256000" expanded="true" signature="294:703" placeholder="..." />
-            <marker date="1460831256000" expanded="true" signature="339:496" placeholder="..." />
-            <marker date="1460831256000" expanded="true" signature="593:692" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/content/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="15" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
-          <folding>
-            <marker date="1494080681000" expanded="true" signature="67:339" placeholder="..." />
-            <marker date="1494080681000" expanded="true" signature="160:279" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/content/_includes/base.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="28" column="39" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
-          <folding>
-            <marker date="1494081743000" expanded="true" signature="21:2921" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="28:746" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="754:2913" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="779:1929" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="810:1922" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="870:1911" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="914:933" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="934:1715" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="973:1164" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="1014:1141" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="1204:1696" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="1237:1255" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="1294:1673" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="1775:1896" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="1974:2370" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="1996:2326" placeholder="{...}" />
-            <marker date="1494081743000" expanded="true" signature="2135:2320" placeholder="{...}" />
-            <marker date="1494081743000" expanded="true" signature="2379:2905" placeholder="..." />
-            <marker date="1494081743000" expanded="true" signature="2412:2746" placeholder="{...}" />
-            <marker date="1494081743000" expanded="true" signature="2489:2568" placeholder="{...}" />
+            <marker date="1494171044000" expanded="true" signature="44:1388" placeholder="..." />
+            <marker date="1494171044000" expanded="true" signature="72:1386" placeholder="..." />
+            <marker date="1494171044000" expanded="true" signature="107:1375" placeholder="..." />
+            <marker date="1494171044000" expanded="true" signature="171:1360" placeholder="..." />
+            <marker date="1494171044000" expanded="true" signature="246:1139" placeholder="..." />
+            <marker date="1494171044000" expanded="true" signature="289:496" placeholder="..." />
+            <marker date="1494171044000" expanded="true" signature="334:469" placeholder="..." />
+            <marker date="1494171044000" expanded="true" signature="540:1116" placeholder="..." />
+            <marker date="1494171044000" expanded="true" signature="577:595" placeholder="..." />
+            <marker date="1494171044000" expanded="true" signature="638:1089" placeholder="..." />
+            <marker date="1494171044000" expanded="true" signature="1212:1341" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/content/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="76" column="17" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
+        <state relative-caret-position="344">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding />
         </state>
       </provider>

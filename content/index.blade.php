@@ -1,8 +1,8 @@
-@extends('_includes.base')
+@extends('_includes.blog_base')
 
 @section('pageTitle', '- Mohamed Said')
 
-@section('body')
+@section('blog_body')
 
     @foreach($paginatedBlogPosts as $post)
         <div class="blog-post">
