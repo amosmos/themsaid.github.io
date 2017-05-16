@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{$siteDescription}}">
 
-    <title>{{$siteName}} @yield('pageTitle')</title>
+    <title>@yield('pageTitle') | {{$siteName}}</title>
 
     <link href="@url('/feed.rss')" rel="alternate" type="application/rss+xml" title="Mohamed Said - themsaid"/>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>

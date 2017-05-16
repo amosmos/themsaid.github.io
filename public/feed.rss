@@ -6,6 +6,11 @@
         <link>http:/themsaid.github.io/</link>
         <atom:link href="http:/themsaid.github.io/feed.xml" rel="self" type="application/rss+xml" />
                 <item>
+            <title>Using Laravel Mailables and Notifications as Event Listeners</title>
+            <description>On how to use Laravel Mailables and Notifications as Event listeners, which eliminates the need to create an extra listener class that only sends the notification/mailable.</description>
+            <link>http:/themsaid.github.io/laravel-mailables-notfiications-as-event-listeners-20170516/</link>
+        </item>
+                <item>
             <title>Conditionally pushing event listeners to queue</title>
             <description>On how to push a queued listener to queue based on a specific condition, this might be a smart way to avoid exhausting your workers on unnecessary jobs.</description>
             <link>http:/themsaid.github.io/conditionally-queue-listeners-laravel-20170505/</link>

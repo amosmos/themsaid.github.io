@@ -1,6 +1,6 @@
 @extends('_includes.blog_base')
 
-@section('pageTitle', '- Mohamed Said')
+@section('pageTitle', 'Mohamed Said')
 
 @section('blog_body')
 

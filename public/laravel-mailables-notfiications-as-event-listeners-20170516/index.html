@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Web developer [PHP, Laravel, Vue.js] &amp; iOS beginner.">
 
-    <title>- Acceptance Testing a Laravel and Vue.js Application | themsaid</title>
+    <title>Using Laravel Mailables and Notifications as Event Listeners | themsaid</title>
 
     <link href="http:/themsaid.github.io/feed.rss" rel="alternate" type="application/rss+xml" title="Mohamed Said - themsaid"/>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' rel='stylesheet' type='text/css'>
@@ -43,20 +43,101 @@
                 
     <a href="/">Back to home</a>
 
-    <h1 class="blog-post-title">A look into acceptance Testing a Laravel and Vue.js Application</h1>
+    <h1 class="blog-post-title">Using Laravel Mailables and Notifications as Event Listeners</h1>
 
-                <p>A few weeks ago I started writing tests for a relatively large application, writing tests for an application at a mature state is always thought to be hard but I think it's easier, things are already shaped and you know what exactly you need to test.</p>
-<p>I wrote about my experience on writing acceptance tests for the project, it has multiple complex screens built using Vue.js, and as you know testing Javascript driven interfaces is not an easy thing to do, in this post I talk about my journey from using laravel's built in Crawler-based testing library to using Selenium server for automating user interactions.</p>
-<p>You can read about that on .Dev, a Medium publication dedicated to  developer news, tutorials, interviews and tools:</p>
-<p><a href="https://dotdev.co/acceptance-testing-a-laravel-and-vue-js-application-4160b8e96156"><img style="width:100%" src="http://s32.postimg.org/cirdmrwsl/Screen_Shot_2016_05_19_at_2_34_32_PM.png"></a></p>
-<p><a href="https://dotdev.co/acceptance-testing-a-laravel-and-vue-js-application-4160b8e96156">https://dotdev.co/acceptance-testing-a-laravel-and-vue-js-application-4160b8e96156</a></p>
+                <p>Most of the time we send alerts to our app users when a specific event happens, for example we send an invoice on a new purchase or a
+welcome email on user signup, and to do this we need to listen to that event like so:</p>
+<pre><code class="language-php">class EventServiceProvider extends ServiceProvider
+{
+    protected $listen = [
+        NewPurchase::class =&gt; [
+            SendInvoice::class,
+        ]
+    ];
+}</code></pre>
+<p>Then inside our <code>SendInvoice</code> listener we would do something like this:</p>
+<pre><code class="language-php">class SendInvoice implements ShouldQueue
+{
+    public function handle(NewPurchase $event)
+    {
+        $event-&gt;order-&gt;customer-&gt;notify(new SendInvoiceNotification($event-&gt;order));
+    }
+}</code></pre>
+<h2>Idea</h2>
+<p>Instead of having to create a class for the listener and another for the notification/mailable, wouldn't it be cool if we can register the Notification/Mailable as an event
+listener? something like:</p>
+<pre><code class="language-php">class EventServiceProvider extends ServiceProvider
+{
+    protected $listen = [
+        NewPurchase::class =&gt; [
+            SendInvoiceNotification::class,
+        ]
+    ];
+}</code></pre>
+<p>What happens when we do so is that the Event Dispatcher will create an instance of our <code>SendInvoiceNotification</code> class and try to call the <code>handle()</code> method, taking this
+into consideration we can use the handle method in the Notification class to send the notification itself:</p>
+<pre><code class="language-php">class SendInvoiceNotification extends Notification implements ShouldQueue
+{
+    public $order;
+
+    /**
+     * Handle the event here
+     */
+    public function handle(NewPurchase $event)
+    {
+        $this-&gt;order = $event-&gt;order;
+
+        app(\Illuminate\Contracts\Notifications\Dispatcher::class)
+                -&gt;sendNow($event-&gt;order-&gt;customer, $this);
+    }
+
+    public function via($notifiable)
+    {
+        return ['mail'];
+    }
+
+    public function toMail($notifiable)
+    {
+        return (new MailMessage)
+                    -&gt;line('Your order reference is #'.$this-&gt;order-&gt;reference);
+    }
+}</code></pre>
+<div class="alert alert-warning">
+Notice that we use <strong>sendNow()</strong> so that we prevent queuing the notification as the listener itself was queued before since we implement
+the ShouldQueue interface.
+</div>
+<h2>What about Mailables?</h2>
+<p>Here's how we can achieve the same using a mailable:</p>
+<pre><code class="language-php">class SendInvoiceNotification extends Mailable implements ShouldQueue
+{
+    public $order;
+
+    /**
+     * Handle the event here
+     */
+    public function handle(NewPurchase $event)
+    {
+        $this-&gt;order = $event-&gt;order;
+
+        $this-&gt;to($event-&gt;order-&gt;customer)
+             -&gt;send(app(\Illuminate\Contracts\Mail\Mailer::class));
+    }
+
+    public function build()
+    {
+        return $this-&gt;subject('Order #'.$this-&gt;order-&gt;reference)-&gt;view('invoice');
+    }
+}</code></pre>
+<h2>Conclusion</h2>
+<p>While some may consider this an anti-SRP hack I think it's a pretty neat implementation that you can use in your application to prevent creating an extra listener class,
+your call :)</p>
             
     <span class="post-footer">————————————————<span>&nbsp&nbspThat's all folks&nbsp&nbsp</span>————————————————</span>
 
     <div class="text-center">
         <a href="https://twitter.com/share"
            class="twitter-share-button"
-           data-text="A look into acceptance Testing a Laravel and Vue.js Application"
+           data-text="Using Laravel Mailables and Notifications as Event Listeners"
            data-via="themsaid">Tweet</a>
         &nbsp&nbsp&nbsp
         <a href="https://twitter.com/intent/tweet?screen_name=themsaid"

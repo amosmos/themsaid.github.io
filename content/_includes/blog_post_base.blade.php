@@ -1,5 +1,9 @@
 @extends('_includes.blog_base')
 
+@section('pageTitle')
+@yield('post::title')
+@stop
+
 @section('blog_body')
 
     <a href="/">Back to home</a>
